@@ -4,7 +4,7 @@ using UnityEditor;
 
 public class Manager : MonoBehaviour
 {
-    private int m_teamSize;
+    [SerializeField] private int m_teamSize;
     private Button[] m_inputs;
     private int m_score = 0;
     private bool m_active = false;

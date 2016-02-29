@@ -140,9 +140,9 @@ public class MainMenuManager : Manager {
         MakeManager(4, 1);
 
         m_ManagerP1 = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
-        m_ManagerP2 = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
-        m_ManagerP3 = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
-        m_ManagerP4 = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
+        m_ManagerP2 = GameObject.FindGameObjectWithTag("ManagerP2").GetComponent<Manager>();
+        m_ManagerP3 = GameObject.FindGameObjectWithTag("ManagerP3").GetComponent<Manager>();
+        m_ManagerP4 = GameObject.FindGameObjectWithTag("ManagerP4").GetComponent<Manager>();
 
     }
 
@@ -152,49 +152,49 @@ public class MainMenuManager : Manager {
         {
             m_controller1Cam.rect = m_topLeft;
             GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().PlayerRect = m_topLeft;
-            m_controller1Cam.enabled = true;
+            m_controller1Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = m_topRight;
             GameObject.FindGameObjectWithTag("ManagerP2").GetComponent<Manager>().PlayerRect = m_topRight;
-            m_controller2Cam.enabled = true;
+            m_controller2Cam.gameObject.SetActive(true);
             m_controller3Cam.rect = m_bottomLeft;
             GameObject.FindGameObjectWithTag("ManagerP3").GetComponent<Manager>().PlayerRect = m_bottomLeft;
-            m_controller3Cam.enabled = true;
+            m_controller3Cam.gameObject.SetActive(true);
             m_controller4Cam.rect = m_bottomRight;
             GameObject.FindGameObjectWithTag("ManagerP4").GetComponent<Manager>().PlayerRect = m_bottomRight;
-            m_controller4Cam.enabled = true;
+            m_controller4Cam.gameObject.SetActive(true);
         }
-        else if (m_joysticks == 3)
+        if (m_joysticks == 3)
         {
             m_controller1Cam.rect = m_topHalf;
             GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().PlayerRect = m_topHalf;
-            m_controller2Cam.enabled = true;
+            m_controller2Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = m_bottomLeft;
             GameObject.FindGameObjectWithTag("ManagerP2").GetComponent<Manager>().PlayerRect = m_bottomLeft;
-            m_controller2Cam.enabled = true;
+            m_controller2Cam.gameObject.SetActive(true);
             m_controller3Cam.rect = m_bottomRight;
             GameObject.FindGameObjectWithTag("ManagerP3").GetComponent<Manager>().PlayerRect = m_bottomRight;
-            m_controller3Cam.enabled = true;
-            m_controller4Cam.enabled = false;
+            m_controller3Cam.gameObject.SetActive(true);
+            m_controller4Cam.gameObject.SetActive(false);
         }
-        else if (m_joysticks == 2)
+        if (m_joysticks == 2)
         {
             m_controller1Cam.rect = m_topHalf;
             GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().PlayerRect = m_topHalf;
-            m_controller1Cam.enabled = true;
+            m_controller1Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = m_bottomHalf;
             GameObject.FindGameObjectWithTag("ManagerP2").GetComponent<Manager>().PlayerRect = m_bottomHalf;
-            m_controller2Cam.enabled = true;
-            m_controller3Cam.enabled = false;
-            m_controller4Cam.enabled = false;
+            m_controller2Cam.gameObject.SetActive(true);
+            m_controller3Cam.gameObject.SetActive(false);
+            m_controller4Cam.gameObject.SetActive(false);
         }
-        else if (m_joysticks == 1)
+        if (m_joysticks == 1)
         {
             m_controller1Cam.rect = m_fullscreen;
             GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().PlayerRect = m_fullscreen;
-            m_controller1Cam.enabled = true;
-            m_controller2Cam.enabled = false;
-            m_controller3Cam.enabled = false;
-            m_controller4Cam.enabled = false;
+            m_controller1Cam.gameObject.SetActive(true);
+            m_controller2Cam.gameObject.SetActive(false);
+            m_controller3Cam.gameObject.SetActive(false);
+            m_controller4Cam.gameObject.SetActive(false);
         }
 
         /*
@@ -219,39 +219,40 @@ public class MainMenuManager : Manager {
             Manager managerp4 = p4.GetComponent<Manager>();
 
             m_controller1Cam.rect = m_topLeft;
-            m_controller1Cam.enabled = true;
+            m_controller1Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = m_topRight;
-            m_controller2Cam.enabled = true;
+            m_controller2Cam.gameObject.SetActive(true);
             m_controller3Cam.rect = m_bottomLeft;
-            m_controller3Cam.enabled = true;
+            m_controller3Cam.gameObject.SetActive(true);
             m_controller4Cam.rect = m_bottomRight;
-            m_controller4Cam.enabled = true;
+            m_controller4Cam.gameObject.SetActive(true);
         }
         else if ((Input.GetKeyDown("f3")))
         {
             m_controller1Cam.rect = new Rect(0f, 0.5f, 1f, 1f);
+            m_controller1Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = new Rect(0f, 0f, 0.5f, 0.5f);
-            m_controller2Cam.enabled = true;
+            m_controller2Cam.gameObject.SetActive(true);
             m_controller3Cam.rect = new Rect(0.5f, 0f, 0.5f, 0.5f);
-            m_controller3Cam.enabled = true;
-            m_controller4Cam.enabled = false;
+            m_controller3Cam.gameObject.SetActive(true);
+            m_controller4Cam.gameObject.SetActive(false);
         }
         else if ((Input.GetKeyDown("f2")))
         {
             m_controller1Cam.rect = new Rect(0f, 0.5f, 1f, 1f);
-            m_controller1Cam.enabled = true;
+            m_controller1Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = new Rect(0f, 0f, 1f, 0.5f);
-            m_controller2Cam.enabled = true;
-            m_controller3Cam.enabled = false;
-            m_controller4Cam.enabled = false;
+            m_controller2Cam.gameObject.SetActive(true);
+            m_controller3Cam.gameObject.SetActive(false);
+            m_controller4Cam.gameObject.SetActive(false);
         }
         else if ((Input.GetKeyDown("f1")))
         {
             m_controller1Cam.rect = new Rect(0f, 0f, 1f, 1f);
             m_controller1Cam.enabled = true;
-            m_controller2Cam.enabled = false;
-            m_controller3Cam.enabled = false;
-            m_controller4Cam.enabled = false;
+            m_controller2Cam.gameObject.SetActive(false);
+            m_controller3Cam.gameObject.SetActive(false);
+            m_controller4Cam.gameObject.SetActive(false);
         }
     }
 
