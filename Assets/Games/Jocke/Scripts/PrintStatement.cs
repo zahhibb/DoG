@@ -3,31 +3,33 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
+public class ButtonInputBind
+{
+    public string InputString;
+    public Sprite InputSprite;
+}
+
 public class PrintStatement : MonoBehaviour
 {
+    public ButtonInputBind[] m_bindings;
+    public ButtonInputBind m_playerOneTrue;
+    public ButtonInputBind m_playerOneFalse;
+
     // Input sprites
     [SerializeField] private List<Sprite> m_buttonSpriteList = new List<Sprite>();
     private List<Sprite> m_spriteListRef = new List<Sprite>();
 
-    /* ATT GÖRA:
-        - Skapa int referens lista till buttonSpriteList som tar bort motsvarande
-          värde i denna nya lista för att undvika dDuUbBlLeEtTeErR.
-        - Gör om buttonSpriteList till array, den skall inte ändras.
-    */
-
     private SpriteRenderer[] m_randomButtons;
-    private string[] m_questionStatement = new string[3] { "Water is wet", "Roses are pink", "Europe is a country" };    
-    private string[] m_questionArr = new string[4] { "Water is wet", "Roses are pink", "Europe is a country", "What is your Favourite Colour?" };
+    private string[] m_questionStatement = new string[3] { "Water is wet", "Roses are pink", "Europe is a country" };        
     private int m_randQuestion;
-    private int m_randInput;
-
-    private int m_andQuestion;
+    
     private Text m_questionText;
     Question[] m_question = new Question[2];
 
     void Start()
-    {
-        AddQuestion();        
+    {       
+        AddQuestion();
         RandomButtonPrompts();
         RandomQuestion();
     }
@@ -35,34 +37,24 @@ public class PrintStatement : MonoBehaviour
     void Update()
     {
         
-    }    
+
+        /*
+        if (Input.GetButtonDown(m_playerOneTrue.InputString))
+        {
+            
+        }*/        
+    }
 
     // Randomize button prompts
     private void RandomButtonPrompts()
     {
-        GameObject[] sprites = GameObject.FindGameObjectsWithTag("Joystick1Input");
-        m_randomButtons = new SpriteRenderer[sprites.Length];
+        GameObject[] findGameobject = GameObject.FindGameObjectsWithTag("TrueButton");
+        m_randomButtons = new SpriteRenderer[findGameobject.Length];
 
-        for (int i = 0; i < sprites.Length; ++i)
+        for (int i = 0; i < findGameobject.Length; ++i)
         {
             int randInput = Random.Range(0, m_buttonSpriteList.Count);
-            m_randomButtons[i] = sprites[i].GetComponent<SpriteRenderer>();
-
-
-            
-
-            m_spriteListRef.Add(m_buttonSpriteList[randInput]);
-
-            for (int matchCheck = 0; matchCheck < m_spriteListRef.Count; matchCheck++)
-            {
-                Debug.Log(m_spriteListRef[matchCheck]);
-                if (m_buttonSpriteList[randInput] == m_spriteListRef[matchCheck])
-                {
-                    Debug.Log("Match!");
-                    m_spriteListRef.RemoveAt(matchCheck);
-                }
-            }
-
+            m_randomButtons[i] = findGameobject[i].GetComponent<SpriteRenderer>();
             m_randomButtons[i].sprite = m_buttonSpriteList[randInput];
         }
     }
