@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine.UI;
 
 public class MainMenuManager : Manager {
@@ -24,7 +23,7 @@ public class MainMenuManager : Manager {
     [SerializeField] private int m_joysticks;
     [SerializeField] private GameObject m_playerManager = null;
 
-    private SerializedProperty[] m_inputManagerArray;
+    //private SerializedProperty[] m_inputManagerArray;
     private Button[] m_buttonArray;
     //private string[] m_controller = Input.GetJoystickNames();
 
@@ -48,7 +47,7 @@ public class MainMenuManager : Manager {
     void Start()
     {
         MakeInputsFromIM();
-        MakeColors();
+        MakeColors();   
         MakeTeams();
 
         SetCameras();
@@ -73,26 +72,33 @@ public class MainMenuManager : Manager {
 
     private void MakeInputsFromIM()
     {
+        m_buttonArray = new Button[68];
+        m_buttonArray[0].name = "A_P1"; // and the other 16 :(
+
+
+        // :'(
+
         // this function makes m_buttonArray contain all inputs from input manager.
 
-        var inputManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0];
-        SerializedObject obj = new SerializedObject(inputManager);
-        SerializedProperty m_inputArray = obj.FindProperty("m_Axes");
+        //var inputManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0];
+        //SerializedObject obj = new SerializedObject(inputManager);
+        //SerializedProperty m_inputArray = obj.FindProperty("m_Axes");
 
-        m_buttonArray = new Button[m_inputArray.arraySize];
 
-        for (int i = 0; i < m_inputArray.arraySize; ++i)
-        {
-            var axis = m_inputArray.GetArrayElementAtIndex(i);
-            var name = axis.FindPropertyRelative("m_Name").stringValue;
-            var axisVal = axis.FindPropertyRelative("axis").intValue;
+        //m_buttonArray = new Button[m_inputArray.arraySize];
 
-            //Debug.Log(name);
-            //Debug.Log(axisVal);
+        //for (int i = 0; i < m_inputArray.arraySize; ++i)
+        //{
+        //    var axis = m_inputArray.GetArrayElementAtIndex(i);
+        //    var name = axis.FindPropertyRelative("m_Name").stringValue;
+        //    var axisVal = axis.FindPropertyRelative("axis").intValue;
 
-            m_buttonArray[i].pressed = false;
-            m_buttonArray[i].name = axis.FindPropertyRelative("m_Name").stringValue;
-        }
+        //    //Debug.Log(name);
+        //    //Debug.Log(axisVal);
+
+        //    m_buttonArray[i].pressed = false;
+        //    m_buttonArray[i].name = axis.FindPropertyRelative("m_Name").stringValue;
+        //}   
     }
 
     private void MakeManager(int controller, int teamSize)
@@ -102,7 +108,7 @@ public class MainMenuManager : Manager {
         {
             // Initialize a new instance of Manager to the parametered team number and player count.
             GameObject newPlayerManager = (GameObject)Instantiate(m_playerManager, transform.position, transform.rotation);
-            Persistency persistencyScript = newPlayerManager.gameObject.AddComponent<Persistency>();
+            newPlayerManager.gameObject.AddComponent<Persistency>();
             newPlayerManager.name = "Player " + controller + " Manager";
             Manager newManager = newPlayerManager.gameObject.AddComponent<Manager>();
             newManager.gameObject.tag = "ManagerP" + controller;
@@ -117,7 +123,7 @@ public class MainMenuManager : Manager {
             }
 
             // Give it a pretty color!
-            //newManager.PlayerColor = SetColor();
+            // newManager.PlayerColor = SetColor();
 
             // Set up whatever variables it will need.
             newManager.Score = 0;
@@ -228,8 +234,8 @@ public class MainMenuManager : Manager {
         {
             m_ManagerP1.Controllers = 4;
 
-            GameObject p4 = GameObject.FindGameObjectWithTag("ManagerP4");
-            Manager managerp4 = p4.GetComponent<Manager>();
+            //GameObject p4 = GameObject.FindGameObjectWithTag("ManagerP4");
+            //Manager managerp4 = p4.GetComponent<Manager>();
 
             m_controller1Cam.rect = m_topLeft;
             m_controller1Cam.gameObject.SetActive(true);
@@ -297,5 +303,10 @@ public class MainMenuManager : Manager {
             m_colorList.Remove(m_colorList[index]);
         }
         return color;
+    }
+
+    public Button[] InputManagerArray
+    {
+        set {m_buttonArray = value; }
     }
 }

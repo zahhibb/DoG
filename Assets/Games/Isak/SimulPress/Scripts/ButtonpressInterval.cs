@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
 
 public class ButtonpressInterval : MonoBehaviour {
 
@@ -18,13 +17,11 @@ public class ButtonpressInterval : MonoBehaviour {
     private float m_endTimeP3 = 0f;
     private float m_endTimeP4 = 0f;
     */
-    private SerializedProperty[] m_inputArray;
     private string[] m_buttonNames;
     private Button[] m_pressedP1;
 
     void Start ()
     {
-        FetchAxis();
         /*
         *if (playerPerTeamAmount < x)
         *{
@@ -41,39 +38,33 @@ public class ButtonpressInterval : MonoBehaviour {
 
     }
 
-    private void FetchAxis()
-    {
-        var inputManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0];
+    //private void FetchAxis()
+    //{
+    //    if (m_inputArray.arraySize == 0)
+    //    {
+    //        Debug.Log("No Axes");
+    //    }
+    //    else
+    //    {
+    //        m_pressedP1 = new Button[m_inputArray.arraySize];
+    //        for (int i = 0; i < m_inputArray.arraySize; ++i)            // here make array size a total of controllers present * inputs per controller
+    //        {
+    //            var axis = m_inputArray.GetArrayElementAtIndex(i);
 
-        SerializedObject obj = new SerializedObject(inputManager);
+    //            var name = axis.FindPropertyRelative("m_Name").stringValue;
+    //            //maybe find the "description" path to check for controller number?
+    //            var axisVal = axis.FindPropertyRelative("axis").intValue;
+    //            var inputType = (InputType)axis.FindPropertyRelative("type").intValue;
 
-        SerializedProperty m_inputArray = obj.FindProperty("m_Axes");
+    //            Debug.Log(name);
+    //            Debug.Log(axisVal);
+    //            Debug.Log(inputType);
 
-        if (m_inputArray.arraySize == 0)
-        {
-            Debug.Log("No Axes");
-        }
-        else
-        {
-            m_pressedP1 = new Button[m_inputArray.arraySize];
-            for (int i = 0; i < m_inputArray.arraySize; ++i)            // here make array size a total of controllers present * inputs per controller
-            {
-                var axis = m_inputArray.GetArrayElementAtIndex(i);
-
-                var name = axis.FindPropertyRelative("m_Name").stringValue;
-                //maybe find the "description" path to check for controller number?
-                var axisVal = axis.FindPropertyRelative("axis").intValue;
-                var inputType = (InputType)axis.FindPropertyRelative("type").intValue;
-
-                Debug.Log(name);
-                Debug.Log(axisVal);
-                Debug.Log(inputType);
-
-                m_pressedP1[i].pressed = false;
-                m_pressedP1[i].name = axis.FindPropertyRelative("m_Name").stringValue;
-            }
-        }
-    }
+    //            m_pressedP1[i].pressed = false;
+    //            m_pressedP1[i].name = axis.FindPropertyRelative("m_Name").stringValue;
+    //        }
+    //    }
+    //}
 
     private struct Button
     {
@@ -109,6 +100,9 @@ public class ButtonpressInterval : MonoBehaviour {
     public void BackToStaging(int player)
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Staging");
+
+        GameObject.FindGameObjectWithTag("ManagerP" + player).GetComponent<Manager>().Score += 8;
+        
     }
 }
 

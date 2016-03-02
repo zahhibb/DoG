@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
 
 public class Manager : MonoBehaviour
 {
@@ -39,13 +38,19 @@ public class Manager : MonoBehaviour
     public int Rounds
         {
             get { return m_rounds; }
-            set { m_score = m_rounds; }
+            set { m_rounds = value; }
         }
 
     public int Controllers
     {
         get { return m_controllers; }
         set { m_controllers = value; }
+    }
+
+    public bool Active
+    {
+        get { return m_active; }
+        set { m_active = value; }
     }
 
     public Button[] Inputs

@@ -24,19 +24,19 @@ public class StagingManager : MonoBehaviour
         {
             if (manager1.Score > manager2.Score && manager1.Score > manager3.Score && manager1.Score > manager4.Score)
             {
-                m_rounds.text = manager1.name + "is the winnewr";
+                m_rounds.text = manager1.name + " is the winnewr";
             }
             if (manager2.Score > manager1.Score && manager2.Score > manager3.Score && manager2.Score > manager4.Score)
             {
-                m_rounds.text = manager1.name + "is the winnewr";
+                m_rounds.text = manager1.name + " is the winnewr";
             }
             if (manager3.Score > manager2.Score && manager3.Score > manager1.Score && manager3.Score > manager4.Score)
             {
-                m_rounds.text = manager1.name + "is the winnewr";
+                m_rounds.text = manager1.name + " is the winnewr";
             }
             if (manager4.Score > manager2.Score && manager4.Score > manager3.Score && manager4.Score > manager1.Score)
             {
-                m_rounds.text = manager1.name + "is the winnewr";
+                m_rounds.text = manager1.name + " is the winnewr";
             }
             //int[] scores = { manager1.Score, manager2.Score, manager3.Score, manager4.Score };
             //int highestScore = Mathf.Max(manager1.Score, manager2.Score, manager3.Score, manager4.Score);
@@ -68,6 +68,10 @@ public class StagingManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Floppy1");
     }
+    public void LoadSimulPress()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SimulPress");
+    }
 
     public void QuitGame()
     {
@@ -78,6 +82,22 @@ public class StagingManager : MonoBehaviour
     {
         // Make win or lose I guess.
         manager.Rounds++;
+        if (manager.Rounds > 3)
+        {
+            GameObject[] finishButtons = GameObject.FindGameObjectsWithTag("Finish");
+
+            foreach (GameObject button in finishButtons)
+            {
+                button.SetActive(false);
+            }
+
+            GameObject[] fireworks = GameObject.FindGameObjectsWithTag("Respawn");
+
+            foreach (GameObject finish in fireworks)
+            {
+                finish.SetActive(true);
+            }
+        }
         return manager.Rounds;
     }
 
