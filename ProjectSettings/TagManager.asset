@@ -10,6 +10,9 @@ TagManager:
   - ManagerP2
   - ManagerP3
   - ManagerP4
+  - QuestionStatement
+  - TrueButton
+  - FalseButton
   layers:
   - Default
   - TransparentFX
