@@ -12,11 +12,16 @@ public class LevelManager : MonoBehaviour {
         //player = FindObjectOfType<PlayerController>();
 	}
 	
-	// Update is called once per frame
-	void Update ()
-    {
-	    //GameObject.FindGameObjectsWithTag.
-	}
+	//// Update is called once per frame
+	//void Update ()
+ //   {
+ //      if (GameObject.FindGameObjectsWithTag("Player").Length == 0)
+ //       {
+ //           print("obamas");
+ //           GetComponent<KillPlayer>.     m_playerY.Sort();
+ //           m_playerY.Reverse();
+ //       }
+	//}
 
     public void RespawnPlayer()
     {

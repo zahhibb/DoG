@@ -11,7 +11,7 @@ public class Manager : MonoBehaviour
     private Color m_playerColor;
     private Rect m_playerRect;
     private int m_rounds = 0;
-    private int m_controllers = 0;
+    public int m_controllers = 0;
 
     private void Start()
     {
@@ -45,7 +45,7 @@ public class Manager : MonoBehaviour
     public int Controllers
     {
         get { return m_controllers; }
-        set { Mathf.Clamp(m_score = m_controllers, 1, 4); }
+        set { m_controllers = value; }
     }
 
     public Button[] Inputs

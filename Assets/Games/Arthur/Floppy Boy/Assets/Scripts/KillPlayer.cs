@@ -28,14 +28,14 @@ public class KillPlayer : MonoBehaviour {
             for (var i = 0; i < m_playerY.Count; i++)
             {
                 print(m_playerY[i]);
-                print("yoloswagerinho");
+                //print("yoloswagerinho");
             }
             m_playerY.Sort();
             m_playerY.Reverse();
             for (var i = 0; i < m_playerY.Count; i++)
             {
                 print(m_playerY[i]);
-                print("nice meme m8");
+                //print("nice meme m8");
             }
 
         }
