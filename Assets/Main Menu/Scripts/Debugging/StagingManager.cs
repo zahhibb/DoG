@@ -35,7 +35,6 @@ public class StagingManager : MonoBehaviour
         //Destroy(GameObject.FindGameObjectWithTag("ManagerP2").gameObject);
         //Destroy(GameObject.FindGameObjectWithTag("ManagerP3").gameObject);
         //Destroy(GameObject.FindGameObjectWithTag("ManagerP4").gameObject);
-
     }
 
     public void LoadIsItTrue()
@@ -45,7 +44,7 @@ public class StagingManager : MonoBehaviour
 
     int CountRounds(Manager manager)
     {
-
-        return 4;
+        // Make win or lose I guess.
+        return manager.Score;
     }
 }
