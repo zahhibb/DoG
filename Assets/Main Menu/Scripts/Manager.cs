@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
 
 public class Manager : MonoBehaviour
 {
-    private int m_teamSize;
+    [SerializeField] private int m_teamSize;
     private Button[] m_inputs;
     private int m_score = 0;
     private bool m_active = false;
     private Color m_playerColor;
     private Rect m_playerRect;
+    private int m_rounds = 0;
+    public int m_controllers = 0;
 
     private void Start()
     {
@@ -34,6 +35,24 @@ public class Manager : MonoBehaviour
         set { m_score = value; }
     }
 
+    public int Rounds
+        {
+            get { return m_rounds; }
+            set { m_rounds = value; }
+        }
+
+    public int Controllers
+    {
+        get { return m_controllers; }
+        set { m_controllers = value; }
+    }
+
+    public bool Active
+    {
+        get { return m_active; }
+        set { m_active = value; }
+    }
+
     public Button[] Inputs
     {
         get { return m_inputs; }
@@ -51,4 +70,6 @@ public class Manager : MonoBehaviour
         get { return m_playerRect; }
         set { m_playerRect = value; }
     }
+
+
 }

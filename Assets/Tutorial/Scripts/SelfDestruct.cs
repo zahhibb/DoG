@@ -17,5 +17,11 @@ public class SelfDestruct : MonoBehaviour
 			Destroy(gameObject);
 	}
 
+    public float LifeTime
+    {
+        set { m_lifeTime = value; }
+        get { return m_lifeTime; }
+    }
+
 }
 

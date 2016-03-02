@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine.UI;
 
 public class MainMenuManager : Manager {
@@ -24,7 +23,7 @@ public class MainMenuManager : Manager {
     [SerializeField] private int m_joysticks;
     [SerializeField] private GameObject m_playerManager = null;
 
-    private SerializedProperty[] m_inputManagerArray;
+    //private SerializedProperty[] m_inputManagerArray;
     private Button[] m_buttonArray;
     //private string[] m_controller = Input.GetJoystickNames();
 
@@ -32,7 +31,7 @@ public class MainMenuManager : Manager {
     private Color m_lemonTruck = new Color(249, 227, 105);
     private Color m_beachBlueCoathanger = new Color(148, 233, 246);
     private Color m_flamingoParachute = new Color(234, 160, 223);
-    private Color m_greenPepperGranola = new Color(140, 253, 125);
+    private Color m_pepperGreenGranola = new Color(140, 253, 125);
 
     // Standard Viewport Rectangles
     private Rect m_fullscreen = new Rect(0f, 0f, 1f, 1f);
@@ -48,7 +47,7 @@ public class MainMenuManager : Manager {
     void Start()
     {
         MakeInputsFromIM();
-        MakeColors();
+        MakeColors();   
         MakeTeams();
 
         SetCameras();
@@ -73,53 +72,63 @@ public class MainMenuManager : Manager {
 
     private void MakeInputsFromIM()
     {
+        m_buttonArray = new Button[68];
+        m_buttonArray[0].name = "A_P1"; // and the other 16 :(
+
+
+        // :'(
+
         // this function makes m_buttonArray contain all inputs from input manager.
 
-        var inputManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0];
-        SerializedObject obj = new SerializedObject(inputManager);
-        SerializedProperty m_inputArray = obj.FindProperty("m_Axes");
+        //var inputManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0];
+        //SerializedObject obj = new SerializedObject(inputManager);
+        //SerializedProperty m_inputArray = obj.FindProperty("m_Axes");
 
-        m_buttonArray = new Button[m_inputArray.arraySize];
 
-        for (int i = 0; i < m_inputArray.arraySize; ++i)
-        {
-            var axis = m_inputArray.GetArrayElementAtIndex(i);
-            var name = axis.FindPropertyRelative("m_Name").stringValue;
-            var axisVal = axis.FindPropertyRelative("axis").intValue;
+        //m_buttonArray = new Button[m_inputArray.arraySize];
 
-            //Debug.Log(name);
-            //Debug.Log(axisVal);
+        //for (int i = 0; i < m_inputArray.arraySize; ++i)
+        //{
+        //    var axis = m_inputArray.GetArrayElementAtIndex(i);
+        //    var name = axis.FindPropertyRelative("m_Name").stringValue;
+        //    var axisVal = axis.FindPropertyRelative("axis").intValue;
 
-            m_buttonArray[i].pressed = false;
-            m_buttonArray[i].name = axis.FindPropertyRelative("m_Name").stringValue;
-        }
+        //    //Debug.Log(name);
+        //    //Debug.Log(axisVal);
+
+        //    m_buttonArray[i].pressed = false;
+        //    m_buttonArray[i].name = axis.FindPropertyRelative("m_Name").stringValue;
+        //}   
     }
 
     private void MakeManager(int controller, int teamSize)
     {
-
-        // Initialize a new instance of Manager to the parametered team number and player count.
-        GameObject newPlayerManager = (GameObject) Instantiate(m_playerManager, transform.position, transform.rotation);
-        Persistency persistencyScript = newPlayerManager.gameObject.AddComponent<Persistency>();
-        newPlayerManager.name = "Player " + controller + " Manager";
-        Manager newManager = newPlayerManager.gameObject.AddComponent<Manager>();
-        newManager.gameObject.tag = "ManagerP" + controller;
-        newManager.TeamSize = teamSize;
-
-        // Set up Inputs array, really only supports xBox controllers. :(
-        newManager.Inputs = new Button[17];
-        for (int i = 0; i < 17; i++)
+        // Find and don't bother if there already is one
+        if (!GameObject.FindGameObjectWithTag("ManagerP" + controller))
         {
-            newManager.Inputs[i] = m_buttonArray[i + (17 * (controller - 1))];
-            //Debug.Log(newManager.Inputs[i].name);
+            // Initialize a new instance of Manager to the parametered team number and player count.
+            GameObject newPlayerManager = (GameObject)Instantiate(m_playerManager, transform.position, transform.rotation);
+            newPlayerManager.gameObject.AddComponent<Persistency>();
+            newPlayerManager.name = "Player " + controller + " Manager";
+            Manager newManager = newPlayerManager.gameObject.AddComponent<Manager>();
+            newManager.gameObject.tag = "ManagerP" + controller;
+            newManager.TeamSize = teamSize;
+
+            // Set up Inputs array, really only supports xBox controllers. :(
+            newManager.Inputs = new Button[17];
+            for (int i = 0; i < 17; i++)
+            {
+                newManager.Inputs[i] = m_buttonArray[i + (17 * (controller - 1))];
+                //Debug.Log(newManager.Inputs[i].name);
+            }
+
+            // Give it a pretty color!
+            // newManager.PlayerColor = SetColor();
+
+            // Set up whatever variables it will need.
+            newManager.Score = 0;
+            newManager.enabled = true; //??
         }
-
-        // Give it a pretty color!
-        //newManager.PlayerColor = SetColor();
-
-        // Set up whatever variables it will need.
-        newManager.Score = 0;
-        newManager.enabled = true; //??
     }
 
     private int SliderSelect(Slider slider)
@@ -140,9 +149,9 @@ public class MainMenuManager : Manager {
         MakeManager(4, 1);
 
         m_ManagerP1 = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
-        m_ManagerP2 = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
-        m_ManagerP3 = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
-        m_ManagerP4 = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
+        m_ManagerP2 = GameObject.FindGameObjectWithTag("ManagerP2").GetComponent<Manager>();
+        m_ManagerP3 = GameObject.FindGameObjectWithTag("ManagerP3").GetComponent<Manager>();
+        m_ManagerP4 = GameObject.FindGameObjectWithTag("ManagerP4").GetComponent<Manager>();
 
     }
 
@@ -150,51 +159,59 @@ public class MainMenuManager : Manager {
     {
         if (m_joysticks == 4)
         {
+            m_ManagerP1.Controllers = 4;
+
             m_controller1Cam.rect = m_topLeft;
             GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().PlayerRect = m_topLeft;
-            m_controller1Cam.enabled = true;
+            m_controller1Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = m_topRight;
             GameObject.FindGameObjectWithTag("ManagerP2").GetComponent<Manager>().PlayerRect = m_topRight;
-            m_controller2Cam.enabled = true;
+            m_controller2Cam.gameObject.SetActive(true);
             m_controller3Cam.rect = m_bottomLeft;
             GameObject.FindGameObjectWithTag("ManagerP3").GetComponent<Manager>().PlayerRect = m_bottomLeft;
-            m_controller3Cam.enabled = true;
+            m_controller3Cam.gameObject.SetActive(true);
             m_controller4Cam.rect = m_bottomRight;
             GameObject.FindGameObjectWithTag("ManagerP4").GetComponent<Manager>().PlayerRect = m_bottomRight;
-            m_controller4Cam.enabled = true;
+            m_controller4Cam.gameObject.SetActive(true);
         }
-        else if (m_joysticks == 3)
+        if (m_joysticks == 3)
         {
+            m_ManagerP1.Controllers = 3;
+
             m_controller1Cam.rect = m_topHalf;
             GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().PlayerRect = m_topHalf;
-            m_controller2Cam.enabled = true;
+            m_controller2Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = m_bottomLeft;
             GameObject.FindGameObjectWithTag("ManagerP2").GetComponent<Manager>().PlayerRect = m_bottomLeft;
-            m_controller2Cam.enabled = true;
+            m_controller2Cam.gameObject.SetActive(true);
             m_controller3Cam.rect = m_bottomRight;
             GameObject.FindGameObjectWithTag("ManagerP3").GetComponent<Manager>().PlayerRect = m_bottomRight;
-            m_controller3Cam.enabled = true;
-            m_controller4Cam.enabled = false;
+            m_controller3Cam.gameObject.SetActive(true);
+            m_controller4Cam.gameObject.SetActive(false);
         }
-        else if (m_joysticks == 2)
+        if (m_joysticks == 2)
         {
+            m_ManagerP1.Controllers = 2;
+
             m_controller1Cam.rect = m_topHalf;
             GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().PlayerRect = m_topHalf;
-            m_controller1Cam.enabled = true;
+            m_controller1Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = m_bottomHalf;
             GameObject.FindGameObjectWithTag("ManagerP2").GetComponent<Manager>().PlayerRect = m_bottomHalf;
-            m_controller2Cam.enabled = true;
-            m_controller3Cam.enabled = false;
-            m_controller4Cam.enabled = false;
+            m_controller2Cam.gameObject.SetActive(true);
+            m_controller3Cam.gameObject.SetActive(false);
+            m_controller4Cam.gameObject.SetActive(false);
         }
-        else if (m_joysticks == 1)
+        if (m_joysticks == 1)
         {
+            m_ManagerP1.Controllers = 1;
+
             m_controller1Cam.rect = m_fullscreen;
             GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().PlayerRect = m_fullscreen;
-            m_controller1Cam.enabled = true;
-            m_controller2Cam.enabled = false;
-            m_controller3Cam.enabled = false;
-            m_controller4Cam.enabled = false;
+            m_controller1Cam.gameObject.SetActive(true);
+            m_controller2Cam.gameObject.SetActive(false);
+            m_controller3Cam.gameObject.SetActive(false);
+            m_controller4Cam.gameObject.SetActive(false);
         }
 
         /*
@@ -215,43 +232,52 @@ public class MainMenuManager : Manager {
 
         if ((Input.GetKeyDown("f4")))
         {
-            GameObject p4 = GameObject.FindGameObjectWithTag("ManagerP4");
-            Manager managerp4 = p4.GetComponent<Manager>();
+            m_ManagerP1.Controllers = 4;
+
+            //GameObject p4 = GameObject.FindGameObjectWithTag("ManagerP4");
+            //Manager managerp4 = p4.GetComponent<Manager>();
 
             m_controller1Cam.rect = m_topLeft;
-            m_controller1Cam.enabled = true;
+            m_controller1Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = m_topRight;
-            m_controller2Cam.enabled = true;
+            m_controller2Cam.gameObject.SetActive(true);
             m_controller3Cam.rect = m_bottomLeft;
-            m_controller3Cam.enabled = true;
+            m_controller3Cam.gameObject.SetActive(true);
             m_controller4Cam.rect = m_bottomRight;
-            m_controller4Cam.enabled = true;
+            m_controller4Cam.gameObject.SetActive(true);
         }
         else if ((Input.GetKeyDown("f3")))
         {
+            m_ManagerP1.Controllers = 3;
+
             m_controller1Cam.rect = new Rect(0f, 0.5f, 1f, 1f);
+            m_controller1Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = new Rect(0f, 0f, 0.5f, 0.5f);
-            m_controller2Cam.enabled = true;
+            m_controller2Cam.gameObject.SetActive(true);
             m_controller3Cam.rect = new Rect(0.5f, 0f, 0.5f, 0.5f);
-            m_controller3Cam.enabled = true;
-            m_controller4Cam.enabled = false;
+            m_controller3Cam.gameObject.SetActive(true);
+            m_controller4Cam.gameObject.SetActive(false);
         }
         else if ((Input.GetKeyDown("f2")))
         {
+            m_ManagerP1.Controllers = 2;
+
             m_controller1Cam.rect = new Rect(0f, 0.5f, 1f, 1f);
-            m_controller1Cam.enabled = true;
+            m_controller1Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = new Rect(0f, 0f, 1f, 0.5f);
-            m_controller2Cam.enabled = true;
-            m_controller3Cam.enabled = false;
-            m_controller4Cam.enabled = false;
+            m_controller2Cam.gameObject.SetActive(true);
+            m_controller3Cam.gameObject.SetActive(false);
+            m_controller4Cam.gameObject.SetActive(false);
         }
         else if ((Input.GetKeyDown("f1")))
         {
+            m_ManagerP1.Controllers = 1;
+
             m_controller1Cam.rect = new Rect(0f, 0f, 1f, 1f);
             m_controller1Cam.enabled = true;
-            m_controller2Cam.enabled = false;
-            m_controller3Cam.enabled = false;
-            m_controller4Cam.enabled = false;
+            m_controller2Cam.gameObject.SetActive(false);
+            m_controller3Cam.gameObject.SetActive(false);
+            m_controller4Cam.gameObject.SetActive(false);
         }
     }
 
@@ -259,12 +285,12 @@ public class MainMenuManager : Manager {
     {
         //List<Color> colorLm_colorListist = new List<Color>();
 
-        m_colorList.AddRange(new Color[] { m_lemonTruck, m_beachBlueCoathanger, m_flamingoParachute, m_greenPepperGranola });
+        m_colorList.AddRange(new Color[] { m_lemonTruck, m_beachBlueCoathanger, m_flamingoParachute, m_pepperGreenGranola });
 
         m_colorList.Add(m_lemonTruck);
         m_colorList.Add(m_beachBlueCoathanger);
         m_colorList.Add(m_flamingoParachute);
-        m_colorList.Add(m_greenPepperGranola);
+        m_colorList.Add(m_pepperGreenGranola);
     }
 
     private Color SetColor()
@@ -277,5 +303,10 @@ public class MainMenuManager : Manager {
             m_colorList.Remove(m_colorList[index]);
         }
         return color;
+    }
+
+    public Button[] InputManagerArray
+    {
+        set {m_buttonArray = value; }
     }
 }

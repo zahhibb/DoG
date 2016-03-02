@@ -6,3 +6,5 @@ bin/
 *.suo
 *.pdb
 Maya/
+ProjectSettings/ProjectSettings.asset
+ProjectSettings/ProjectVersion.txt
