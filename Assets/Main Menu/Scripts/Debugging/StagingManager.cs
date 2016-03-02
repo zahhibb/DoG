@@ -41,6 +41,10 @@ public class StagingManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("IsItTrue");
     }
+    public void LoadAntonsAliens()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Aliens");
+    }
 
     int CountRounds(Manager manager)
     {
