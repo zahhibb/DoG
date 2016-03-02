@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class StagingManager : MonoBehaviour
 {
-
     [SerializeField] Text m_scoreText;
     [SerializeField] Text m_rounds;
 
     private void Start()
     {
-        // loop towards manager amount here
+        // loop towards manager amount here instead
         Manager manager1 = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
         Manager manager2 = GameObject.FindGameObjectWithTag("ManagerP2").GetComponent<Manager>();
         Manager manager3 = GameObject.FindGameObjectWithTag("ManagerP3").GetComponent<Manager>();
@@ -22,7 +22,26 @@ public class StagingManager : MonoBehaviour
         }
         else
         {
-            int[] scores = { manager1.Score, manager2.Score, manager3.Score, manager4.Score };
+            if (manager1.Score > manager2.Score && manager1.Score > manager3.Score && manager1.Score > manager4.Score)
+            {
+                m_rounds.text = manager1.name + "is the winnewr";
+            }
+            if (manager2.Score > manager1.Score && manager2.Score > manager3.Score && manager2.Score > manager4.Score)
+            {
+                m_rounds.text = manager1.name + "is the winnewr";
+            }
+            if (manager3.Score > manager2.Score && manager3.Score > manager1.Score && manager3.Score > manager4.Score)
+            {
+                m_rounds.text = manager1.name + "is the winnewr";
+            }
+            if (manager4.Score > manager2.Score && manager4.Score > manager3.Score && manager4.Score > manager1.Score)
+            {
+                m_rounds.text = manager1.name + "is the winnewr";
+            }
+            //int[] scores = { manager1.Score, manager2.Score, manager3.Score, manager4.Score };
+            //int highestScore = Mathf.Max(manager1.Score, manager2.Score, manager3.Score, manager4.Score);
+
+
         }
         m_scoreText.text = "Scores   || Team 1: " + manager1.Score + " points.  " + "|| Team 1: " + manager1.Score +  " points." + "  || Team 1: " + manager1.Score + " points.  " + "  || Team 1: " + manager1.Score + " points.  "    ;
     }
@@ -39,16 +58,42 @@ public class StagingManager : MonoBehaviour
 
     public void LoadIsItTrue()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("IsItTrue");
+            
     }
     public void LoadAntonsAliens()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Aliens");
     }
 
-    int CountRounds(Manager manager)
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    private int CountRounds(Manager manager)
     {
         // Make win or lose I guess.
-        return manager.Score;
+        manager.Rounds++;
+        return manager.Rounds;
     }
+
+    private void CountScores()
+    {
+
+        TeamScore[] scores = new TeamScore[4];
+        for (int i = 0; i <= 3; i++)
+        {
+            Manager currentManager = GameObject.FindGameObjectWithTag("ManagerP" + i).GetComponent<Manager>();
+            scores[i].score = currentManager.Score;
+            scores[i].name = currentManager.gameObject.tag;
+        }
+        
+    }
+
+    struct TeamScore
+    {
+        public int score;
+        public string name;
+    }
+
 }

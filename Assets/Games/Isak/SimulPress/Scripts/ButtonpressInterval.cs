@@ -37,7 +37,8 @@ public class ButtonpressInterval : MonoBehaviour {
 
     private void Update()
     {
-        CheckButton(m_pressedP1);
+        //CheckButton(m_pressedP1);
+
     }
 
     private void FetchAxis()
@@ -103,6 +104,11 @@ public class ButtonpressInterval : MonoBehaviour {
                 }
             }
         }        
+    }
+
+    public void BackToStaging(int player)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Staging");
     }
 }
 
