@@ -20,7 +20,7 @@ public class Manager : MonoBehaviour
     public struct Button
     {
         public string name;
-        public bool pressed; //getters in structs? :|
+        public bool isAxis; //getters in structs? :|
     }
 
     public int TeamSize 

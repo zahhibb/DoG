@@ -91,12 +91,7 @@ public class StagingManager : MonoBehaviour
                 button.SetActive(false);
             }
 
-            GameObject[] fireworks = GameObject.FindGameObjectsWithTag("Respawn");
-
-            foreach (GameObject finish in fireworks)
-            {
-                finish.SetActive(true);
-            }
+            GameObject.FindGameObjectWithTag("FindableUI").GetComponent<Text>().text = "congratulations. \n fireworks.";
         }
         return manager.Rounds;
     }

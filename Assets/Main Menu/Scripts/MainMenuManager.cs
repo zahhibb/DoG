@@ -56,7 +56,11 @@ public class MainMenuManager : Manager {
 
     void Update()
     {
-        TestCameras();
+        if (Input.GetKeyDown("f4")) { TestCameras(4); }
+        if (Input.GetKeyDown("f3")) { TestCameras(3); }
+        if (Input.GetKeyDown("f2")) { TestCameras(2); }
+        if (Input.GetKeyDown("f1")) { TestCameras(1); }
+
         m_ManagerP1.TeamSize = SliderSelect(m_slider1);
         m_ManagerP2.TeamSize = SliderSelect(m_slider2);
         m_ManagerP3.TeamSize = SliderSelect(m_slider3);
@@ -73,8 +77,56 @@ public class MainMenuManager : Manager {
     private void MakeInputsFromIM()
     {
         m_buttonArray = new Button[68];
-        m_buttonArray[0].name = "A_P1"; // and the other 16 :(
+        for (int i = 1; i > 4; i++)
+        {
+            m_buttonArray[0 * i].name = "A_P" + (1+ i);
+            m_buttonArray[1 * i].name = "B_P" + (1 + i);
+            m_buttonArray[2 * i].name = "X_P" + (1 + i);
+            m_buttonArray[3 * i].name = "Y_P" + (1 + i);
+            m_buttonArray[4 * i].name = "LBumper_P" + (1 + i);
+            m_buttonArray[5 * i].name = "RBumper_P" + (1 + i);
+            m_buttonArray[6 * i].name = "Back_P" + (1 + i);
+            m_buttonArray[7 * i].name = "Start_P" + (1 + i);
+            m_buttonArray[8 * i].name = "LeftStickClick_P" + (1 + i);
+            m_buttonArray[9 * i].name = "RightStickClick_P" + (1 + i);
+            m_buttonArray[10 * i].name = "DPadX_P" + (1 + i);
+            m_buttonArray[11 * i].name = "DPadY_P" + (1 + i);
+            m_buttonArray[12 * i].name = "LeftStickX_P" + (1 + i);
+            m_buttonArray[13 * i].name = "LeftStickY_P" + (1 + i);
+            m_buttonArray[14 * i].name = "RightStickX_P" + (1 + i);
+            m_buttonArray[15 * i].name = "RightStickY_P" + (1 + i);
+            m_buttonArray[16 * i].name = "TriggerAxis_P" + (1 + i);
 
+            for (int j = 0; j < 10; j++)
+            {
+                m_buttonArray[j * i].isAxis = false;
+            }
+
+            for (int k = 10; k < 17; k++)
+            {
+                m_buttonArray[k * i].isAxis = false;
+            }
+
+            /*
+            m_buttonArray[0 * i].isAxis = false;
+            m_buttonArray[1 * i].isAxis = false;
+            m_buttonArray[2 * i].isAxis = false;
+            m_buttonArray[3 * i].isAxis = false;
+            m_buttonArray[4 * i].isAxis = false;
+            m_buttonArray[5 * i].isAxis = false;
+            m_buttonArray[6 * i].isAxis = false;
+            m_buttonArray[7 * i].isAxis = false;
+            m_buttonArray[8 * i].isAxis = false;
+            m_buttonArray[9 * i].isAxis = false;
+            m_buttonArray[10 * i].isAxis = true;
+            m_buttonArray[11 * i].isAxis = true;
+            m_buttonArray[12 * i].isAxis = true;
+            m_buttonArray[13 * i].isAxis = true;
+            m_buttonArray[14 * i].isAxis = true;
+            m_buttonArray[15 * i].isAxis = true;
+            m_buttonArray[16 * i].isAxis = true;
+            */
+        }
 
         // :'(
 
@@ -226,11 +278,11 @@ public class MainMenuManager : Manager {
         */
     }
 
-    private void TestCameras()
+    private void TestCameras(int players)
     {
         MakeColors();
 
-        if ((Input.GetKeyDown("f4")))
+        if (players == 4)
         {
             m_ManagerP1.Controllers = 4;
 
@@ -246,7 +298,7 @@ public class MainMenuManager : Manager {
             m_controller4Cam.rect = m_bottomRight;
             m_controller4Cam.gameObject.SetActive(true);
         }
-        else if ((Input.GetKeyDown("f3")))
+        else if (players == 3)
         {
             m_ManagerP1.Controllers = 3;
 
@@ -258,7 +310,7 @@ public class MainMenuManager : Manager {
             m_controller3Cam.gameObject.SetActive(true);
             m_controller4Cam.gameObject.SetActive(false);
         }
-        else if ((Input.GetKeyDown("f2")))
+        else if (players == 2)
         {
             m_ManagerP1.Controllers = 2;
 
@@ -269,7 +321,7 @@ public class MainMenuManager : Manager {
             m_controller3Cam.gameObject.SetActive(false);
             m_controller4Cam.gameObject.SetActive(false);
         }
-        else if ((Input.GetKeyDown("f1")))
+        else if (players == 1)
         {
             m_ManagerP1.Controllers = 1;
 
