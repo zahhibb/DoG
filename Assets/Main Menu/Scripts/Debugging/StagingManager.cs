@@ -43,7 +43,7 @@ public class StagingManager : MonoBehaviour
 
 
         }
-        m_scoreText.text = "Scores   || Team 1: " + manager1.Score + " points.  " + "|| Team 1: " + manager1.Score +  " points." + "  || Team 1: " + manager1.Score + " points.  " + "  || Team 1: " + manager1.Score + " points.  "    ;
+        m_scoreText.text = "Scores   || Team 1: " + manager1.Score + " points.  " + "|| Team 1: " + manager1.Score + " points." + "  || Team 1: " + manager1.Score + " points.  " + "  || Team 1: " + manager1.Score + " points.  ";
     }
 
     public void BackToMain()
@@ -63,6 +63,10 @@ public class StagingManager : MonoBehaviour
     public void LoadAntonsAliens()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Aliens");
+    }
+    public void LoadFloppy1()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Floppy1");
     }
 
     public void QuitGame()

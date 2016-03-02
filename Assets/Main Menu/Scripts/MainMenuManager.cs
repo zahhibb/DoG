@@ -226,6 +226,8 @@ public class MainMenuManager : Manager {
 
         if ((Input.GetKeyDown("f4")))
         {
+            m_ManagerP1.Controllers = 4;
+
             GameObject p4 = GameObject.FindGameObjectWithTag("ManagerP4");
             Manager managerp4 = p4.GetComponent<Manager>();
 
@@ -240,6 +242,8 @@ public class MainMenuManager : Manager {
         }
         else if ((Input.GetKeyDown("f3")))
         {
+            m_ManagerP1.Controllers = 3;
+
             m_controller1Cam.rect = new Rect(0f, 0.5f, 1f, 1f);
             m_controller1Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = new Rect(0f, 0f, 0.5f, 0.5f);
@@ -250,6 +254,8 @@ public class MainMenuManager : Manager {
         }
         else if ((Input.GetKeyDown("f2")))
         {
+            m_ManagerP1.Controllers = 2;
+
             m_controller1Cam.rect = new Rect(0f, 0.5f, 1f, 1f);
             m_controller1Cam.gameObject.SetActive(true);
             m_controller2Cam.rect = new Rect(0f, 0f, 1f, 0.5f);
@@ -259,6 +265,8 @@ public class MainMenuManager : Manager {
         }
         else if ((Input.GetKeyDown("f1")))
         {
+            m_ManagerP1.Controllers = 1;
+
             m_controller1Cam.rect = new Rect(0f, 0f, 1f, 1f);
             m_controller1Cam.enabled = true;
             m_controller2Cam.gameObject.SetActive(false);

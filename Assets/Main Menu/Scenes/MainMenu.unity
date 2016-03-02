@@ -5707,6 +5707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_teamSize: 0
+  m_controllers: 0
   m_controller1Cam: {fileID: 1012388053}
   m_controller2Cam: {fileID: 884990456}
   m_controller3Cam: {fileID: 1301353955}
