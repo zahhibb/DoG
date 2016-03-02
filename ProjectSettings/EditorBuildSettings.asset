@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Main Menu/Scenes/MainMenu.unity
   - enabled: 1
     path: Assets/Main Menu/Scenes/Staging.unity
+  - enabled: 1
+    path: Assets/Games/Jocke/Scenes/IsItTrue.unity

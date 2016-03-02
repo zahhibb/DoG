@@ -23,3 +23,6 @@ public class StagingText : MonoBehaviour {
         m_text4.text = "Inputs[3]: (0-16)" + m_playerManager.Inputs[3].name;
     }
 }
+
+
+

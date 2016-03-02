@@ -32,7 +32,7 @@ public class MainMenuManager : Manager {
     private Color m_lemonTruck = new Color(249, 227, 105);
     private Color m_beachBlueCoathanger = new Color(148, 233, 246);
     private Color m_flamingoParachute = new Color(234, 160, 223);
-    private Color m_greenPepperGranola = new Color(140, 253, 125);
+    private Color m_pepperGreenGranola = new Color(140, 253, 125);
 
     // Standard Viewport Rectangles
     private Rect m_fullscreen = new Rect(0f, 0f, 1f, 1f);
@@ -97,29 +97,32 @@ public class MainMenuManager : Manager {
 
     private void MakeManager(int controller, int teamSize)
     {
-
-        // Initialize a new instance of Manager to the parametered team number and player count.
-        GameObject newPlayerManager = (GameObject) Instantiate(m_playerManager, transform.position, transform.rotation);
-        Persistency persistencyScript = newPlayerManager.gameObject.AddComponent<Persistency>();
-        newPlayerManager.name = "Player " + controller + " Manager";
-        Manager newManager = newPlayerManager.gameObject.AddComponent<Manager>();
-        newManager.gameObject.tag = "ManagerP" + controller;
-        newManager.TeamSize = teamSize;
-
-        // Set up Inputs array, really only supports xBox controllers. :(
-        newManager.Inputs = new Button[17];
-        for (int i = 0; i < 17; i++)
+        // Find and don't bother if there already is one
+        if (!GameObject.FindGameObjectWithTag("ManagerP" + controller))
         {
-            newManager.Inputs[i] = m_buttonArray[i + (17 * (controller - 1))];
-            //Debug.Log(newManager.Inputs[i].name);
+            // Initialize a new instance of Manager to the parametered team number and player count.
+            GameObject newPlayerManager = (GameObject)Instantiate(m_playerManager, transform.position, transform.rotation);
+            Persistency persistencyScript = newPlayerManager.gameObject.AddComponent<Persistency>();
+            newPlayerManager.name = "Player " + controller + " Manager";
+            Manager newManager = newPlayerManager.gameObject.AddComponent<Manager>();
+            newManager.gameObject.tag = "ManagerP" + controller;
+            newManager.TeamSize = teamSize;
+
+            // Set up Inputs array, really only supports xBox controllers. :(
+            newManager.Inputs = new Button[17];
+            for (int i = 0; i < 17; i++)
+            {
+                newManager.Inputs[i] = m_buttonArray[i + (17 * (controller - 1))];
+                //Debug.Log(newManager.Inputs[i].name);
+            }
+
+            // Give it a pretty color!
+            //newManager.PlayerColor = SetColor();
+
+            // Set up whatever variables it will need.
+            newManager.Score = 0;
+            newManager.enabled = true; //??
         }
-
-        // Give it a pretty color!
-        //newManager.PlayerColor = SetColor();
-
-        // Set up whatever variables it will need.
-        newManager.Score = 0;
-        newManager.enabled = true; //??
     }
 
     private int SliderSelect(Slider slider)
@@ -150,6 +153,8 @@ public class MainMenuManager : Manager {
     {
         if (m_joysticks == 4)
         {
+            m_ManagerP1.Controllers = 4;
+
             m_controller1Cam.rect = m_topLeft;
             GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().PlayerRect = m_topLeft;
             m_controller1Cam.gameObject.SetActive(true);
@@ -165,6 +170,8 @@ public class MainMenuManager : Manager {
         }
         if (m_joysticks == 3)
         {
+            m_ManagerP1.Controllers = 3;
+
             m_controller1Cam.rect = m_topHalf;
             GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().PlayerRect = m_topHalf;
             m_controller2Cam.gameObject.SetActive(true);
@@ -178,6 +185,8 @@ public class MainMenuManager : Manager {
         }
         if (m_joysticks == 2)
         {
+            m_ManagerP1.Controllers = 2;
+
             m_controller1Cam.rect = m_topHalf;
             GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().PlayerRect = m_topHalf;
             m_controller1Cam.gameObject.SetActive(true);
@@ -189,6 +198,8 @@ public class MainMenuManager : Manager {
         }
         if (m_joysticks == 1)
         {
+            m_ManagerP1.Controllers = 1;
+
             m_controller1Cam.rect = m_fullscreen;
             GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().PlayerRect = m_fullscreen;
             m_controller1Cam.gameObject.SetActive(true);
@@ -260,12 +271,12 @@ public class MainMenuManager : Manager {
     {
         //List<Color> colorLm_colorListist = new List<Color>();
 
-        m_colorList.AddRange(new Color[] { m_lemonTruck, m_beachBlueCoathanger, m_flamingoParachute, m_greenPepperGranola });
+        m_colorList.AddRange(new Color[] { m_lemonTruck, m_beachBlueCoathanger, m_flamingoParachute, m_pepperGreenGranola });
 
         m_colorList.Add(m_lemonTruck);
         m_colorList.Add(m_beachBlueCoathanger);
         m_colorList.Add(m_flamingoParachute);
-        m_colorList.Add(m_greenPepperGranola);
+        m_colorList.Add(m_pepperGreenGranola);
     }
 
     private Color SetColor()

@@ -19,6 +19,8 @@ public class MenuButtonManager : MonoBehaviour {
 	}
 	
 
+    // not good :/
+
 	void Update ()
     {
         if (Input.GetButtonDown("A_P1"))

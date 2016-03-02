@@ -10,6 +10,7 @@ TagManager:
   - ManagerP2
   - ManagerP3
   - ManagerP4
+  - QuestionStatement
   layers:
   - Default
   - TransparentFX
@@ -46,4 +47,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 4084799977
+    locked: 0
+  - name: Foreground
+    uniqueID: 4029234989
+    locked: 0
+  - name: Interface
+    uniqueID: 2201542403
     locked: 0

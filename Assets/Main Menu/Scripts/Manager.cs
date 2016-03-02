@@ -10,6 +10,8 @@ public class Manager : MonoBehaviour
     private bool m_active = false;
     private Color m_playerColor;
     private Rect m_playerRect;
+    private int m_rounds = 0;
+    private int m_controllers = 0;
 
     private void Start()
     {
@@ -34,6 +36,18 @@ public class Manager : MonoBehaviour
         set { m_score = value; }
     }
 
+    public int Rounds
+        {
+            get { return m_rounds; }
+            set { m_score = m_rounds; }
+        }
+
+    public int Controllers
+    {
+        get { return m_controllers; }
+        set { Mathf.Clamp(m_score = m_controllers, 1, 4); }
+    }
+
     public Button[] Inputs
     {
         get { return m_inputs; }
@@ -51,4 +65,6 @@ public class Manager : MonoBehaviour
         get { return m_playerRect; }
         set { m_playerRect = value; }
     }
+
+
 }
