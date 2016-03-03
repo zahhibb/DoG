@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        Manager m_myManager = GameObject.FindGameObjectWithTag("ManagerP" + m_playerNumber).GetComponent<Manager>();
+        m_myManager = GameObject.FindGameObjectWithTag("ManagerP" + m_playerNumber).GetComponent<Manager>();
     }
 
     // Update is called once per frame
@@ -23,21 +23,23 @@ public class PlayerController : MonoBehaviour {
             //Time.timeScale = 1;
         }
 
+       
         if (Input.GetButtonDown(m_myManager.Inputs[0].name))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
             //Time.timeScale = 1;
+            Debug.Log("Manager: " + m_myManager.tag  + " > " + m_myManager.Inputs[0].name);
         }
 
 
-        if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
         }
         if (Input.GetButtonDown(m_myManager.Inputs[5].name))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-            //Time.timeScale = 1;
+
         }
 
 
@@ -46,10 +48,11 @@ public class PlayerController : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
             //Time.timeScale = 1;
         }
+    
         if (Input.GetButtonDown(m_myManager.Inputs[4].name))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
-            //Time.timeScale = 1;
+
         }
 
 

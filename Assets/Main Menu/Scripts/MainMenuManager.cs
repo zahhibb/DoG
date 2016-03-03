@@ -77,25 +77,28 @@ public class MainMenuManager : Manager {
     private void MakeInputsFromIM()
     {
         m_buttonArray = new Button[68];
-        for (int i = 1; i > 4; i++)
+        for (int i = 0; i < 4; i++)
         {
-            m_buttonArray[0 * i].name = "A_P" + (1+ i);
-            m_buttonArray[1 * i].name = "B_P" + (1 + i);
-            m_buttonArray[2 * i].name = "X_P" + (1 + i);
-            m_buttonArray[3 * i].name = "Y_P" + (1 + i);
-            m_buttonArray[4 * i].name = "LBumper_P" + (1 + i);
-            m_buttonArray[5 * i].name = "RBumper_P" + (1 + i);
-            m_buttonArray[6 * i].name = "Back_P" + (1 + i);
-            m_buttonArray[7 * i].name = "Start_P" + (1 + i);
-            m_buttonArray[8 * i].name = "LeftStickClick_P" + (1 + i);
-            m_buttonArray[9 * i].name = "RightStickClick_P" + (1 + i);
-            m_buttonArray[10 * i].name = "DPadX_P" + (1 + i);
-            m_buttonArray[11 * i].name = "DPadY_P" + (1 + i);
-            m_buttonArray[12 * i].name = "LeftStickX_P" + (1 + i);
-            m_buttonArray[13 * i].name = "LeftStickY_P" + (1 + i);
-            m_buttonArray[14 * i].name = "RightStickX_P" + (1 + i);
-            m_buttonArray[15 * i].name = "RightStickY_P" + (1 + i);
-            m_buttonArray[16 * i].name = "TriggerAxis_P" + (1 + i);
+            int p = i + 1;
+
+            m_buttonArray[  0 + (17 * i)].name = "A_P" + (p);
+            m_buttonArray[  1 + (17 * i)].name = "B_P" + (p);
+            m_buttonArray[  2 + (17 * i)].name = "X_P" + (p);
+            m_buttonArray[  3 + (17 * i)].name = "Y_P" + (p);
+            m_buttonArray[  4 + (17 * i)].name = "LBumper_P" + ( p);
+            m_buttonArray[  5 + (17 * i)].name = "RBumper_P" + (p);
+            m_buttonArray[  6 + (17 * i)].name = "Back_P" + ( p);
+            m_buttonArray[  7 + (17 * i)].name = "Start_P" + ( p);
+            m_buttonArray[  8 + (17 * i)].name = "LeftStickClick_P" + ( p);
+            m_buttonArray[  9 + (17 * i)].name = "RightStickClick_P" + (p);
+            m_buttonArray[ 10 + (17 * i)].name = "DPadX_P" + ( p);
+            m_buttonArray[ 11 + (17 * i)].name = "DPadY_P" + (p);
+            m_buttonArray[ 12 + (17 * i)].name = "LeftStickX_P" + (p);
+            m_buttonArray[ 13 + (17 * i)].name = "LeftStickY_P" + (p);
+            m_buttonArray[ 14 + (17 * i)].name = "RightStickX_P" + (p);
+            m_buttonArray[ 15 + (17 * i)].name = "RightStickY_P" + (p);
+            m_buttonArray[ 16 + (17 * i)].name = "TriggerAxis_P" + (p);
+           
 
             for (int j = 0; j < 10; j++)
             {
@@ -171,7 +174,6 @@ public class MainMenuManager : Manager {
             for (int i = 0; i < 17; i++)
             {
                 newManager.Inputs[i] = m_buttonArray[i + (17 * (controller - 1))];
-                //Debug.Log(newManager.Inputs[i].name);
             }
 
             // Give it a pretty color!
