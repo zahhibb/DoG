@@ -44,7 +44,7 @@ public class MainMenuManager : Manager {
     private List<Color> m_colorList = new List<Color>();
 
 
-    void Start()
+    void Awake()
     {
         MakeInputsFromIM();
         MakeColors();   
@@ -56,7 +56,11 @@ public class MainMenuManager : Manager {
 
     void Update()
     {
-        TestCameras();
+        if (Input.GetKeyDown("f4")) { TestCameras(4); }
+        if (Input.GetKeyDown("f3")) { TestCameras(3); }
+        if (Input.GetKeyDown("f2")) { TestCameras(2); }
+        if (Input.GetKeyDown("f1")) { TestCameras(1); }
+
         m_ManagerP1.TeamSize = SliderSelect(m_slider1);
         m_ManagerP2.TeamSize = SliderSelect(m_slider2);
         m_ManagerP3.TeamSize = SliderSelect(m_slider3);
@@ -73,8 +77,59 @@ public class MainMenuManager : Manager {
     private void MakeInputsFromIM()
     {
         m_buttonArray = new Button[68];
-        m_buttonArray[0].name = "A_P1"; // and the other 16 :(
+        for (int i = 0; i < 4; i++)
+        {
+            int p = i + 1;
 
+            m_buttonArray[  0 + (17 * i)].name = "A_P" + (p);
+            m_buttonArray[  1 + (17 * i)].name = "B_P" + (p);
+            m_buttonArray[  2 + (17 * i)].name = "X_P" + (p);
+            m_buttonArray[  3 + (17 * i)].name = "Y_P" + (p);
+            m_buttonArray[  4 + (17 * i)].name = "LBumper_P" + ( p);
+            m_buttonArray[  5 + (17 * i)].name = "RBumper_P" + (p);
+            m_buttonArray[  6 + (17 * i)].name = "Back_P" + ( p);
+            m_buttonArray[  7 + (17 * i)].name = "Start_P" + ( p);
+            m_buttonArray[  8 + (17 * i)].name = "LeftStickClick_P" + ( p);
+            m_buttonArray[  9 + (17 * i)].name = "RightStickClick_P" + (p);
+            m_buttonArray[ 10 + (17 * i)].name = "DPadX_P" + ( p);
+            m_buttonArray[ 11 + (17 * i)].name = "DPadY_P" + (p);
+            m_buttonArray[ 12 + (17 * i)].name = "LeftStickX_P" + (p);
+            m_buttonArray[ 13 + (17 * i)].name = "LeftStickY_P" + (p);
+            m_buttonArray[ 14 + (17 * i)].name = "RightStickX_P" + (p);
+            m_buttonArray[ 15 + (17 * i)].name = "RightStickY_P" + (p);
+            m_buttonArray[ 16 + (17 * i)].name = "TriggerAxis_P" + (p);
+           
+
+            for (int j = 0; j < 10; j++)
+            {
+                m_buttonArray[j * i].isAxis = false;
+            }
+
+            for (int k = 10; k < 17; k++)
+            {
+                m_buttonArray[k * i].isAxis = false;
+            }
+
+            /*
+            m_buttonArray[0 * i].isAxis = false;
+            m_buttonArray[1 * i].isAxis = false;
+            m_buttonArray[2 * i].isAxis = false;
+            m_buttonArray[3 * i].isAxis = false;
+            m_buttonArray[4 * i].isAxis = false;
+            m_buttonArray[5 * i].isAxis = false;
+            m_buttonArray[6 * i].isAxis = false;
+            m_buttonArray[7 * i].isAxis = false;
+            m_buttonArray[8 * i].isAxis = false;
+            m_buttonArray[9 * i].isAxis = false;
+            m_buttonArray[10 * i].isAxis = true;
+            m_buttonArray[11 * i].isAxis = true;
+            m_buttonArray[12 * i].isAxis = true;
+            m_buttonArray[13 * i].isAxis = true;
+            m_buttonArray[14 * i].isAxis = true;
+            m_buttonArray[15 * i].isAxis = true;
+            m_buttonArray[16 * i].isAxis = true;
+            */
+        }
 
         // :'(
 
@@ -113,13 +168,13 @@ public class MainMenuManager : Manager {
             Manager newManager = newPlayerManager.gameObject.AddComponent<Manager>();
             newManager.gameObject.tag = "ManagerP" + controller;
             newManager.TeamSize = teamSize;
+            newManager.TeamNumber = controller;
 
             // Set up Inputs array, really only supports xBox controllers. :(
             newManager.Inputs = new Button[17];
             for (int i = 0; i < 17; i++)
             {
                 newManager.Inputs[i] = m_buttonArray[i + (17 * (controller - 1))];
-                //Debug.Log(newManager.Inputs[i].name);
             }
 
             // Give it a pretty color!
@@ -226,11 +281,11 @@ public class MainMenuManager : Manager {
         */
     }
 
-    private void TestCameras()
+    private void TestCameras(int players)
     {
         MakeColors();
 
-        if ((Input.GetKeyDown("f4")))
+        if (players == 4)
         {
             m_ManagerP1.Controllers = 4;
 
@@ -246,7 +301,7 @@ public class MainMenuManager : Manager {
             m_controller4Cam.rect = m_bottomRight;
             m_controller4Cam.gameObject.SetActive(true);
         }
-        else if ((Input.GetKeyDown("f3")))
+        else if (players == 3)
         {
             m_ManagerP1.Controllers = 3;
 
@@ -258,7 +313,7 @@ public class MainMenuManager : Manager {
             m_controller3Cam.gameObject.SetActive(true);
             m_controller4Cam.gameObject.SetActive(false);
         }
-        else if ((Input.GetKeyDown("f2")))
+        else if (players == 2)
         {
             m_ManagerP1.Controllers = 2;
 
@@ -269,7 +324,7 @@ public class MainMenuManager : Manager {
             m_controller3Cam.gameObject.SetActive(false);
             m_controller4Cam.gameObject.SetActive(false);
         }
-        else if ((Input.GetKeyDown("f1")))
+        else if (players == 1)
         {
             m_ManagerP1.Controllers = 1;
 
@@ -309,4 +364,9 @@ public class MainMenuManager : Manager {
     {
         set {m_buttonArray = value; }
     }
+
+    public Manager Manager1 { get { return m_ManagerP1; } }
+    public Manager Manager2 { get { return m_ManagerP1; } }
+    public Manager Manager3 { get { return m_ManagerP1; } }
+    public Manager Manager4 { get { return m_ManagerP1; } }
 }

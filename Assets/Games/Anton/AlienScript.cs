@@ -12,8 +12,8 @@ public class AlienScript : MonoBehaviour {
     {
         m_turning = 0;//the amount of degrees the player has turned
         m_currentTime = 0;
-        m_timeBetweenShots = 3.0f;
-        m_startVelocity = 10.0f;
+        m_timeBetweenShots = 2.8f;
+        m_startVelocity = 25.0f;
     }
 	
 	// Update is called once per frame
@@ -22,7 +22,7 @@ public class AlienScript : MonoBehaviour {
         if (m_currentTime > m_timeBetweenShots)//checks if enough time has passed
         {
             m_currentTime -= m_timeBetweenShots;//decreased by the time since last shot
-            if (m_timeBetweenShots > 0.15)//increases the firing speed with a maximum firing speed at 1/0.15 shots per second (6 2/3)
+            if (m_timeBetweenShots > 0.25)//increases the firing speed with a maximum firing speed at 1/0.15 shots per second (6 2/3)
             {
                 m_timeBetweenShots -= 0.1f;
             }

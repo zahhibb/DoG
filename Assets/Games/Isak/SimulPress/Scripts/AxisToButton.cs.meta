@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: 76025c57cd611614ea1ec663911eb64c
-timeCreated: 1456959421
+guid: 2adc3267cd0de1b4bb0f1b7cb32491e2
+timeCreated: 1457042303
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - m_fireWork: {fileID: 155944, guid: 9ebdfcda600ebca4a80b111c7a9285f8, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
