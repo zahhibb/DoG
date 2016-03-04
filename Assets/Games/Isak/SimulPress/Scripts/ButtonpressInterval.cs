@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ButtonpressInterval : MonoBehaviour {
 
@@ -19,9 +20,11 @@ public class ButtonpressInterval : MonoBehaviour {
     */
     private string[] m_buttonNames;
     private Button[] m_pressedP1;
+    private List<Manager> m_playerManagers;
 
     void Start ()
     {
+        FindTeams();
         /*
         *if (playerPerTeamAmount < x)
         *{
@@ -34,37 +37,9 @@ public class ButtonpressInterval : MonoBehaviour {
 
     private void Update()
     {
+        LameGame();
         //CheckButton(m_pressedP1);
-
     }
-
-    //private void FetchAxis()
-    //{
-    //    if (m_inputArray.arraySize == 0)
-    //    {
-    //        Debug.Log("No Axes");
-    //    }
-    //    else
-    //    {
-    //        m_pressedP1 = new Button[m_inputArray.arraySize];
-    //        for (int i = 0; i < m_inputArray.arraySize; ++i)            // here make array size a total of controllers present * inputs per controller
-    //        {
-    //            var axis = m_inputArray.GetArrayElementAtIndex(i);
-
-    //            var name = axis.FindPropertyRelative("m_Name").stringValue;
-    //            //maybe find the "description" path to check for controller number?
-    //            var axisVal = axis.FindPropertyRelative("axis").intValue;
-    //            var inputType = (InputType)axis.FindPropertyRelative("type").intValue;
-
-    //            Debug.Log(name);
-    //            Debug.Log(axisVal);
-    //            Debug.Log(inputType);
-
-    //            m_pressedP1[i].pressed = false;
-    //            m_pressedP1[i].name = axis.FindPropertyRelative("m_Name").stringValue;
-    //        }
-    //    }
-    //}
 
     private struct Button
     {
@@ -97,12 +72,36 @@ public class ButtonpressInterval : MonoBehaviour {
         }        
     }
 
+    private void LameGame()
+    {
+        foreach (Manager team in m_playerManagers)
+        {
+            if (Input.GetButtonDown(team.Inputs[0].name))
+            {
+                Debug.Log("team number " + team.TeamNumber + " pressed " + team.Inputs[0].name);
+                BackToStaging(team.TeamNumber);
+            }
+        }
+    }
+
     public void BackToStaging(int player)
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Staging");
 
         GameObject.FindGameObjectWithTag("ManagerP" + player).GetComponent<Manager>().Score += 8;
         
+    }
+
+    private void FindTeams()
+    {
+        m_playerManagers = new List<Manager>();
+        Manager player1Manager = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
+        int loop = player1Manager.Controllers;
+        m_playerManagers.Add(player1Manager);
+        for (int i = 1; i < loop; i++)
+        {
+            m_playerManagers.Add(GameObject.FindGameObjectWithTag("ManagerP" + (i + 1)).GetComponent<Manager>());
+        }
     }
 }
 

@@ -4,6 +4,7 @@ using System.Collections;
 public class Manager : MonoBehaviour
 {
     [SerializeField] private int m_teamSize;
+    private int m_teamNumber;
     private Button[] m_inputs;
     private int m_score = 0;
     private bool m_active = false;
@@ -27,6 +28,12 @@ public class Manager : MonoBehaviour
     {
         get { return m_teamSize; }
         set { m_teamSize = value; }
+    }
+
+    public int TeamNumber
+    {
+        get { return m_teamNumber; }
+        set { m_teamNumber = value; }
     }
 
     public int Score

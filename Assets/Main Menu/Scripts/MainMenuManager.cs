@@ -44,7 +44,7 @@ public class MainMenuManager : Manager {
     private List<Color> m_colorList = new List<Color>();
 
 
-    void Start()
+    void Awake()
     {
         MakeInputsFromIM();
         MakeColors();   
@@ -168,6 +168,7 @@ public class MainMenuManager : Manager {
             Manager newManager = newPlayerManager.gameObject.AddComponent<Manager>();
             newManager.gameObject.tag = "ManagerP" + controller;
             newManager.TeamSize = teamSize;
+            newManager.TeamNumber = controller;
 
             // Set up Inputs array, really only supports xBox controllers. :(
             newManager.Inputs = new Button[17];
@@ -363,4 +364,9 @@ public class MainMenuManager : Manager {
     {
         set {m_buttonArray = value; }
     }
+
+    public Manager Manager1 { get { return m_ManagerP1; } }
+    public Manager Manager2 { get { return m_ManagerP1; } }
+    public Manager Manager3 { get { return m_ManagerP1; } }
+    public Manager Manager4 { get { return m_ManagerP1; } }
 }

@@ -7,7 +7,7 @@ public class Pause : MonoBehaviour
     [SerializeField] private Canvas m_canvas = null;
     [SerializeField] private float m_totalTime = 10.0f;
 
-    private void Awake()
+    private void Start()
     {
         Time.timeScale = 0;
         //Time.fixedDeltaTime = 0;

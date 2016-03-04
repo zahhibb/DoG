@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private int m_playerNumber;
     private Manager m_myManager;
 
+    private bool m_isXAxisInUse = false;
+    private bool m_isStickAxisInUse = false;
+
     // Use this for initialization
     void Start ()
     {
@@ -41,6 +44,10 @@ public class PlayerController : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
 
         }
+        if (Input.GetAxisRaw("DPadY_P2") == 0)
+        {
+            m_isXAxisInUse = false;
+        }
 
 
         if (Input.GetKey(KeyCode.A))
@@ -48,7 +55,7 @@ public class PlayerController : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
             //Time.timeScale = 1;
         }
-    
+
         if (Input.GetButtonDown(m_myManager.Inputs[4].name))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
@@ -56,6 +63,59 @@ public class PlayerController : MonoBehaviour {
         }
 
 
+        // New for DPad inputs.
+
+        if (Input.GetAxisRaw(m_myManager.Inputs[10].name) >= 0.5f)
+        {
+            if (m_isXAxisInUse == false)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                m_isXAxisInUse = false;
+            }
+        }
+
+        if (Input.GetAxisRaw(m_myManager.Inputs[10].name) <= -0.5f)
+        {
+            if (m_isXAxisInUse == false)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                m_isXAxisInUse = false;
+            }
+        }
+
+        if (Input.GetAxisRaw(m_myManager.Inputs[12].name) >= 0.5f)
+        {
+            if (m_isStickAxisInUse == false)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                m_isStickAxisInUse = false;
+            }
+        }
+
+        if (Input.GetAxisRaw(m_myManager.Inputs[12].name) <= -0.5f)
+        {
+            if (m_isStickAxisInUse == false)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                m_isStickAxisInUse = false;
+            }
+        }
+
+        // this whole "inUse" thing is maybe not needed, Aurthur's choice ( mispunning intended :U )
+
+        if (Input.GetAxisRaw(m_myManager.Inputs[10].name) == 0)
+        {
+            m_isXAxisInUse = false;
+        }
+
+        if (Input.GetAxisRaw(m_myManager.Inputs[12].name) == 0f)
+        {
+            m_isStickAxisInUse = false;
+        }
+
+
+
+        // End of New for DPad inputs.
     }
 
     public Manager MyManager
