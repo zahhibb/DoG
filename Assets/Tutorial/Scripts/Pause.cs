@@ -47,4 +47,9 @@ public class Pause : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public float TotalTime
+    {
+        get { return m_totalTime; }
+        set { m_totalTime = value; }
+    }
 }
