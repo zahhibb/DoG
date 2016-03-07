@@ -11,11 +11,20 @@ public class Manager : MonoBehaviour
     private Color m_playerColor;
     private Rect m_playerRect;
     private int m_rounds = 0;
+    private string m_chosenScene;
     public int m_controllers = 0;
 
     private void Start()
     {
         //Debug.Log(gameObject.tag + " har " + m_teamSize + " spelare.");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PrintInputs();
+        }
     }
 
     public struct Button
@@ -78,5 +87,19 @@ public class Manager : MonoBehaviour
         set { m_playerRect = value; }
     }
 
+    public string ChosenScene
+    {
+        get { return m_chosenScene; }
+        set { m_chosenScene = value; }
+    }
+
+    // for debugging input issues
+    private void PrintInputs()
+    {
+        for (int i = 0; i < 17; i++)
+        {
+            Debug.Log(gameObject.tag + " - input " + i + ": " + Inputs[i].name);
+        }
+    }
 
 }
