@@ -1,1 +1,3 @@
 Varför inte lite beskrivningar för minispelen här i "keep"-filen
+
+Spelarna spawnar och ska försöka hålla sig undan de roterande monstren som skjuter,
