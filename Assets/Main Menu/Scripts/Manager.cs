@@ -3,11 +3,11 @@ using System.Collections;
 
 public class Manager : MonoBehaviour
 {
-    [SerializeField] private int m_teamSize;
+    [SerializeField] private int m_teamSize = 1;
     private int m_teamNumber;
     private Button[] m_inputs;
     private int m_score = 0;
-    private bool m_active = false;
+    [SerializeField] private bool m_active = false;
     private Color m_playerColor;
     private Rect m_playerRect;
     private int m_rounds = 0;

@@ -13,6 +13,7 @@ TagManager:
   - QuestionStatement
   - TrueButton
   - FalseButton
+  - InactiveManager
   layers:
   - Default
   - TransparentFX

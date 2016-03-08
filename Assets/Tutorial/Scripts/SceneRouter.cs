@@ -8,6 +8,9 @@ public class SceneRouter : MonoBehaviour {
     [SerializeField] private float m_totalTime = 2f;
     [SerializeField] private GameObject m_countDownParent;
     [SerializeField] GameObject m_spinCountdown;
+    [SerializeField] GameObject m_backgroundCutout;
+    [SerializeField] GameObject m_background;
+    [SerializeField] Color m_backgroundColor;
 
     private bool m_isCounting = false;
     private float m_lastTime = 0f;
@@ -21,12 +24,23 @@ public class SceneRouter : MonoBehaviour {
         MakeTutorial(m_sceneChoice);
 
         // there should be some fancy count down animated too
-        StartCoroutine(LoadScene(m_totalTime));
-        SpinCountdown();
+
     }
 
     private void Update()
     {
+        UpdateBackground();
+
+        if (!m_isCounting)
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                Destroy(m_sampleTutorial);
+                StartCoroutine(LoadScene(m_totalTime));
+                SpinCountdown();
+            }
+            
+        }
         UpdateCounter();
     }
 
@@ -61,9 +75,15 @@ public class SceneRouter : MonoBehaviour {
 
     private void SpinCountdown()
     {
-        m_countDownParent.GetComponentInChildren<Text>().text = "5";
+        m_countDownParent.GetComponentInChildren<Text>().text = "game starting";
         m_countDownParent.GetComponentInChildren<PlayImage>().PlayLoop();
         m_isCounting = true;
+    }
+
+    private void UpdateBackground()
+    {
+        m_backgroundCutout.GetComponent<Image>().color = m_backgroundColor;
+        m_background.GetComponent<Image>().color = m_backgroundColor;
     }
 
     private void UpdateCounter()
@@ -72,23 +92,23 @@ public class SceneRouter : MonoBehaviour {
         {
             if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime)
             {
-                m_countDownParent.GetComponentInChildren<Text>().text = "go.";
+                m_countDownParent.GetComponentInChildren<Text>().text = "ready";
             }
             else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 1)
             {
-                m_countDownParent.GetComponentInChildren<Text>().text = "1";
+                m_countDownParent.GetComponentInChildren<Text>().text = "get set";
             }
             else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 2)
             {
-                m_countDownParent.GetComponentInChildren<Text>().text = "2";
+                m_countDownParent.GetComponentInChildren<Text>().text = "on your marks";
             }
             else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 3)
             {
-                m_countDownParent.GetComponentInChildren<Text>().text = "3";
+                m_countDownParent.GetComponentInChildren<Text>().text = "";
             }
             else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 4)
             {
-                m_countDownParent.GetComponentInChildren<Text>().text = "4";
+                m_countDownParent.GetComponentInChildren<Text>().text = "game starting";
             }
 
         }

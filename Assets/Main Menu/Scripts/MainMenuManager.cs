@@ -14,7 +14,9 @@ public class MainMenuManager : Manager {
     private Manager m_ManagerP2 = null;
     private Manager m_ManagerP3 = null;
     private Manager m_ManagerP4 = null;
+    private List<Manager> m_managerList = new List<Manager>();
 
+    // the sliders that will set the teamSize on each manager.
     [SerializeField] private Slider m_slider1 = null;
     [SerializeField] private Slider m_slider2 = null;
     [SerializeField] private Slider m_slider3 = null;
@@ -23,11 +25,11 @@ public class MainMenuManager : Manager {
     [SerializeField] private int m_joysticks;
     [SerializeField] private GameObject m_playerManager = null;
 
-    //private SerializedProperty[] m_inputManagerArray;
+    // private SerializedProperty[] m_inputManagerArray;
     private Button[] m_buttonArray;
-    //private string[] m_controller = Input.GetJoystickNames();
+    // private string[] m_controller = Input.GetJoystickNames();
 
-    // Standard Colors (there needs to be as many as of these as there are supported controllers!)
+    // Standard Colors (there needs to be as many as of these as there are supported controllers)
     private Color m_lemonTruck = new Color(249, 227, 105);
     private Color m_beachBlueCoathanger = new Color(148, 233, 246);
     private Color m_flamingoParachute = new Color(234, 160, 223);
@@ -52,14 +54,17 @@ public class MainMenuManager : Manager {
 
         SetCameras();
 
-    }
+}
 
-    void Update()
+void Update()
     {
         if (Input.GetKeyDown("f4")) { TestCameras(4); }
         if (Input.GetKeyDown("f3")) { TestCameras(3); }
         if (Input.GetKeyDown("f2")) { TestCameras(2); }
         if (Input.GetKeyDown("f1")) { TestCameras(1); }
+
+        TogglePlayersActive();
+        TestCameras(Manager1.Controllers);
 
         m_ManagerP1.TeamSize = SliderSelect(m_slider1);
         m_ManagerP2.TeamSize = SliderSelect(m_slider2);
@@ -109,54 +114,10 @@ public class MainMenuManager : Manager {
             {
                 m_buttonArray[k * i].isAxis = false;
             }
-
-            /*
-            m_buttonArray[0 * i].isAxis = false;
-            m_buttonArray[1 * i].isAxis = false;
-            m_buttonArray[2 * i].isAxis = false;
-            m_buttonArray[3 * i].isAxis = false;
-            m_buttonArray[4 * i].isAxis = false;
-            m_buttonArray[5 * i].isAxis = false;
-            m_buttonArray[6 * i].isAxis = false;
-            m_buttonArray[7 * i].isAxis = false;
-            m_buttonArray[8 * i].isAxis = false;
-            m_buttonArray[9 * i].isAxis = false;
-            m_buttonArray[10 * i].isAxis = true;
-            m_buttonArray[11 * i].isAxis = true;
-            m_buttonArray[12 * i].isAxis = true;
-            m_buttonArray[13 * i].isAxis = true;
-            m_buttonArray[14 * i].isAxis = true;
-            m_buttonArray[15 * i].isAxis = true;
-            m_buttonArray[16 * i].isAxis = true;
-            */
-        }
-
-        // :'(
-
-        // this function makes m_buttonArray contain all inputs from input manager.
-
-        //var inputManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0];
-        //SerializedObject obj = new SerializedObject(inputManager);
-        //SerializedProperty m_inputArray = obj.FindProperty("m_Axes");
-
-
-        //m_buttonArray = new Button[m_inputArray.arraySize];
-
-        //for (int i = 0; i < m_inputArray.arraySize; ++i)
-        //{
-        //    var axis = m_inputArray.GetArrayElementAtIndex(i);
-        //    var name = axis.FindPropertyRelative("m_Name").stringValue;
-        //    var axisVal = axis.FindPropertyRelative("axis").intValue;
-
-        //    //Debug.Log(name);
-        //    //Debug.Log(axisVal);
-
-        //    m_buttonArray[i].pressed = false;
-        //    m_buttonArray[i].name = axis.FindPropertyRelative("m_Name").stringValue;
-        //}   
+        }  
     }
 
-    private void MakeManager(int controller, int teamSize)
+    private void MakeManager(int controller)
     {
         // Find and don't bother if there already is one
         if (!GameObject.FindGameObjectWithTag("ManagerP" + controller))
@@ -167,7 +128,6 @@ public class MainMenuManager : Manager {
             newPlayerManager.name = "Player " + controller + " Manager";
             Manager newManager = newPlayerManager.gameObject.AddComponent<Manager>();
             newManager.gameObject.tag = "ManagerP" + controller;
-            newManager.TeamSize = teamSize;
             newManager.TeamNumber = controller;
 
             // Set up Inputs array, really only supports xBox controllers. :(
@@ -177,12 +137,15 @@ public class MainMenuManager : Manager {
                 newManager.Inputs[i] = m_buttonArray[i + (17 * (controller - 1))];
             }
 
-            // Give it a pretty color!
+            // Give it a pretty color! (just set colors for team 1-4 atm...)
             // newManager.PlayerColor = SetColor();
 
             // Set up whatever variables it will need.
             newManager.Score = 0;
             newManager.enabled = true; //??
+
+            // Add it to the list to sort them upon leaving Main Menu.
+            m_managerList.Add(newManager);
         }
     }
 
@@ -198,10 +161,10 @@ public class MainMenuManager : Manager {
     private void MakeTeams()
     {
 
-        MakeManager(1, 1);
-        MakeManager(2, 1);
-        MakeManager(3, 1);
-        MakeManager(4, 1);
+        MakeManager(1);
+        MakeManager(2);
+        MakeManager(3);
+        MakeManager(4);
 
         m_ManagerP1 = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
         m_ManagerP2 = GameObject.FindGameObjectWithTag("ManagerP2").GetComponent<Manager>();
@@ -333,6 +296,49 @@ public class MainMenuManager : Manager {
             m_controller2Cam.gameObject.SetActive(false);
             m_controller3Cam.gameObject.SetActive(false);
             m_controller4Cam.gameObject.SetActive(false);
+        }
+    }
+
+    private void TogglePlayersActive()
+    {
+        List<Manager> tempManagerList = m_managerList;
+
+        for (int i = 1; i < tempManagerList.Count; i++)
+        {
+            Manager tempManager = tempManagerList[i];
+
+            if (!tempManager.Active) 
+            {
+                if (Input.GetButtonDown(tempManager.Inputs[0].name))
+                {
+                    m_ManagerP1.Controllers++;
+                    tempManager.Active = true;
+                    m_managerList.Remove(tempManager);
+                    m_managerList.Add(tempManager);
+
+                }
+            }
+            if (tempManager.Active)
+            {
+                if (Input.GetButtonDown(tempManager.Inputs[1].name))
+                {
+                    m_ManagerP1.Controllers--;
+                    tempManager.Active = false;
+                    m_managerList.Remove(tempManager);
+                    m_managerList.Add(tempManager);
+                }
+            }
+        }
+
+        //SortManagers();
+    }
+
+    private void SortManagers()
+    {
+        // note that we never sort Manager 1.
+        for (int i = 1; i < m_managerList.Count; i++)
+        {
+            m_managerList[i].gameObject.tag = "ManagerP" + (i + 1);
         }
     }
 
