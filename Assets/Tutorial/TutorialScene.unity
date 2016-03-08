@@ -114,7 +114,7 @@ RectTransform:
   m_LocalScale: {x: 0.2973737, y: 0.29737306, z: 0.29737306}
   m_Children: []
   m_Father: {fileID: 203178417}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 173029604}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: CountDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179,7 +179,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7491574, y: 0.7491574, z: 0.7491574}
-  m_Children: []
+  m_Children:
+  - {fileID: 1316579102}
+  - {fileID: 321834670}
   m_Father: {fileID: 203178417}
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -346,8 +348,6 @@ RectTransform:
   m_Children:
   - {fileID: 179952886}
   - {fileID: 173029604}
-  - {fileID: 1316579102}
-  - {fileID: 321834670}
   - {fileID: 123883277}
   m_Father: {fileID: 880053950}
   m_RootOrder: 0
@@ -382,13 +382,13 @@ RectTransform:
   m_GameObject: {fileID: 321834669}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7491574, y: 0.7491574, z: 0.7491574}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 203178417}
-  m_RootOrder: 3
+  m_Father: {fileID: 173029604}
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 472.1, y: -256}
+  m_AnchoredPosition: {x: 52.80316, y: -50}
   m_SizeDelta: {x: 166.8, y: 118.11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &321834671
@@ -445,7 +445,7 @@ GameObject:
   - 92: {fileID: 880053947}
   - 114: {fileID: 880053946}
   m_Layer: 0
-  m_Name: CountdownPrefab
+  m_Name: CountDownCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,9 +462,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87be555601360cd4b9d853751144761c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_sceneChoice: TutorialScene
-  m_totalTime: 4
-  m_countDownCanvas: {fileID: 203178414}
+  m_sceneChoice: SimulPress
+  m_totalTime: 5
+  m_countDownParent: {fileID: 173029603}
   m_spinCountdown: {fileID: 1316579101}
   m_sampleTutorial: {fileID: 0}
 --- !u!92 &880053947
@@ -545,7 +545,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 203178417}
+    m_TransformParent: {fileID: 173029604}
     m_Modifications:
     - target: {fileID: 22461096, guid: b0a186c73e99c4743938178e1464df5c, type: 2}
       propertyPath: m_LocalPosition.x
@@ -577,7 +577,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22461096, guid: b0a186c73e99c4743938178e1464df5c, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22461096, guid: b0a186c73e99c4743938178e1464df5c, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -638,15 +638,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22461096, guid: b0a186c73e99c4743938178e1464df5c, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.7491574
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22461096, guid: b0a186c73e99c4743938178e1464df5c, type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.7491574
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22461096, guid: b0a186c73e99c4743938178e1464df5c, type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.7491574
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0a186c73e99c4743938178e1464df5c, type: 2}

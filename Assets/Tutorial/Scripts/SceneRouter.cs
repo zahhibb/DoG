@@ -6,7 +6,7 @@ public class SceneRouter : MonoBehaviour {
 
     [SerializeField] private string m_sceneChoice;
     [SerializeField] private float m_totalTime = 2f;
-    [SerializeField] private Canvas m_countDownCanvas;
+    [SerializeField] private GameObject m_countDownParent;
     [SerializeField] GameObject m_spinCountdown;
 
     private bool m_isCounting = false;
@@ -21,31 +21,13 @@ public class SceneRouter : MonoBehaviour {
         MakeTutorial(m_sceneChoice);
 
         // there should be some fancy count down animated too
-        StartCoroutine(CountDown(m_totalTime));
+        StartCoroutine(LoadScene(m_totalTime));
         SpinCountdown();
     }
 
     private void Update()
     {
-        if (m_isCounting)
-        {
-            if (Time.timeSinceLevelLoad - m_lastTime >= 3)
-            {
-                m_countDownCanvas.GetComponentInChildren<Text>().text = "go.";
-            }
-            else if (Time.timeSinceLevelLoad - m_lastTime >= 2)
-            {
-                m_countDownCanvas.GetComponentInChildren<Text>().text = "1";
-            }
-            else if (Time.timeSinceLevelLoad - m_lastTime >= 1)
-            {
-                m_countDownCanvas.GetComponentInChildren<Text>().text = "2";
-            }
-        }
-        else
-        {
-            m_lastTime = Time.timeSinceLevelLoad;
-        }
+        UpdateCounter();
     }
 
     private void MakeTutorial(string choice)
@@ -69,18 +51,50 @@ public class SceneRouter : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
     }
 
-    private IEnumerator CountDown(float time)
+    private IEnumerator LoadScene(float time)
     {
+        // add a little bit to finish animating :/
+        time += 0.53f;
         yield return new WaitForSeconds(time);
         UnityEngine.SceneManagement.SceneManager.LoadScene(m_sceneChoice);
     }
 
     private void SpinCountdown()
     {
-        m_countDownCanvas.GetComponentInChildren<Text>().text = "3";
-        m_countDownCanvas.GetComponentInChildren<PlayImage>().PlayLoop();
+        m_countDownParent.GetComponentInChildren<Text>().text = "5";
+        m_countDownParent.GetComponentInChildren<PlayImage>().PlayLoop();
         m_isCounting = true;
     }
 
+    private void UpdateCounter()
+    {
+        if (m_isCounting)
+        {
+            if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime)
+            {
+                m_countDownParent.GetComponentInChildren<Text>().text = "go.";
+            }
+            else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 1)
+            {
+                m_countDownParent.GetComponentInChildren<Text>().text = "1";
+            }
+            else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 2)
+            {
+                m_countDownParent.GetComponentInChildren<Text>().text = "2";
+            }
+            else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 3)
+            {
+                m_countDownParent.GetComponentInChildren<Text>().text = "3";
+            }
+            else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 4)
+            {
+                m_countDownParent.GetComponentInChildren<Text>().text = "4";
+            }
 
+        }
+        else
+        {
+            m_lastTime = Time.timeSinceLevelLoad;
+        }
+    }
 }
