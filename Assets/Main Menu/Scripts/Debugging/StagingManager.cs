@@ -48,7 +48,11 @@ public class StagingManager : MonoBehaviour
 
 
         }
-        m_scoreText.text = "Scores   || Team 1: " + m_manager1.Score + " points.  " + "|| Team 1: " + m_manager2.Score + " points." + "  || Team 1: " + m_manager3.Score + " points.  " + "  || Team 1: " + m_manager4.Score + " points.  ";
+        m_scoreText.text =
+                             "Scores   || Team 1: " + m_manager1.Score + " points.  " +
+                                    "  || Team 2: " + m_manager2.Score + " points.  " +
+                                    "  || Team 3: " + m_manager3.Score + " points.  " +
+                                    "  || Team 4: " + m_manager4.Score + " points.  " ;
     }
 
     private void Update()
@@ -70,9 +74,9 @@ public class StagingManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
-    public void LoadIsItTrue()
+    public void LoadTutorial()
     {
-            
+        UnityEngine.SceneManagement.SceneManager.LoadScene("TutorialScene");
     }
     public void LoadAntonsAliens()
     {
@@ -145,20 +149,28 @@ public class StagingManager : MonoBehaviour
         {
             if (CheckButton(m_manager1, 0))
             {
-                LoadFloppy1();
+                //LoadFloppy1();
+                m_manager1.ChosenScene = "Floppy1";
+                LoadTutorial();
             }
             if (CheckButton(m_manager2, 0))
             {
-                LoadFloppy1();
+                //LoadFloppy1();
+                m_manager1.ChosenScene = "Floppy1";
+                LoadTutorial();
             }
 
             if (CheckButton(m_manager3, 0))
             {
-                LoadFloppy1();
+                //LoadFloppy1();
+                m_manager1.ChosenScene = "Floppy1";
+                LoadTutorial(); ;
             }
             if (CheckButton(m_manager4, 0))
             {
-                LoadFloppy1();
+                //LoadFloppy1();
+                m_manager1.ChosenScene = "Floppy1";
+                LoadTutorial();
             }
 
 

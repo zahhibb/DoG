@@ -20,11 +20,8 @@ public class SceneRouter : MonoBehaviour {
 
 	private void Start ()
     {
-        //m_sceneChoice = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().ChosenScene;
+        m_sceneChoice = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().ChosenScene;
         MakeTutorial(m_sceneChoice);
-
-        // there should be some fancy count down animated too
-
     }
 
     private void Update()
@@ -49,11 +46,16 @@ public class SceneRouter : MonoBehaviour {
         switch (choice)
         {
 
-            // and add a case for it in this switch.
+            // and add a case for your game in this switch.
 
             case "Sample":
                 GameObject specificPrefab = (GameObject)Instantiate(m_sampleTutorial, transform.position, transform.rotation);
                 m_totalTime = specificPrefab.GetComponent<Pause>().TotalTime;
+                break;
+            case "Floppy1":
+                m_countDownParent.GetComponentInChildren<Text>().text = "flopp your boys";
+                StartCoroutine(LoadScene(m_totalTime));
+                SpinCountdown();
                 break;
         }
         
@@ -68,7 +70,7 @@ public class SceneRouter : MonoBehaviour {
     private IEnumerator LoadScene(float time)
     {
         // add a little bit to finish animating :/
-        time += 0.53f;
+        time += 0.8f;
         yield return new WaitForSeconds(time);
         UnityEngine.SceneManagement.SceneManager.LoadScene(m_sceneChoice);
     }
@@ -104,7 +106,7 @@ public class SceneRouter : MonoBehaviour {
             }
             else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 3)
             {
-                m_countDownParent.GetComponentInChildren<Text>().text = "";
+                m_countDownParent.GetComponentInChildren<Text>().text = "game starting";
             }
             else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 4)
             {

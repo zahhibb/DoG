@@ -535,7 +535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sceneChoice: SimulPress
-  m_totalTime: 5
+  m_totalTime: 3
   m_countDownParent: {fileID: 173029603}
   m_spinCountdown: {fileID: 1316579101}
   m_backgroundCutout: {fileID: 123883276}
