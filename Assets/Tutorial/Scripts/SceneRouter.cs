@@ -8,6 +8,7 @@ public class SceneRouter : MonoBehaviour {
     [SerializeField] private float m_totalTime = 2f;
     [SerializeField] private GameObject m_countDownParent;
     [SerializeField] GameObject m_spinCountdown;
+    [SerializeField] float m_spinCountdownTime = 3;
     [SerializeField] GameObject m_backgroundCutout;
     [SerializeField] GameObject m_background;
     [SerializeField] Color m_backgroundColor;
@@ -17,8 +18,9 @@ public class SceneRouter : MonoBehaviour {
 
     // serialize your very own tutorial here.
     [SerializeField] Object m_sampleTutorial = null;
+    [SerializeField] Object m_floppyTutorial = null;
 
-	private void Start ()
+    private void Start ()
     {
         m_sceneChoice = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().ChosenScene;
         MakeTutorial(m_sceneChoice);
@@ -33,7 +35,7 @@ public class SceneRouter : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 Destroy(m_sampleTutorial);
-                StartCoroutine(LoadScene(m_totalTime));
+                StartCoroutine(TutorialTime(m_totalTime));
                 SpinCountdown();
             }
             
@@ -47,14 +49,22 @@ public class SceneRouter : MonoBehaviour {
         {
 
             // and add a case for your game in this switch.
-
-            case "Sample":
-                GameObject specificPrefab = (GameObject)Instantiate(m_sampleTutorial, transform.position, transform.rotation);
-                m_totalTime = specificPrefab.GetComponent<Pause>().TotalTime;
+            case "SimulPress":
+                GameObject simulTutorial = (GameObject)Instantiate(m_sampleTutorial, transform.position, transform.rotation);
+                m_totalTime = simulTutorial.GetComponent<SelfDestruct>().LifeTime;
+                StartCoroutine(TimeToStartSpin(m_totalTime));
+                SpinCountdown();
                 break;
             case "Floppy1":
-                m_countDownParent.GetComponentInChildren<Text>().text = "flopp your boys";
-                StartCoroutine(LoadScene(m_totalTime));
+                GameObject floppyTutorial = (GameObject)Instantiate(m_floppyTutorial, transform.position, transform.rotation);
+                m_totalTime = floppyTutorial.GetComponent<SelfDestruct>().LifeTime;
+                StartCoroutine(TimeToStartSpin(m_totalTime));
+                SpinCountdown();
+                break;
+            default:
+                GameObject samplePrefab = (GameObject)Instantiate(m_sampleTutorial, transform.position, transform.rotation);
+                m_totalTime = samplePrefab.GetComponent<SelfDestruct>().LifeTime;
+                StartCoroutine(TimeToStartSpin(m_totalTime));
                 SpinCountdown();
                 break;
         }
@@ -67,12 +77,19 @@ public class SceneRouter : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
     }
 
-    private IEnumerator LoadScene(float time)
+    private IEnumerator TutorialTime(float time)
     {
         // add a little bit to finish animating :/
         time += 0.8f;
         yield return new WaitForSeconds(time);
         UnityEngine.SceneManagement.SceneManager.LoadScene(m_sceneChoice);
+    }
+
+    private IEnumerator TimeToStartSpin(float time)
+    {
+        yield return new WaitForSeconds(time);
+        StartCoroutine(TutorialTime(m_spinCountdownTime));
+        SpinCountdown();
     }
 
     private void SpinCountdown()
@@ -92,23 +109,25 @@ public class SceneRouter : MonoBehaviour {
     {
         if (m_isCounting)
         {
-            if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime)
+            Debug.Log("time since lastTime: " + (Time.timeSinceLevelLoad - m_lastTime));
+
+            if (Time.timeSinceLevelLoad - m_lastTime >= m_spinCountdownTime + m_totalTime)
             {
                 m_countDownParent.GetComponentInChildren<Text>().text = "ready";
             }
-            else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 1)
+            else if (Time.timeSinceLevelLoad - m_lastTime >= m_spinCountdownTime + m_totalTime - 1)
             {
                 m_countDownParent.GetComponentInChildren<Text>().text = "get set";
             }
-            else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 2)
+            else if (Time.timeSinceLevelLoad - m_lastTime >= m_spinCountdownTime + m_totalTime - 2)
             {
                 m_countDownParent.GetComponentInChildren<Text>().text = "on your marks";
             }
-            else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 3)
+            else if (Time.timeSinceLevelLoad - m_lastTime >= m_spinCountdownTime + m_totalTime - 3)
             {
                 m_countDownParent.GetComponentInChildren<Text>().text = "game starting";
             }
-            else if (Time.timeSinceLevelLoad - m_lastTime >= m_totalTime - 4)
+            else if (Time.timeSinceLevelLoad - m_lastTime >= m_spinCountdownTime + m_totalTime - 4)
             {
                 m_countDownParent.GetComponentInChildren<Text>().text = "game starting";
             }

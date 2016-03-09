@@ -52,11 +52,11 @@ public class MainMenuManager : Manager {
         MakeColors();   
         MakeTeams();
 
-        SetCameras();
+        TestCameras(1);
 
-}
+    }
 
-void Update()
+    void Update()
     {
         if (Input.GetKeyDown("f4")) { TestCameras(4); }
         if (Input.GetKeyDown("f3")) { TestCameras(3); }
@@ -129,6 +129,7 @@ void Update()
             Manager newManager = newPlayerManager.gameObject.AddComponent<Manager>();
             newManager.gameObject.tag = "ManagerP" + controller;
             newManager.TeamNumber = controller;
+            newManager.Active = true;
 
             // Set up Inputs array, really only supports xBox controllers. :(
             newManager.Inputs = new Button[17];
@@ -145,7 +146,7 @@ void Update()
             newManager.enabled = true; //??
 
             // Add it to the list to sort them upon leaving Main Menu.
-            m_managerList.Add(newManager);
+            //m_managerList.Add(newManager);
         }
     }
 
@@ -246,23 +247,24 @@ void Update()
 
     private void TestCameras(int players)
     {
-        MakeColors();
+        //MakeColors();
 
         if (players == 4)
         {
             m_ManagerP1.Controllers = 4;
 
-            //GameObject p4 = GameObject.FindGameObjectWithTag("ManagerP4");
-            //Manager managerp4 = p4.GetComponent<Manager>();
-
             m_controller1Cam.rect = m_topLeft;
             m_controller1Cam.gameObject.SetActive(true);
+            m_ManagerP1.Active = true;
             m_controller2Cam.rect = m_topRight;
             m_controller2Cam.gameObject.SetActive(true);
+            m_ManagerP2.Active = true;
             m_controller3Cam.rect = m_bottomLeft;
             m_controller3Cam.gameObject.SetActive(true);
+            m_ManagerP3.Active = true;
             m_controller4Cam.rect = m_bottomRight;
             m_controller4Cam.gameObject.SetActive(true);
+            m_ManagerP4.Active = true;
         }
         else if (players == 3)
         {
@@ -270,11 +272,15 @@ void Update()
 
             m_controller1Cam.rect = new Rect(0f, 0.5f, 1f, 1f);
             m_controller1Cam.gameObject.SetActive(true);
+            m_ManagerP1.Active = true;
             m_controller2Cam.rect = new Rect(0f, 0f, 0.5f, 0.5f);
             m_controller2Cam.gameObject.SetActive(true);
+            m_ManagerP2.Active = true;
             m_controller3Cam.rect = new Rect(0.5f, 0f, 0.5f, 0.5f);
             m_controller3Cam.gameObject.SetActive(true);
+            m_ManagerP3.Active = true;
             m_controller4Cam.gameObject.SetActive(false);
+            m_ManagerP4.Active = false;
         }
         else if (players == 2)
         {
@@ -282,53 +288,79 @@ void Update()
 
             m_controller1Cam.rect = new Rect(0f, 0.5f, 1f, 1f);
             m_controller1Cam.gameObject.SetActive(true);
+            m_ManagerP1.Active = true;
             m_controller2Cam.rect = new Rect(0f, 0f, 1f, 0.5f);
             m_controller2Cam.gameObject.SetActive(true);
+            m_ManagerP2.Active = true;
             m_controller3Cam.gameObject.SetActive(false);
+            m_ManagerP3.Active = false;
             m_controller4Cam.gameObject.SetActive(false);
-        }
+            m_ManagerP4.Active = false;
+        }   
         else if (players == 1)
         {
             m_ManagerP1.Controllers = 1;
 
             m_controller1Cam.rect = new Rect(0f, 0f, 1f, 1f);
             m_controller1Cam.enabled = true;
+            m_ManagerP1.Active = true;
             m_controller2Cam.gameObject.SetActive(false);
+            m_ManagerP2.Active = false;
             m_controller3Cam.gameObject.SetActive(false);
+            m_ManagerP3.Active = false;
             m_controller4Cam.gameObject.SetActive(false);
+            m_ManagerP4.Active = false;
         }
     }
 
     private void TogglePlayersActive()
     {
-        List<Manager> tempManagerList = m_managerList;
-
-        for (int i = 1; i < tempManagerList.Count; i++)
+        for (int i = 0; i > m_ManagerP1.Controllers; i++)
         {
-            Manager tempManager = tempManagerList[i];
-
-            if (!tempManager.Active) 
+            Manager myManager = GameObject.FindGameObjectWithTag("ManagerP" + (i + 1)).GetComponent<Manager>();
+            if (Input.GetButtonDown(myManager.Inputs[7].name))
             {
-                if (Input.GetButtonDown(tempManager.Inputs[0].name))
-                {
-                    m_ManagerP1.Controllers++;
-                    tempManager.Active = true;
-                    m_managerList.Remove(tempManager);
-                    m_managerList.Add(tempManager);
-
-                }
-            }
-            if (tempManager.Active)
-            {
-                if (Input.GetButtonDown(tempManager.Inputs[1].name))
+                if (myManager.Active)
                 {
                     m_ManagerP1.Controllers--;
-                    tempManager.Active = false;
-                    m_managerList.Remove(tempManager);
-                    m_managerList.Add(tempManager);
+                    myManager.Active = false;
+                }
+                else
+                {
+                    m_ManagerP1.Controllers++;
+                    myManager.Active = true;
                 }
             }
         }
+
+        //List<Manager> tempManagerList = m_managerList;
+
+        //for (int i = 1; i < tempManagerList.Count; i++)
+        //{
+        //    Manager tempManager = tempManagerList[i];
+
+        //    if (!tempManager.Active) 
+        //    {
+        //        if (Input.GetButtonDown(tempManager.Inputs[0].name))
+        //        {
+        //            m_ManagerP1.Controllers++;
+        //            tempManager.Active = true;
+        //            m_managerList.Remove(tempManager);
+        //            m_managerList.Add(tempManager);
+
+        //        }
+        //    }
+        //    if (tempManager.Active)
+        //    {
+        //        if (Input.GetButtonDown(tempManager.Inputs[1].name))
+        //        {
+        //            m_ManagerP1.Controllers--;
+        //            tempManager.Active = false;
+        //            m_managerList.Remove(tempManager);
+        //            m_managerList.Add(tempManager);
+        //        }
+        //    }
+        //}
 
         //SortManagers();
     }

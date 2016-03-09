@@ -4,9 +4,11 @@ using System.Collections;
 public class SelfDestruct : MonoBehaviour
 {
 
-	[SerializeField] private float m_lifeTime = 10.0f;
-	
-	private void Start ()
+	[SerializeField] private float m_lifeTime = 5;
+    [SerializeField] private bool startOnLoad = false;
+
+
+    private void Start ()
 	{	
 		StartCoroutine(CountDown(m_lifeTime));
 	}

@@ -15,15 +15,25 @@ public class DoneToStaging : MonoBehaviour {
 
 	void Update ()
     {
-	    if (Input.GetButtonDown(m_managerScript.Inputs[1].name))
+	    if (Input.GetButtonDown(m_managerScript.Inputs[1].name) || Input.GetKeyDown(KeyCode.Return))
         {
             DoneInMainMenu();
         }
-
-	}
+        AllSkipCheck();
+    }
 
     public void DoneInMainMenu()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Staging");
+    }
+
+    private void AllSkipCheck()
+    {
+        if (gameObject.GetComponent<AllSkip>())
+        {
+            //Debug.Log(gameObject.name + " found allskipper");
+            if (gameObject.GetComponent<AllSkip>().AllTeamsPressed(2))
+                DoneInMainMenu();
+        }
     }
 }

@@ -80,15 +80,18 @@ public class StagingManager : MonoBehaviour
     }
     public void LoadAntonsAliens()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Aliens");
+        m_manager1.ChosenScene = "Aliens";
+        LoadTutorial();
     }
     public void LoadFloppy1()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Floppy1");
+        m_manager1.ChosenScene = "Floppy1";
+        LoadTutorial();
     }
     public void LoadSimulPress()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SimulPress");
+        m_manager1.ChosenScene = "SimulPress";
+        LoadTutorial();
     }
 
     public void QuitGame()
