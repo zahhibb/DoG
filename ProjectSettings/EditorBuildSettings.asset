@@ -10,7 +10,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main Menu/Scenes/Staging.unity
   - enabled: 1
-    path: Assets/Games/Jocke/Scenes/IsItTrue.unity
+    path: Assets/Games/Jocke/IsItTrue/Scenes/IsItTrue.unity
   - enabled: 1
     path: Assets/Games/Anton/Aliens.unity
   - enabled: 0
