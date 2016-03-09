@@ -9,7 +9,7 @@ public class Shrink : MonoBehaviour {
     {
 	    if (m_beShrinking)
         {
-            gameObject.transform.localScale *= 0.8f;
+            gameObject.transform.localScale *= (1 - (5 * Time.deltaTime));
         }
 	}
 }

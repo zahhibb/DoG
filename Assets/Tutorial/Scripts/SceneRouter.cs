@@ -41,6 +41,8 @@ public class SceneRouter : MonoBehaviour {
             
         }
         UpdateCounter();
+
+        AllSkipCheck();
     }
 
     private void MakeTutorial(string choice)
@@ -109,7 +111,7 @@ public class SceneRouter : MonoBehaviour {
     {
         if (m_isCounting)
         {
-            Debug.Log("time since lastTime: " + (Time.timeSinceLevelLoad - m_lastTime));
+            //Debug.Log("time since lastTime: " + (Time.timeSinceLevelLoad - m_lastTime));
 
             if (Time.timeSinceLevelLoad - m_lastTime >= m_spinCountdownTime + m_totalTime)
             {
@@ -136,6 +138,16 @@ public class SceneRouter : MonoBehaviour {
         else
         {
             m_lastTime = Time.timeSinceLevelLoad;
+        }
+    }
+
+    private void AllSkipCheck()
+    {
+        if (gameObject.GetComponent<AllSkip>())
+        {
+            //Debug.Log(gameObject.name + " found allskipper");
+            gameObject.GetComponent<AllSkip>().AllTeamsPressed(7, "SpinCountdown");
+            Debug.Log("DoneToStaging called DoneInMainMenu from All");
         }
     }
 }

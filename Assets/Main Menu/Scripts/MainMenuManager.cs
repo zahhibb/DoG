@@ -315,11 +315,12 @@ public class MainMenuManager : Manager {
 
     private void TogglePlayersActive()
     {
-        for (int i = 0; i > m_ManagerP1.Controllers; i++)
+        for (int i = 0; i < 4; i++)
         {
             Manager myManager = GameObject.FindGameObjectWithTag("ManagerP" + (i + 1)).GetComponent<Manager>();
             if (Input.GetButtonDown(myManager.Inputs[7].name))
             {
+                Debug.Log(myManager.gameObject.tag + " pressed that button");
                 if (myManager.Active)
                 {
                     m_ManagerP1.Controllers--;

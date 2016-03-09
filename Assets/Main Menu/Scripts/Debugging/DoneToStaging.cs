@@ -32,8 +32,8 @@ public class DoneToStaging : MonoBehaviour {
         if (gameObject.GetComponent<AllSkip>())
         {
             //Debug.Log(gameObject.name + " found allskipper");
-            if (gameObject.GetComponent<AllSkip>().AllTeamsPressed(2))
-                DoneInMainMenu();
+            gameObject.GetComponent<AllSkip>().AllTeamsPressed(2, "DoneInMainMenu");
+            Debug.Log("DoneToStaging called DoneInMainMenu from All");
         }
     }
 }
