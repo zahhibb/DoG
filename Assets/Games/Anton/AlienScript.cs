@@ -10,10 +10,12 @@ public class AlienScript : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        
+
         m_turning = 0;//the amount of degrees the player has turned
         m_currentTime = 0;
         m_timeBetweenShots = 2.8f;
-        m_startVelocity = 25.0f;
+        m_startVelocity = 30.0f;
     }
 	
 	// Update is called once per frame
