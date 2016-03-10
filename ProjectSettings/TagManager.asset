@@ -16,6 +16,7 @@ TagManager:
   - InactiveManager
   - Wall
   - Shot
+  - CelebratorCanvas
   layers:
   - Default
   - TransparentFX

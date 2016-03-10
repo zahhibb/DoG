@@ -8,7 +8,7 @@ public class Manager : MonoBehaviour
     private Button[] m_inputs;
     private int m_score = 0;
     [SerializeField] private bool m_active = false;
-    private Color m_playerColor;
+    [SerializeField] private Color m_playerColor;
     private Rect m_playerRect;
     private int m_rounds = 0;
     private string m_chosenScene;

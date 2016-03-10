@@ -30,10 +30,10 @@ public class MainMenuManager : Manager {
     // private string[] m_controller = Input.GetJoystickNames();
 
     // Standard Colors (there needs to be as many as of these as there are supported controllers)
-    private Color m_lemonTruck = new Color(249, 227, 105);
-    private Color m_beachBlueCoathanger = new Color(148, 233, 246);
-    private Color m_flamingoParachute = new Color(234, 160, 223);
-    private Color m_pepperGreenGranola = new Color(140, 253, 125);
+    private Color m_lemonTruck = new Color32(249, 227, 105, 255);
+    private Color m_beachBlueCoathanger = new Color32(148, 233, 246, 255);
+    private Color m_flamingoParachute = new Color32(234, 160, 223, 255);
+    private Color m_pepperGreenGranola = new Color32(140, 253, 125, 255);
 
     // Standard Viewport Rectangles
     private Rect m_fullscreen = new Rect(0f, 0f, 1f, 1f);
@@ -139,7 +139,7 @@ public class MainMenuManager : Manager {
             }
 
             // Give it a pretty color! (just set colors for team 1-4 atm...)
-            // newManager.PlayerColor = SetColor();
+            newManager.PlayerColor = m_colorList[controller-1];
 
             // Set up whatever variables it will need.
             newManager.Score = 0;
@@ -379,12 +379,14 @@ public class MainMenuManager : Manager {
     {
         //List<Color> colorLm_colorListist = new List<Color>();
 
-        m_colorList.AddRange(new Color[] { m_lemonTruck, m_beachBlueCoathanger, m_flamingoParachute, m_pepperGreenGranola });
+        m_colorList = new List<Color>();
 
+        m_colorList.Add(m_pepperGreenGranola);
+        m_colorList.Add(m_flamingoParachute);
         m_colorList.Add(m_lemonTruck);
         m_colorList.Add(m_beachBlueCoathanger);
-        m_colorList.Add(m_flamingoParachute);
-        m_colorList.Add(m_pepperGreenGranola);
+
+        
     }
 
     private Color SetColor()
