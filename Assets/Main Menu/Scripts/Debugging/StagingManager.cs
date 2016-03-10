@@ -93,6 +93,11 @@ public class StagingManager : MonoBehaviour
         m_manager1.ChosenScene = "SimulPress";
         LoadTutorial();
     }
+    public void LoadTankYou()
+    {
+        m_manager1.ChosenScene = "tanks_test";
+        LoadTutorial();
+    }
 
     public void QuitGame()
     {
