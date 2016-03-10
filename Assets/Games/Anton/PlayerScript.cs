@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour {
     public void AssignManager(Manager manager)
     {
         m_manager = manager;
+        GetComponent<SpriteRenderer>().color = m_manager.PlayerColor;
     }
     // Use this for initialization
     void Start() {
