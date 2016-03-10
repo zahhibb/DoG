@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 public class ButtonpressInterval : MonoBehaviour {
-
-    // try to make this instantiable per controller (input is the crux)
 
     private float m_startTimeP1 = 0f;
     /*
@@ -18,12 +17,25 @@ public class ButtonpressInterval : MonoBehaviour {
     private float m_endTimeP3 = 0f;
     private float m_endTimeP4 = 0f;
     */
+    private bool m_coolingDown = false;
+
     private string[] m_buttonNames;
     private Button[] m_pressedP1;
+
+    
+    private int m_roundCount = 1;
+    [SerializeField] private int m_currentWorth = 1;
+    [SerializeField] private Text m_currentWorthText;
+
     private List<Manager> m_playerManagers;
+    [SerializeField] private int m_buttonOfTheDay;
 
     void Start ()
     {
+        m_currentWorthText.text = "1 pt";
+        m_currentWorthText.color = Color.white;
+
+        m_buttonOfTheDay = Random.Range(0, 4);
         FindTeams();
         /*
         *if (playerPerTeamAmount < x)
@@ -37,8 +49,11 @@ public class ButtonpressInterval : MonoBehaviour {
 
     private void Update()
     {
-        LameGame();
-        //CheckButton(m_pressedP1);
+        if (LameGame())
+        {
+            m_coolingDown = true;
+            StartCoroutine(SuspendPresses(1f));
+        }
     }
 
     private struct Button
@@ -72,16 +87,35 @@ public class ButtonpressInterval : MonoBehaviour {
         }        
     }
 
-    private void LameGame()
+    private Manager LameGame()
     {
         foreach (Manager team in m_playerManagers)
         {
-            if (Input.GetButtonDown(team.Inputs[0].name))
+            if (Input.GetButtonDown(team.Inputs[m_buttonOfTheDay].name))
             {
-                Debug.Log("team number " + team.TeamNumber + " pressed " + team.Inputs[0].name);
+                Debug.Log("team number " + team.TeamNumber + " pressed " + team.Inputs[m_buttonOfTheDay].name);
                 BackToStaging(team.TeamNumber);
+                return team;
             }
+            else if (Input.GetButtonDown(team.Inputs[0].name))
+            {
+                return team;
+            }
+            else if (Input.GetButtonDown(team.Inputs[1].name))
+            {
+                return team;
+            }
+            else if (Input.GetButtonDown(team.Inputs[2].name))
+            {
+                return team;
+            }
+            else if (Input.GetButtonDown(team.Inputs[3].name))
+            {
+                return team;
+            }
+
         }
+        return null;
     }
 
     public void BackToStaging(int player)
@@ -102,6 +136,17 @@ public class ButtonpressInterval : MonoBehaviour {
         {
             m_playerManagers.Add(GameObject.FindGameObjectWithTag("ManagerP" + (i + 1)).GetComponent<Manager>());
         }
+    }
+
+    private IEnumerator SuspendPresses(float time)
+    {
+        yield return new WaitForSeconds(time);
+        m_coolingDown = false;
+        if (m_roundCount > 4)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Staging");
+        }
+
     }
 }
 
