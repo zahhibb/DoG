@@ -15,7 +15,7 @@ public class DoneToStaging : MonoBehaviour {
 
 	void Update ()
     {
-	    if (Input.GetButtonDown(m_managerScript.Inputs[1].name) || Input.GetKeyDown(KeyCode.Return))
+	    if ( /* Input.GetButtonDown(m_managerScript.Inputs[1].name) || */ Input.GetKeyDown(KeyCode.Return))
         {
             DoneInMainMenu();
         }
@@ -29,11 +29,12 @@ public class DoneToStaging : MonoBehaviour {
 
     private void AllSkipCheck()
     {
-        if (gameObject.GetComponent<AllSkip>())
-        {
-            //Debug.Log(gameObject.name + " found allskipper");
-            gameObject.GetComponent<AllSkip>().AllTeamsPressed(2, "DoneInMainMenu");
-            Debug.Log("DoneToStaging called DoneInMainMenu from All");
-        }
+        //if (GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().Controllers > 1)
+        //{
+            if (gameObject.GetComponent<AllSkip>())
+            {
+                gameObject.GetComponent<AllSkip>().AllTeamsPressed(2, "DoneInMainMenu");
+            }
+        //}
     }
 }

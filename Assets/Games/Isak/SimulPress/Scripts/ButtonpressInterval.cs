@@ -32,7 +32,8 @@ public class ButtonpressInterval : MonoBehaviour {
 
     void Start ()
     {
-        m_currentWorthText.text = "1 pt";
+        m_currentWorth = Random.Range(1, 8);
+        m_currentWorthText.text = "" + m_currentWorth;
         m_currentWorthText.color = Color.white;
 
         m_buttonOfTheDay = Random.Range(0, 4);
@@ -95,6 +96,8 @@ public class ButtonpressInterval : MonoBehaviour {
             {
                 Debug.Log("team number " + team.TeamNumber + " pressed " + team.Inputs[m_buttonOfTheDay].name);
                 BackToStaging(team.TeamNumber);
+                team.Score += m_currentWorth;
+                m_currentWorth *= 2;
                 return team;
             }
             else if (Input.GetButtonDown(team.Inputs[0].name))
@@ -121,8 +124,6 @@ public class ButtonpressInterval : MonoBehaviour {
     public void BackToStaging(int player)
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Staging");
-
-        GameObject.FindGameObjectWithTag("ManagerP" + player).GetComponent<Manager>().Score += 8;
         
     }
 
