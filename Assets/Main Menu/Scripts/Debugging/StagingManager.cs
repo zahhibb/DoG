@@ -49,10 +49,10 @@ public class StagingManager : MonoBehaviour
 
         }
         m_scoreText.text =
-                             "Scores   || Team 1: " + m_manager1.Score + " points.  " +
-                                    "  || Team 2: " + m_manager2.Score + " points.  " +
-                                    "  || Team 3: " + m_manager3.Score + " points.  " +
-                                    "  || Team 4: " + m_manager4.Score + " points.  " ;
+                                    "  || Team 1: " + m_manager1.Score + " points. " +
+                                    "  || Team 2: " + m_manager2.Score + " points. " +
+                                    "  || Team 3: " + m_manager3.Score + " points. " +
+                                    "  || Team 4: " + m_manager4.Score + " points. ||" ;
     }
 
     private void Update()
@@ -148,71 +148,71 @@ public class StagingManager : MonoBehaviour
 
     private void DebugButtons()
     {
-        if (m_manager1.Rounds <= 3)
-        {
-            if (CheckButton(m_manager1, 0))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Floppy1";
-                LoadTutorial();
-            }
-            if (CheckButton(m_manager2, 0))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Floppy1";
-                LoadTutorial();
-            }
+        //if (m_manager1.Rounds <= 3)
+        //{
+        //    if (CheckButton(m_manager1, 0))
+        //    {
+        //        //LoadFloppy1();
+        //        m_manager1.ChosenScene = "Floppy1";
+        //        LoadTutorial();
+        //    }
+        //    if (CheckButton(m_manager2, 0))
+        //    {
+        //        //LoadFloppy1();
+        //        m_manager1.ChosenScene = "Floppy1";
+        //        LoadTutorial();
+        //    }
 
-            if (CheckButton(m_manager3, 0))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Floppy1";
-                LoadTutorial(); ;
-            }
-            if (CheckButton(m_manager4, 0))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Floppy1";
-                LoadTutorial();
-            }
+        //    if (CheckButton(m_manager3, 0))
+        //    {
+        //        //LoadFloppy1();
+        //        m_manager1.ChosenScene = "Floppy1";
+        //        LoadTutorial(); ;
+        //    }
+        //    if (CheckButton(m_manager4, 0))
+        //    {
+        //        //LoadFloppy1();
+        //        m_manager1.ChosenScene = "Floppy1";
+        //        LoadTutorial();
+        //    }
 
 
-            if (CheckButton(m_manager1, 1))
-            {
-                LoadSimulPress();
-            }
-            if (CheckButton(m_manager2, 1))
-            {
-                LoadSimulPress();
-            }
+        //    if (CheckButton(m_manager1, 1))
+        //    {
+        //        LoadSimulPress();
+        //    }
+        //    if (CheckButton(m_manager2, 1))
+        //    {
+        //        LoadSimulPress();
+        //    }
 
-            if (CheckButton(m_manager3, 1))
-            {
-                LoadSimulPress();
-            }
-            if (CheckButton(m_manager4, 1))
-            {
-                LoadSimulPress();
-            }
-        }
+        //    if (CheckButton(m_manager3, 1))
+        //    {
+        //        LoadSimulPress();
+        //    }
+        //    if (CheckButton(m_manager4, 1))
+        //    {
+        //        LoadSimulPress();
+        //    }
+        //}
 
-        if (CheckButton(m_manager1, 2))
-        {
-            BackToMain();
-        }
-        if (CheckButton(m_manager2, 2))
-        {
-            BackToMain();
-        }
+        //if (CheckButton(m_manager1, 2))
+        //{
+        //    BackToMain();
+        //}
+        //if (CheckButton(m_manager2, 2))
+        //{
+        //    BackToMain();
+        //}
 
-        if (CheckButton(m_manager3, 2))
-        {
-            BackToMain();
-        }
-        if (CheckButton(m_manager4, 2))
-        {
-            BackToMain();
-        }
+        //if (CheckButton(m_manager3, 2))
+        //{
+        //    BackToMain();
+        //}
+        //if (CheckButton(m_manager4, 2))
+        //{
+        //    BackToMain();
+        //}
 
 
         //if (CheckButton(m_manager1, 3))

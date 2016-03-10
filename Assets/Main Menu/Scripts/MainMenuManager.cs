@@ -22,7 +22,7 @@ public class MainMenuManager : Manager {
     [SerializeField] private Slider m_slider3 = null;
     [SerializeField] private Slider m_slider4 = null;
 
-    [SerializeField] private int m_joysticks;
+    [SerializeField] private int m_joysticks = 4;
     [SerializeField] private GameObject m_playerManager = null;
 
     // private SerializedProperty[] m_inputManagerArray;
@@ -56,6 +56,11 @@ public class MainMenuManager : Manager {
 
     }
 
+    private void Start()
+    {
+        m_ManagerP1.Controllers = m_joysticks;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown("f4")) { TestCameras(4); }
@@ -75,7 +80,7 @@ public class MainMenuManager : Manager {
 
     void MakePlayers()
     {
-        m_joysticks = Input.GetJoystickNames().Length + 1;
+        m_joysticks = Input.GetJoystickNames().Length;
         
     }
 
@@ -146,7 +151,7 @@ public class MainMenuManager : Manager {
             newManager.enabled = true; //??
 
             // Add it to the list to sort them upon leaving Main Menu.
-            //m_managerList.Add(newManager);
+            m_managerList.Add(newManager);
         }
     }
 
@@ -323,15 +328,22 @@ public class MainMenuManager : Manager {
                 Debug.Log(myManager.gameObject.tag + " pressed that button");
                 if (myManager.Active)
                 {
-                    m_ManagerP1.Controllers--;
-                    myManager.Active = false;
+                    if (myManager.TeamNumber == m_ManagerP1.Controllers)
+                    {
+                        m_ManagerP1.Controllers--;
+                        myManager.Active = false;
+                    }
                 }
                 else
                 {
-                    m_ManagerP1.Controllers++;
-                    myManager.Active = true;
+                    if (myManager.TeamNumber == (m_ManagerP1.Controllers +1))
+                    {
+                        m_ManagerP1.Controllers++;
+                        myManager.Active = true;
+                    }
                 }
             }
+            //SortManagers();
         }
 
         //List<Manager> tempManagerList = m_managerList;

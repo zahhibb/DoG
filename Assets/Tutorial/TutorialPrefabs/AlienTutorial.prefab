@@ -285,9 +285,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "g\xF6r en canvas med instruktioner.\n\nl\xE4mpligen skalbar med spelare,
-    s\xE5 att\n\nman kan skriva individuella (tsz1, tsz2, etc)\n\nefter tid ta bort
-    den och starta CountDownCanvas,\n\neller bara l\xE4gg \xF6ver den. (\xE5 f\xE4rjer)"
+  m_Text: "tjenal\xE4get\n\nanv\xE4nd v\xE4nster styrspak\n\ndet kommer komma doritos
+    \xE5kandes\n\nakta"
 --- !u!114 &11453004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -552,7 +551,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_lifeTime
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 106886}

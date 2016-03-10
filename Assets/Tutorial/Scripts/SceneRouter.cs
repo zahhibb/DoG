@@ -19,6 +19,7 @@ public class SceneRouter : MonoBehaviour {
     // serialize your very own tutorial here.
     [SerializeField] Object m_sampleTutorial = null;
     [SerializeField] Object m_floppyTutorial = null;
+    [SerializeField] Object m_aliensTutorial = null;
 
     private void Start ()
     {
@@ -60,6 +61,12 @@ public class SceneRouter : MonoBehaviour {
             case "Floppy1":
                 GameObject floppyTutorial = (GameObject)Instantiate(m_floppyTutorial, transform.position, transform.rotation);
                 m_totalTime = floppyTutorial.GetComponent<SelfDestruct>().LifeTime;
+                StartCoroutine(TimeToStartSpin(m_totalTime));
+                SpinCountdown();
+                break;
+            case "Aliens":
+                GameObject aliensTutorial = (GameObject)Instantiate(m_aliensTutorial, transform.position, transform.rotation);
+                m_totalTime = aliensTutorial.GetComponent<SelfDestruct>().LifeTime;
                 StartCoroutine(TimeToStartSpin(m_totalTime));
                 SpinCountdown();
                 break;
@@ -147,7 +154,7 @@ public class SceneRouter : MonoBehaviour {
         {
             //Debug.Log(gameObject.name + " found allskipper");
             gameObject.GetComponent<AllSkip>().AllTeamsPressed(7, "SpinCountdown");
-            Debug.Log("DoneToStaging called DoneInMainMenu from All");
+            //Debug.Log("DoneToStaging called DoneInMainMenu from All");
         }
     }
 }

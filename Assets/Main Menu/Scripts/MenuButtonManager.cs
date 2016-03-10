@@ -21,27 +21,27 @@ public class MenuButtonManager : MonoBehaviour {
 
     // not good :/
 
-	void Update ()
-    {
-        if (Input.GetButtonDown("A_P1"))
-        {
-            m_a.Select();
-        }
-        if (Input.GetButtonDown("X_P1"))
-        {
-            m_x.Select();
-        }
-        if (Input.GetButtonDown("B_P1"))
-        {
-            m_b.Select();
-        }
-        if (Input.GetButtonDown("Back_P1"))
-        {
-            m_pSlider.value = Mathf.Clamp(m_pSlider.value-1, 1, 4);
-        }
-        if (Input.GetButtonDown("Start_P1"))
-        {
-            m_pSlider.value = Mathf.Clamp(m_pSlider.value+1, 1, 4);
-        }
-    }
+	//void Update ()
+ //   {
+ //       if (Input.GetButtonDown("A_P1"))
+ //       {
+ //           m_a.Select();
+ //       }
+ //       if (Input.GetButtonDown("X_P1"))
+ //       {
+ //           m_x.Select();
+ //       }
+ //       if (Input.GetButtonDown("B_P1"))
+ //       {
+ //           m_b.Select();
+ //       }
+ //       if (Input.GetButtonDown("Back_P1"))
+ //       {
+ //           m_pSlider.value = Mathf.Clamp(m_pSlider.value-1, 1, 4);
+ //       }
+ //       if (Input.GetButtonDown("Start_P1"))
+ //       {
+ //           m_pSlider.value = Mathf.Clamp(m_pSlider.value+1, 1, 4);
+ //       }
+ //   }
 }

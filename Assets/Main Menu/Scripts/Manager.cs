@@ -12,7 +12,7 @@ public class Manager : MonoBehaviour
     private Rect m_playerRect;
     private int m_rounds = 0;
     private string m_chosenScene;
-    public int m_controllers = 0;
+    public int m_controllers;
 
     private void Start()
     {

@@ -1339,6 +1339,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ae22ffec3c54744ab422e5262ae3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_currentWorth: 1
+  m_currentWorthText: {fileID: 1178611557}
   m_buttonOfTheDay: 0
 --- !u!1 &1316270364
 GameObject:
