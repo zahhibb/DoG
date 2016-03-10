@@ -32,7 +32,11 @@ public class PlayerManager : MonoBehaviour
 
             playerController.MyManager = m_playerManagers[i];
             playerController.PlayerNumber = i + 1;
+
+            player.GetComponent<SpriteRenderer>().color = m_playerManagers[i].PlayerColor;
         }
+
+        //renderer.material.color = Color(Random.Range(0.0, 1.0), Random.Range(0.0, 1.0), Random.Range(0.0, 1.0));
     }
     // Update is called once per frame
     void Update()
