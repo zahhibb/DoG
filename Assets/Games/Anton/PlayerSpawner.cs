@@ -13,9 +13,7 @@ public class PlayerSpawner : MonoBehaviour {
         m_players = new List<GameObject>();
          Manager player1Manager = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
         int loop = player1Manager.Controllers;
-        m_players.Add(Instantiate(m_player));
-        m_players[0].GetComponent<PlayerScript>().AssignManager(player1Manager);
-        for (int i = 1; i < loop; i++)
+        for (int i = 0; i < loop; i++)
         {
             m_players.Add(Instantiate(m_player));
             m_players[i].GetComponent<PlayerScript>().AssignManager(GameObject.FindGameObjectWithTag("ManagerP"+(i+1)).GetComponent<Manager>());
