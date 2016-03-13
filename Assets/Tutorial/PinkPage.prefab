@@ -63,7 +63,7 @@ GameObject:
   - 92: {fileID: 9232300}
   - 114: {fileID: 11494940}
   m_Layer: 0
-  m_Name: TutorialPrefab
+  m_Name: PinkPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

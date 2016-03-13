@@ -29,30 +29,29 @@ public class StagingManager : MonoBehaviour
         {
             if (m_manager1.Score > m_manager2.Score && m_manager1.Score > m_manager3.Score && m_manager1.Score > m_manager4.Score)
             {
-                m_rounds.text = m_manager1.name + " is the winnewr";
+                m_rounds.text = m_manager1.TeamName + " is the winnewr";
             }
             if (m_manager2.Score > m_manager1.Score && m_manager2.Score > m_manager3.Score && m_manager2.Score > m_manager4.Score)
             {
-                m_rounds.text = m_manager2.name + " is the winnewr";
+                m_rounds.text = m_manager2.TeamName + " is the winnewr";
             }
             if (m_manager3.Score > m_manager2.Score && m_manager3.Score > m_manager1.Score && m_manager3.Score > m_manager4.Score)
             {
-                m_rounds.text = m_manager3.name + " is the winnewr";
+                m_rounds.text = m_manager3.TeamName + " is the winnewr";
             }
             if (m_manager4.Score > m_manager2.Score && m_manager4.Score > m_manager3.Score && m_manager4.Score > m_manager1.Score)
             {
-                m_rounds.text = m_manager4.name + " is the winnewr";
+                m_rounds.text = m_manager4.TeamName + " is the winnewr";
             }
             //int[] scores = { manager1.Score, manager2.Score, manager3.Score, manager4.Score };
             //int highestScore = Mathf.Max(manager1.Score, manager2.Score, manager3.Score, manager4.Score);
 
 
         }
-        m_scoreText.text =
-                                    "  || Team 1: " + m_manager1.Score + " points. " +
-                                    "  || Team 2: " + m_manager2.Score + " points. " +
-                                    "  || Team 3: " + m_manager3.Score + " points. " +
-                                    "  || Team 4: " + m_manager4.Score + " points. ||" ;
+        m_scoreText.text = (m_manager1.Controllers > 0) ? (m_manager1.TeamName + ": " + m_manager1.Score + " points. ") : (" ");
+        m_scoreText.text += (m_manager1.Controllers > 1) ? " || " + (m_manager2.TeamName + ": " + m_manager2.Score + " points. ") : (" ");
+        m_scoreText.text += (m_manager1.Controllers > 2) ? " || " + (m_manager3.TeamName + ": " + m_manager3.Score + " points. ") : (" ");
+        m_scoreText.text += (m_manager1.Controllers > 3) ? " || " + (m_manager4.TeamName + ": " + m_manager4.Score + " points. ") : (" ");
     }
 
     private void Update()

@@ -130,7 +130,7 @@ public class MainMenuManager : Manager {
             // Initialize a new instance of Manager to the parametered team number and player count.
             GameObject newPlayerManager = (GameObject)Instantiate(m_playerManager, transform.position, transform.rotation);
             newPlayerManager.gameObject.AddComponent<Persistency>();
-            newPlayerManager.name = "Player " + controller + " Manager";
+            newPlayerManager.name = "Team " + controller + " Manager";
             Manager newManager = newPlayerManager.gameObject.AddComponent<Manager>();
             newManager.gameObject.tag = "ManagerP" + controller;
             newManager.TeamNumber = controller;
@@ -149,8 +149,27 @@ public class MainMenuManager : Manager {
             // Set up whatever variables it will need.
             newManager.Score = 0;
             newManager.enabled = true; //??
+            switch (controller)
+            {
+                case 1:
+                    newManager.TeamName = "Pepper-Green Granola";
+                    break;
+                case 2:
+                    newManager.TeamName = "Pink Pelican Parachute";
+                    break;
+                case 3:
+                    newManager.TeamName = "Lemon Truck";
+                    break;
+                case 4:
+                    newManager.TeamName = "Blue Coathanger";
+                    break;
+                default:
+                    newManager.TeamName = "Special Snowflake";
+                    break;
+            }
 
-            // Add it to the list to sort them upon leaving Main Menu.
+
+            // Add it to the list to sort them upon leaving Main Menu (obsolete).
             m_managerList.Add(newManager);
         }
     }

@@ -33,7 +33,7 @@ public class ButtonpressInterval : MonoBehaviour {
     void Start ()
     {
         m_currentWorth = Random.Range(1, 8);
-        m_currentWorthText.text = "" + m_currentWorth;
+        m_currentWorthText.text = " " + m_currentWorth + ".";
         m_currentWorthText.color = Color.white;
 
         m_buttonOfTheDay = Random.Range(0, 4);
@@ -52,8 +52,9 @@ public class ButtonpressInterval : MonoBehaviour {
     {
         if (LameGame())
         {
-            m_coolingDown = true;
-            StartCoroutine(SuspendPresses(1f));
+            BackToStaging();
+            //m_coolingDown = true;
+            //StartCoroutine(SuspendPresses(1f));
         }
     }
 
@@ -95,25 +96,28 @@ public class ButtonpressInterval : MonoBehaviour {
             if (Input.GetButtonDown(team.Inputs[m_buttonOfTheDay].name))
             {
                 Debug.Log("team number " + team.TeamNumber + " pressed " + team.Inputs[m_buttonOfTheDay].name);
-                BackToStaging(team.TeamNumber);
-                team.Score += m_currentWorth;
+                AwardPointsToPlayer(team);
                 m_currentWorth *= 2;
                 return team;
             }
             else if (Input.GetButtonDown(team.Inputs[0].name))
             {
+                AwardPointsToOthers(team);
                 return team;
             }
             else if (Input.GetButtonDown(team.Inputs[1].name))
             {
+                AwardPointsToOthers(team);
                 return team;
             }
             else if (Input.GetButtonDown(team.Inputs[2].name))
             {
+                AwardPointsToOthers(team);
                 return team;
             }
             else if (Input.GetButtonDown(team.Inputs[3].name))
             {
+                AwardPointsToOthers(team);
                 return team;
             }
 
@@ -121,9 +125,33 @@ public class ButtonpressInterval : MonoBehaviour {
         return null;
     }
 
-    public void BackToStaging(int player)
+    private void AwardPointsToPlayer(Manager winningTeam)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Staging");
+        winningTeam.Score += 1;
+        foreach (Manager team in m_playerManagers)
+        {
+            if (team != winningTeam)
+            {
+                team.Score += m_currentWorth;
+            }
+        }
+    }
+
+    private void AwardPointsToOthers(Manager winningTeam)
+    {
+        winningTeam.Score += m_currentWorth;
+        foreach (Manager team in m_playerManagers)
+        {
+            if (team != winningTeam)
+            {
+                team.Score += 1;
+            }
+        }
+    }
+
+    public void BackToStaging()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Celebration");
         
     }
 

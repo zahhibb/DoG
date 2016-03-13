@@ -12,7 +12,8 @@ public class Manager : MonoBehaviour
     private Rect m_playerRect;
     private int m_rounds = 0;
     private string m_chosenScene;
-    public int m_controllers;
+    private int m_controllers;
+    public string m_teamName;
 
     private void Start()
     {
@@ -91,6 +92,12 @@ public class Manager : MonoBehaviour
     {
         get { return m_chosenScene; }
         set { m_chosenScene = value; }
+    }
+
+    public string TeamName
+    {
+        get { return m_teamName; }
+        set { m_teamName = value; }
     }
 
     // for debugging input issues
