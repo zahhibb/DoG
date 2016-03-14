@@ -285,8 +285,19 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "tjenal\xE4get\n\nanv\xE4nd v\xE4nster styrspak\n\ndet kommer komma doritos
-    \xE5kandes\n\nakta"
+  m_Text: 'Move with left thumbstick.
+
+
+    Avoid the bullets.
+
+
+    The firing speed of the bullets increase over time.
+
+
+    You can push your enemies into the bullets.
+
+
+    Do so before it becomes bullet hell.'
 --- !u!114 &11453004
 MonoBehaviour:
   m_ObjectHideFlags: 1
