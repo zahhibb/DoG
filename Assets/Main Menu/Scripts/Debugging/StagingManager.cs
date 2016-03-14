@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class StagingManager : MonoBehaviour
 {
-    [SerializeField] Text m_scoreText;
+    [SerializeField] Text[] m_scoreTexts;
     [SerializeField] Text m_rounds;
 
     Manager m_manager1;
@@ -48,10 +48,11 @@ public class StagingManager : MonoBehaviour
 
 
         }
-        m_scoreText.text = (m_manager1.Controllers > 0) ? (m_manager1.TeamName + ": " + m_manager1.Score + " points. ") : (" ");
-        m_scoreText.text += (m_manager1.Controllers > 1) ? " || " + (m_manager2.TeamName + ": " + m_manager2.Score + " points. ") : (" ");
-        m_scoreText.text += (m_manager1.Controllers > 2) ? " || " + (m_manager3.TeamName + ": " + m_manager3.Score + " points. ") : (" ");
-        m_scoreText.text += (m_manager1.Controllers > 3) ? " || " + (m_manager4.TeamName + ": " + m_manager4.Score + " points. ") : (" ");
+        m_scoreTexts[0].text = m_manager1.Score + "p";
+        m_scoreTexts[1].text = m_manager2.Score + "p";
+        m_scoreTexts[2].text = m_manager3.Score + "p";
+        m_scoreTexts[3].text = m_manager4.Score + "p";
+
     }
 
     private void Update()

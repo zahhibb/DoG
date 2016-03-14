@@ -20,11 +20,11 @@ public class GrowFromParam : MonoBehaviour
     private void Update()
     {
         float scoreLerp = Mathf.InverseLerp(0, 24, m_myManager.Score);
-        float scaleLerp = Mathf.Lerp(1, m_originalScale.x * m_maxSize, scoreLerp);
+        float scaleLerp = Mathf.Lerp(1, m_originalScale.z * m_maxSize, scoreLerp);
 
         if (m_myManager.Active)
         {
-            if (gameObject.transform.localScale.x < m_originalScale.x * (m_originalScale.x * m_maxSize))
+            if (gameObject.transform.localScale.z < m_originalScale.x * (m_originalScale.z * m_maxSize))
                 gameObject.transform.localScale = (m_originalScale * scaleLerp);
         }
     }

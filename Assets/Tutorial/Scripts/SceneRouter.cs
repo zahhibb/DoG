@@ -44,6 +44,11 @@ public class SceneRouter : MonoBehaviour {
         UpdateCounter();
 
         AllSkipCheck();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(m_sceneChoice);
+        }
     }
 
     private void MakeTutorial(string choice)
