@@ -668,6 +668,7 @@ MonoBehaviour:
   - {fileID: 1892825206}
   - {fileID: 1783572246}
   - {fileID: 1352524047}
+  m_scoreTexts: []
 --- !u!1 &730854393
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,6 +785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6ded735e2fd2f468c31bc73101a78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_optionalTarget: {fileID: 0}
   m_myControllerNumber: 1
 --- !u!1 &839476703
 GameObject:
@@ -1225,6 +1227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6ded735e2fd2f468c31bc73101a78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_optionalTarget: {fileID: 0}
   m_myControllerNumber: 2
 --- !u!114 &1300815256
 MonoBehaviour:
@@ -1287,6 +1290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6ded735e2fd2f468c31bc73101a78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_optionalTarget: {fileID: 0}
   m_myControllerNumber: 4
 --- !u!1 &1388989852
 GameObject:
@@ -1390,6 +1394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6ded735e2fd2f468c31bc73101a78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_optionalTarget: {fileID: 0}
   m_myControllerNumber: 4
 --- !u!114 &1419256345
 MonoBehaviour:
@@ -1710,6 +1715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6ded735e2fd2f468c31bc73101a78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_optionalTarget: {fileID: 0}
   m_myControllerNumber: 3
 --- !u!1 &1892825206
 GameObject:
@@ -1757,6 +1763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6ded735e2fd2f468c31bc73101a78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_optionalTarget: {fileID: 0}
   m_myControllerNumber: 2
 --- !u!1 &1950807750
 GameObject:
@@ -2020,6 +2027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6ded735e2fd2f468c31bc73101a78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_optionalTarget: {fileID: 0}
   m_myControllerNumber: 1
 --- !u!114 &2023760118
 MonoBehaviour:
@@ -2068,6 +2076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6ded735e2fd2f468c31bc73101a78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_optionalTarget: {fileID: 0}
   m_myControllerNumber: 3
 --- !u!114 &2075655276
 MonoBehaviour:

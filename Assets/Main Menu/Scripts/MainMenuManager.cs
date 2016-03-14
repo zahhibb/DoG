@@ -277,63 +277,63 @@ public class MainMenuManager : Manager {
         {
             m_ManagerP1.Controllers = 4;
 
-            m_controller1Cam.rect = m_topLeft;
-            m_controller1Cam.gameObject.SetActive(true);
-            m_ManagerP1.Active = true;
-            m_controller2Cam.rect = m_topRight;
-            m_controller2Cam.gameObject.SetActive(true);
-            m_ManagerP2.Active = true;
-            m_controller3Cam.rect = m_bottomLeft;
-            m_controller3Cam.gameObject.SetActive(true);
-            m_ManagerP3.Active = true;
-            m_controller4Cam.rect = m_bottomRight;
-            m_controller4Cam.gameObject.SetActive(true);
-            m_ManagerP4.Active = true;
+            //m_controller1Cam.rect = m_topLeft;
+            //m_controller1Cam.gameObject.SetActive(true);
+            //m_ManagerP1.Active = true;
+            //m_controller2Cam.rect = m_topRight;
+            //m_controller2Cam.gameObject.SetActive(true);
+            //m_ManagerP2.Active = true;
+            //m_controller3Cam.rect = m_bottomLeft;
+            //m_controller3Cam.gameObject.SetActive(true);
+            //m_ManagerP3.Active = true;
+            //m_controller4Cam.rect = m_bottomRight;
+            //m_controller4Cam.gameObject.SetActive(true);
+            //m_ManagerP4.Active = true;
         }
         else if (players == 3)
         {
             m_ManagerP1.Controllers = 3;
 
-            m_controller1Cam.rect = new Rect(0f, 0.5f, 1f, 1f);
-            m_controller1Cam.gameObject.SetActive(true);
-            m_ManagerP1.Active = true;
-            m_controller2Cam.rect = new Rect(0f, 0f, 0.5f, 0.5f);
-            m_controller2Cam.gameObject.SetActive(true);
-            m_ManagerP2.Active = true;
-            m_controller3Cam.rect = new Rect(0.5f, 0f, 0.5f, 0.5f);
-            m_controller3Cam.gameObject.SetActive(true);
-            m_ManagerP3.Active = true;
-            m_controller4Cam.gameObject.SetActive(false);
-            m_ManagerP4.Active = false;
+            //m_controller1Cam.rect = new Rect(0f, 0.5f, 1f, 1f);
+            //m_controller1Cam.gameObject.SetActive(true);
+            //m_ManagerP1.Active = true;
+            //m_controller2Cam.rect = new Rect(0f, 0f, 0.5f, 0.5f);
+            //m_controller2Cam.gameObject.SetActive(true);
+            //m_ManagerP2.Active = true;
+            //m_controller3Cam.rect = new Rect(0.5f, 0f, 0.5f, 0.5f);
+            //m_controller3Cam.gameObject.SetActive(true);
+            //m_ManagerP3.Active = true;
+            //m_controller4Cam.gameObject.SetActive(false);
+            //m_ManagerP4.Active = false;
         }
         else if (players == 2)
         {
             m_ManagerP1.Controllers = 2;
 
-            m_controller1Cam.rect = new Rect(0f, 0.5f, 1f, 1f);
-            m_controller1Cam.gameObject.SetActive(true);
-            m_ManagerP1.Active = true;
-            m_controller2Cam.rect = new Rect(0f, 0f, 1f, 0.5f);
-            m_controller2Cam.gameObject.SetActive(true);
-            m_ManagerP2.Active = true;
-            m_controller3Cam.gameObject.SetActive(false);
-            m_ManagerP3.Active = false;
-            m_controller4Cam.gameObject.SetActive(false);
-            m_ManagerP4.Active = false;
+            //m_controller1Cam.rect = new Rect(0f, 0.5f, 1f, 1f);
+            //m_controller1Cam.gameObject.SetActive(true);
+            //m_ManagerP1.Active = true;
+            //m_controller2Cam.rect = new Rect(0f, 0f, 1f, 0.5f);
+            //m_controller2Cam.gameObject.SetActive(true);
+            //m_ManagerP2.Active = true;
+            //m_controller3Cam.gameObject.SetActive(false);
+            //m_ManagerP3.Active = false;
+            //m_controller4Cam.gameObject.SetActive(false);
+            //m_ManagerP4.Active = false;
         }   
         else if (players == 1)
         {
             m_ManagerP1.Controllers = 1;
 
-            m_controller1Cam.rect = new Rect(0f, 0f, 1f, 1f);
-            m_controller1Cam.enabled = true;
-            m_ManagerP1.Active = true;
-            m_controller2Cam.gameObject.SetActive(false);
-            m_ManagerP2.Active = false;
-            m_controller3Cam.gameObject.SetActive(false);
-            m_ManagerP3.Active = false;
-            m_controller4Cam.gameObject.SetActive(false);
-            m_ManagerP4.Active = false;
+            //m_controller1Cam.rect = new Rect(0f, 0f, 1f, 1f);
+            //m_controller1Cam.enabled = true;
+            //m_ManagerP1.Active = true;
+            //m_controller2Cam.gameObject.SetActive(false);
+            //m_ManagerP2.Active = false;
+            //m_controller3Cam.gameObject.SetActive(false);
+            //m_ManagerP3.Active = false;
+            //m_controller4Cam.gameObject.SetActive(false);
+            //m_ManagerP4.Active = false;
         }
     }
 

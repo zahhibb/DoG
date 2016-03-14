@@ -5,6 +5,7 @@ using System.Collections;
 public class CelebrationScaler : ScoreAnnouncer {
 
     [SerializeField] private GameObject[] m_bars;
+    [SerializeField] private Text[] m_scoreTexts;
 
     private bool m_displayGameResult = true;
 

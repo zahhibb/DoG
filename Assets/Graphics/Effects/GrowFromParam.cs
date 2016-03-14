@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GrowWhilePressed : MonoBehaviour
+public class GrowFromParam : MonoBehaviour
 {
-
     [SerializeField] private int m_controller;
     private Manager m_myManager;
-    [SerializeField] private int m_buttonIndex;
 
     [SerializeField] private float m_maxSize = 5;
     [SerializeField] private float m_growthPerSecond;
@@ -21,14 +19,13 @@ public class GrowWhilePressed : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButton(m_myManager.Inputs[m_buttonIndex].name))
+        float scoreLerp = Mathf.InverseLerp(0, 24, m_myManager.Score);
+        float scaleLerp = Mathf.Lerp(1, m_originalScale.x * m_maxSize, scoreLerp);
+
+        if (m_myManager.Active)
         {
-            if (gameObject.transform.localScale.x < m_originalScale.x * m_maxSize) 
-            gameObject.transform.localScale += (gameObject.transform.localScale * ((m_growthPerSecond * Time.deltaTime)));
-        }
-        else
-        {
-            gameObject.transform.localScale = m_originalScale;
+            if (gameObject.transform.localScale.x < m_originalScale.x * (m_originalScale.x * m_maxSize))
+                gameObject.transform.localScale = (m_originalScale * scaleLerp);
         }
     }
 }
