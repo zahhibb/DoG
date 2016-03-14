@@ -41,8 +41,9 @@ public class PlayerScript : MonoBehaviour {
     }
 // Update is called once per frame
 void Update() {
-        float x = Input.GetAxis(m_manager.Inputs[12].name);
         float y = -Input.GetAxis(m_manager.Inputs[13].name);
+
+        float x = Input.GetAxis(m_manager.Inputs[12].name);
 
         m_rb2d.AddForce(new Vector2(x * m_speed, y * m_speed));
 

@@ -11,8 +11,7 @@ public class PlayerSpawner : MonoBehaviour {
     void Start ()
     {
         m_players = new List<GameObject>();
-         Manager player1Manager = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
-        int loop = player1Manager.Controllers;
+        int loop = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().Controllers;
         for (int i = 0; i < loop; i++)
         {
             m_players.Add(Instantiate(m_player));
@@ -28,9 +27,8 @@ public class PlayerSpawner : MonoBehaviour {
         {
             if (m_players[i].GetComponent<PlayerScript>().GetShallDestroy()==true)
             {
-                print("blue");
 
-                m_players[i].GetComponent<PlayerScript>().SetScore(m_players.Count * 2);
+                m_players[i].GetComponent<PlayerScript>().SetScore(8-m_players.Count * 2);
                 Destroy(m_players[i]);
                 m_players.RemoveAt(i);
             }
