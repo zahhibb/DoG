@@ -17,6 +17,10 @@ TagManager:
   - Wall
   - Shot
   - CelebratorCanvas
+  - buttonA
+  - buttonB
+  - buttonX
+  - buttonY
   layers:
   - Default
   - TransparentFX
