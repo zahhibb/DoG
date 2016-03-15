@@ -6,6 +6,9 @@ public class CelebrationScaler : ScoreAnnouncer {
 
     [SerializeField] private GameObject[] m_bars;
     [SerializeField] private Text[] m_scoreTexts;
+    [SerializeField] private float m_celebrationTime = 4;
+
+    private AllSkip m_allSkipper;
 
     private bool m_displayGameResult = true;
 
@@ -25,16 +28,21 @@ public class CelebrationScaler : ScoreAnnouncer {
 
     void Start()
     {
+        m_allSkipper = GetComponent<AllSkip>();
+
         foreach (GameObject bar in m_bars)
         {
             bar.transform.localScale = new Vector3(1f, 0f, 1f);
         }
+        StartCoroutine(DoneWithScores(m_celebrationTime));
     }
 
     public override void Update()
     {
         UpdateBars();
         DebugScoreThings();
+        m_allSkipper.AllTeamsPressed(1, "GoToStaging");
+
     }
 
     private void DebugScoreThings()
@@ -77,5 +85,16 @@ public class CelebrationScaler : ScoreAnnouncer {
             float yScale = Mathf.Clamp(m_bars[i].gameObject.transform.localScale.y + (4 * Time.deltaTime), 0, Mathf.InverseLerp(0,8,m_fetchedScoreThings[i].newScore));
             m_bars[i].gameObject.transform.localScale = new Vector3(.4f, (0.04f + yScale), .4f);
         }
+    }
+
+    private IEnumerator DoneWithScores(float time)
+    {
+        yield return new WaitForSeconds(time);
+        GoToStaging();
+    }
+
+    public void GoToStaging()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Staging");
     }
 }

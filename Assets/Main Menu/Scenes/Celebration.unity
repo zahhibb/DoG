@@ -556,6 +556,7 @@ GameObject:
   - 114: {fileID: 714577138}
   - 114: {fileID: 714577137}
   - 114: {fileID: 714577141}
+  - 114: {fileID: 714577142}
   m_Layer: 5
   m_Name: CelebratorCanvas
   m_TagString: CelebratorCanvas
@@ -669,6 +670,23 @@ MonoBehaviour:
   - {fileID: 1783572246}
   - {fileID: 1352524047}
   m_scoreTexts: []
+  m_celebrationTime: 4
+--- !u!114 &714577142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 714577136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb5ea88f74395d43bcc5cac07a4113f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_displayTeam1: {fileID: 0}
+  m_displayTeam2: {fileID: 0}
+  m_displayTeam3: {fileID: 0}
+  m_displayTeam4: {fileID: 0}
+  m_goPrefab: {fileID: 119588, guid: 5a586dc0e9a828f4ea932da6da3c580e, type: 2}
 --- !u!1 &730854393
 GameObject:
   m_ObjectHideFlags: 0
