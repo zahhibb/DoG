@@ -3,56 +3,53 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ButtonpressInterval : MonoBehaviour {
+public class ButtonpressInterval : MonoBehaviour
+{
+    [SerializeField] private Object m_go = null;
 
-    private float m_startTimeP1 = 0f;
-    /*
-    private float m_startTimeP2 = 0f;
-    private float m_startTimeP3 = 0f;
-    private float m_startTimeP4 = 0f;
-    */
-    private float m_endTimeP1 = 0f;
-    /*
-    private float m_endTimeP2 = 0f;
-    private float m_endTimeP3 = 0f;
-    private float m_endTimeP4 = 0f;
-    */
     private bool m_coolingDown = false;
 
     private string[] m_buttonNames;
     private Button[] m_pressedP1;
 
-    
     private int m_roundCount = 1;
     [SerializeField] private int m_currentWorth = 1;
     [SerializeField] private Text m_currentWorthText;
+
+    [SerializeField] private Text[] m_teamScoreTexts;
+    private int[] m_teamScores;
 
     private List<Manager> m_playerManagers;
     [SerializeField] private int m_buttonOfTheDay;
 
     void Start ()
     {
-        m_currentWorthText.text = "1 pt";
+        m_currentWorth = 1;
         m_currentWorthText.color = Color.white;
 
         m_buttonOfTheDay = Random.Range(0, 4);
         FindTeams();
-        /*
-        *if (playerPerTeamAmount < x)
-        *{
-        *   PossibleButtonAmount = (x == 1) ? y : z;
-        *}
-        */
 
-        // Turn over cards to reveal "what you pressed" (sounds retarded but is probably fun)
+        foreach (Text text in m_teamScoreTexts)
+        {
+            text.text = "0";
+        }
+
+        m_teamScores = new int[4] { 0, 0, 0, 0 };
     }
 
     private void Update()
     {
-        if (LameGame())
-        {
-            m_coolingDown = true;
-            StartCoroutine(SuspendPresses(1f));
+        m_currentWorthText.text = " " + m_currentWorth + ".";
+
+        if (!m_coolingDown)
+            {
+            if (LameGame())
+            {
+                m_coolingDown = true;
+                StartCoroutine(SuspendPresses(1f));
+                m_roundCount++;
+            }
         }
     }
 
@@ -69,23 +66,23 @@ public class ButtonpressInterval : MonoBehaviour {
         JoystickAxis,
     };
 
-    private void CheckButton(Button[] buttons)
-    {
-        bool isThatAll = false;
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            if (buttons[i].pressed == false && m_startTimeP1 == 0)
-            {
-                buttons[i].pressed = (Input.GetKeyDown(buttons[i].name));
-                // send to funky bar filling up and/or cards flipping over
-                m_startTimeP1 = Time.realtimeSinceStartup;
-                if (!isThatAll)
-                {
-                    isThatAll = true;
-                }
-            }
-        }        
-    }
+    //private void CheckButton(Button[] buttons)
+    //{
+    //    bool isThatAll = false;
+    //    for (int i = 0; i < buttons.Length; i++)
+    //    {
+    //        if (buttons[i].pressed == false && m_startTimeP1 == 0)
+    //        {
+    //            buttons[i].pressed = (Input.GetKeyDown(buttons[i].name));
+    //            // send to funky bar filling up and/or cards flipping over
+    //            m_startTimeP1 = Time.realtimeSinceStartup;
+    //            if (!isThatAll)
+    //            {
+    //                isThatAll = true;
+    //            }
+    //        }
+    //    }        
+    //}
 
     private Manager LameGame()
     {
@@ -94,35 +91,55 @@ public class ButtonpressInterval : MonoBehaviour {
             if (Input.GetButtonDown(team.Inputs[m_buttonOfTheDay].name))
             {
                 Debug.Log("team number " + team.TeamNumber + " pressed " + team.Inputs[m_buttonOfTheDay].name);
-                BackToStaging(team.TeamNumber);
+
+                AwardPointsToPlayer(team);
+                m_currentWorth *= 2;
                 return team;
             }
-            else if (Input.GetButtonDown(team.Inputs[0].name))
+            else if (Input.GetButtonDown(team.Inputs[0].name) || Input.GetButtonDown(team.Inputs[1].name) || Input.GetButtonDown(team.Inputs[2].name) || Input.GetButtonDown(team.Inputs[3].name))
             {
+                AwardPointsToOthers(team);
+                m_currentWorth *= 2;
                 return team;
-            }
-            else if (Input.GetButtonDown(team.Inputs[1].name))
-            {
-                return team;
-            }
-            else if (Input.GetButtonDown(team.Inputs[2].name))
-            {
-                return team;
-            }
-            else if (Input.GetButtonDown(team.Inputs[3].name))
-            {
-                return team;
+
             }
 
         }
         return null;
     }
 
-    public void BackToStaging(int player)
+    private void AwardPointsToPlayer(Manager winningTeam)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Staging");
 
-        GameObject.FindGameObjectWithTag("ManagerP" + player).GetComponent<Manager>().Score += 8;
+        winningTeam.Score += m_currentWorth;
+        m_teamScores[winningTeam.TeamNumber - 1] += m_currentWorth;
+        m_teamScoreTexts[winningTeam.TeamNumber - 1].text = m_teamScores[winningTeam.TeamNumber - 1] + "pts";
+
+        //foreach (Manager team in m_playerManagers)
+        //{
+        //    if (team != winningTeam)
+        //    {
+        //        team.Score += m_currentWorth;
+        //    }
+        //}
+    }
+
+    private void AwardPointsToOthers(Manager losingTeam)
+    {
+        foreach (Manager team in m_playerManagers)
+        {
+            if (team != losingTeam)
+            {
+                team.Score += m_currentWorth;
+                m_teamScores[team.TeamNumber - 1] += m_currentWorth;
+                m_teamScoreTexts[team.TeamNumber - 1].text = m_teamScores[team.TeamNumber - 1] + "p";
+            }
+        }
+    }
+
+    public void BackToStaging()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Celebration");
         
     }
 
@@ -140,13 +157,19 @@ public class ButtonpressInterval : MonoBehaviour {
 
     private IEnumerator SuspendPresses(float time)
     {
+        m_coolingDown = true;
+        Rotate rotator = GetComponentInChildren<Rotate>();
+        float rotatorRot = rotator.ZRot;
+        rotator.ZRot = 0;
+
         yield return new WaitForSeconds(time);
         m_coolingDown = false;
-        if (m_roundCount > 4)
+        if (m_roundCount > 3)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Staging");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Celebration");
         }
-
+        GameObject go = (GameObject)Instantiate(m_go, transform.position, transform.rotation);
+        rotator.ZRot = rotatorRot;
     }
 }
 

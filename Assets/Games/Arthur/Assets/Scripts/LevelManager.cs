@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour {
             
 
             // load staging menu
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Staging");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Celebration");
         }
     }
 

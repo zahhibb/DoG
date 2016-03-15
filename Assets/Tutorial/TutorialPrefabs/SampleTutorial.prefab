@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ac276c72427554ca2b1a806a1a81b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_lifeTime: 5
+  m_lifeTime: 3
   startOnLoad: 1
 --- !u!114 &11440130
 MonoBehaviour:
@@ -361,9 +361,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "g\xF6r en canvas med instruktioner.\n\nl\xE4mpligen skalbar med spelare,
-    s\xE5 att\n\nman kan skriva individuella (tsz1, tsz2, etc)\n\nefter tid ta bort
-    den och starta CountDownCanvas,\n\neller bara l\xE4gg \xF6ver den. (\xE5 f\xE4rjer)"
+  m_Text: "en beskrivning av spelet\n\neller hur man spelar det\n\ninstruktioner allts\xE5\n\nkanske
+    lite f\xE4rjer\n\nha det"
 --- !u!114 &11495088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -563,7 +562,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_lifeTime
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

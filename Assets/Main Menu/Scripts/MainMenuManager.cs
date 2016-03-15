@@ -22,7 +22,7 @@ public class MainMenuManager : Manager {
     [SerializeField] private Slider m_slider3 = null;
     [SerializeField] private Slider m_slider4 = null;
 
-    [SerializeField] private int m_joysticks;
+    [SerializeField] private int m_joysticks = 4;
     [SerializeField] private GameObject m_playerManager = null;
 
     // private SerializedProperty[] m_inputManagerArray;
@@ -30,10 +30,10 @@ public class MainMenuManager : Manager {
     // private string[] m_controller = Input.GetJoystickNames();
 
     // Standard Colors (there needs to be as many as of these as there are supported controllers)
-    private Color m_lemonTruck = new Color(249, 227, 105);
-    private Color m_beachBlueCoathanger = new Color(148, 233, 246);
-    private Color m_flamingoParachute = new Color(234, 160, 223);
-    private Color m_pepperGreenGranola = new Color(140, 253, 125);
+    private Color m_lemonTruck = new Color32(249, 227, 105, 255);
+    private Color m_beachBlueCoathanger = new Color32(148, 233, 246, 255);
+    private Color m_flamingoParachute = new Color32(234, 160, 223, 255);
+    private Color m_pepperGreenGranola = new Color32(140, 253, 125, 255);
 
     // Standard Viewport Rectangles
     private Rect m_fullscreen = new Rect(0f, 0f, 1f, 1f);
@@ -56,6 +56,11 @@ public class MainMenuManager : Manager {
 
     }
 
+    private void Start()
+    {
+        m_ManagerP1.Controllers = m_joysticks;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown("f4")) { TestCameras(4); }
@@ -75,7 +80,7 @@ public class MainMenuManager : Manager {
 
     void MakePlayers()
     {
-        m_joysticks = Input.GetJoystickNames().Length + 1;
+        m_joysticks = Input.GetJoystickNames().Length;
         
     }
 
@@ -125,7 +130,7 @@ public class MainMenuManager : Manager {
             // Initialize a new instance of Manager to the parametered team number and player count.
             GameObject newPlayerManager = (GameObject)Instantiate(m_playerManager, transform.position, transform.rotation);
             newPlayerManager.gameObject.AddComponent<Persistency>();
-            newPlayerManager.name = "Player " + controller + " Manager";
+            newPlayerManager.name = "Team " + controller + " Manager";
             Manager newManager = newPlayerManager.gameObject.AddComponent<Manager>();
             newManager.gameObject.tag = "ManagerP" + controller;
             newManager.TeamNumber = controller;
@@ -139,14 +144,33 @@ public class MainMenuManager : Manager {
             }
 
             // Give it a pretty color! (just set colors for team 1-4 atm...)
-            // newManager.PlayerColor = SetColor();
+            newManager.PlayerColor = m_colorList[controller-1];
 
             // Set up whatever variables it will need.
             newManager.Score = 0;
             newManager.enabled = true; //??
+            switch (controller)
+            {
+                case 1:
+                    newManager.TeamName = "Pepper-Green Granola";
+                    break;
+                case 2:
+                    newManager.TeamName = "Pink Pelican Parachute";
+                    break;
+                case 3:
+                    newManager.TeamName = "Lemon Truck";
+                    break;
+                case 4:
+                    newManager.TeamName = "Blue Coathanger";
+                    break;
+                default:
+                    newManager.TeamName = "Special Snowflake";
+                    break;
+            }
 
-            // Add it to the list to sort them upon leaving Main Menu.
-            //m_managerList.Add(newManager);
+
+            // Add it to the list to sort them upon leaving Main Menu (obsolete).
+            m_managerList.Add(newManager);
         }
     }
 
@@ -323,15 +347,22 @@ public class MainMenuManager : Manager {
                 Debug.Log(myManager.gameObject.tag + " pressed that button");
                 if (myManager.Active)
                 {
-                    m_ManagerP1.Controllers--;
-                    myManager.Active = false;
+                    if (myManager.TeamNumber == m_ManagerP1.Controllers)
+                    {
+                        m_ManagerP1.Controllers--;
+                        myManager.Active = false;
+                    }
                 }
                 else
                 {
-                    m_ManagerP1.Controllers++;
-                    myManager.Active = true;
+                    if (myManager.TeamNumber == (m_ManagerP1.Controllers +1))
+                    {
+                        m_ManagerP1.Controllers++;
+                        myManager.Active = true;
+                    }
                 }
             }
+            //SortManagers();
         }
 
         //List<Manager> tempManagerList = m_managerList;
@@ -379,12 +410,14 @@ public class MainMenuManager : Manager {
     {
         //List<Color> colorLm_colorListist = new List<Color>();
 
-        m_colorList.AddRange(new Color[] { m_lemonTruck, m_beachBlueCoathanger, m_flamingoParachute, m_pepperGreenGranola });
+        m_colorList = new List<Color>();
 
+        m_colorList.Add(m_pepperGreenGranola);
+        m_colorList.Add(m_flamingoParachute);
         m_colorList.Add(m_lemonTruck);
         m_colorList.Add(m_beachBlueCoathanger);
-        m_colorList.Add(m_flamingoParachute);
-        m_colorList.Add(m_pepperGreenGranola);
+
+        
     }
 
     private Color SetColor()

@@ -53,7 +53,7 @@ public class SliderText : MonoBehaviour {
             m_targetPlayer = GameObject.FindGameObjectWithTag("ManagerP" + m_text.gameObject.name).GetComponent<Manager>();
             m_text.text = "Players on team: " + m_slider.value;
             m_targetPlayer.TeamSize = (int)m_slider.value;
-            Debug.Log(m_targetPlayer.tag + ": " + m_targetPlayer.TeamSize);
+            Debug.Log(m_targetPlayer.TeamName + ": " + m_targetPlayer.TeamSize);
         }
     }
 
