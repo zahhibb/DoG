@@ -13,9 +13,6 @@ public class PlayerScript : MonoBehaviour {
     }
     // Use this for initialization
     void Start() {
-        Vector3 temp = transform.position;
-        temp.z = 0.0f;
-        transform.position = temp;//ensure all parts have same z value http://answers.unity3d.com/questions/600421/how-to-change-xyz-values-in-a-vector3-properly-in.html
         m_speed = 5;
         m_rb2d = GetComponent<Rigidbody2D>();
     }
@@ -26,6 +23,10 @@ public class PlayerScript : MonoBehaviour {
             print("blue");
             m_shallDestroy = true;
         }
+    }
+    public void SetPlayerPosition(Vector3 NewPosition)
+    {
+        transform.position = NewPosition;
     }
     public bool GetShallDestroy()
     {//returns if the player has hit a shot

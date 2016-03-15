@@ -12,36 +12,36 @@ public class GameScript : MonoBehaviour
     [SerializeField]
     private GameObject buttonY;
 
-    private int countdown;       //Time before button is instantiated
-    private int buttonChoice;    //Which button to instantiate
+    private int m_countdown;       //Time before button is instantiated
+    private int m_buttonChoice;    //Which button to instantiate
 
     // Use this for initialization
     void Start ()
     {
-        buttonChoice = Random.Range(1, 5);
-        countdown = Random.Range(1, 10);
-        StartCoroutine(ExecuteAfterTime(countdown));
+        m_buttonChoice = Random.Range(1, 5);
+        m_countdown = Random.Range(1, 10);
+        StartCoroutine(ExecuteAfterTime(m_countdown));
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        //buttonChoice = Random.Range(1, 5);
-        //countdown = Random.Range(1, 2);
+        //m_buttonChoice = Random.Range(1, 5);
+        //m_countdown = Random.Range(1, 2);
 
-        //if (buttonChoice == 1)
+        //if (m_buttonChoice == 1)
         //{
         //    Instantiate(buttonA);
         //}
-        //else if (buttonChoice == 2)
+        //else if (m_buttonChoice == 2)
         //{
         //    Instantiate(buttonB);
         //}
-        //else if (buttonChoice == 3)
+        //else if (m_buttonChoice == 3)
         //{
         //    Instantiate(buttonX);
         //}
-        //else if (buttonChoice == 4)
+        //else if (m_buttonChoice == 4)
         //{
         //    Instantiate(buttonY);
         //}
@@ -49,20 +49,20 @@ public class GameScript : MonoBehaviour
 
     IEnumerator ExecuteAfterTime(float time)
     {
-        yield return new WaitForSeconds(countdown);
-        if(buttonChoice == 1)
+        yield return new WaitForSeconds(m_countdown);
+        if(m_buttonChoice == 1)
         {
             Instantiate(buttonA);
         }
-        else if (buttonChoice == 2)
+        else if (m_buttonChoice == 2)
         {
             Instantiate(buttonB);
         }
-        else if (buttonChoice == 3)
+        else if (m_buttonChoice == 3)
         {
             Instantiate(buttonX);
         }
-        else if (buttonChoice == 4)
+        else if (m_buttonChoice == 4)
         {
             Instantiate(buttonY);
         }
