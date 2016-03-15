@@ -5,25 +5,23 @@ public class Inputs : MonoBehaviour
 {
 
     [SerializeField] private int m_playerNumber;
-    private int m_clickCount;
-    private int m_buttonHp;
+    private int m_clickCount = 1;
+    private int m_buttonHp = 1; // acutaly number = m_numberofPlayer or w/e
     //private Manager m_myManager;
 
 	// Use this for initialization
 	void Start ()
     {
-        m_clickCount = 1;
         //m_myManager = GameObject.FindGameObjectWithTag("ManagerP" + m_playerNumber).GetComponent<Manager>();
 
         /// Idea for a win condition:
         /// m_buttonHp = 0 + m_numberofPlayers;
-        /// m_buttonHp -= 1; //in le inputs
+        /// m_buttonHp -= 1; //in le pressing-the-button code
         /// if (m_buttonHp == 0)
         /// {
         ///      UnityEngine.SceneManagement.SceneManager.LoadScene("Celebration");
         /// }
         /// can abuse if everyone presses before button spawn and just skip the game. solution: cant press shit until button actually spawns (variables n shit in button spawn)
-        m_buttonHp = 1;
     }
 
     // Update is called once per frame
