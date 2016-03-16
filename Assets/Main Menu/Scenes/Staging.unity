@@ -325,6 +325,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_minigames:
   - Floppy1
+  - tanks_test
+  - Aliens
 --- !u!54 &80658281
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2704,6 +2706,10 @@ Prefab:
       propertyPath: m_Name
       value: b1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 792d3f4cacd1e6e49b869554ec050b90, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41b417334e97cea41868e5d365203bbe, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 792d3f4cacd1e6e49b869554ec050b90, type: 3}
   m_IsPrefabParent: 0
@@ -9837,9 +9843,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Letters
-
-    '''
+  m_Text: :)
 --- !u!222 &1884189983
 CanvasRenderer:
   m_ObjectHideFlags: 0
