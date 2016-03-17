@@ -21,7 +21,7 @@ public class StagingManager : MonoBehaviour
         m_manager3 = GameObject.FindGameObjectWithTag("ManagerP3").GetComponent<Manager>();
         m_manager4 = GameObject.FindGameObjectWithTag("ManagerP4").GetComponent<Manager>();
 
-        if (CountRounds(m_manager1) <= 3)
+        if (CountRounds(m_manager1) <= 1)
         {
             m_rounds.text = "round " + m_manager1.Rounds + "/3!";
         }
@@ -30,23 +30,27 @@ public class StagingManager : MonoBehaviour
             if (m_manager1.Score > m_manager2.Score && m_manager1.Score > m_manager3.Score && m_manager1.Score > m_manager4.Score)
             {
                 m_rounds.text = m_manager1.TeamName + " is the winnewr";
+                m_manager1.ChosenScene = m_manager1.TeamName;
                 UnityEngine.SceneManagement.SceneManager.LoadScene("WinnerShowOff");
             }
             if (m_manager2.Score > m_manager1.Score && m_manager2.Score > m_manager3.Score && m_manager2.Score > m_manager4.Score)
             {
                 m_rounds.text = m_manager2.TeamName + " is the winnewr";
+                m_manager1.ChosenScene = m_manager2.TeamName;
                 UnityEngine.SceneManagement.SceneManager.LoadScene("WinnerShowOff");
                 // Declare Winner, show-off scene before returning to main!
             }
             if (m_manager3.Score > m_manager2.Score && m_manager3.Score > m_manager1.Score && m_manager3.Score > m_manager4.Score)
             {
                 m_rounds.text = m_manager3.TeamName + " is the winnewr";
+                m_manager1.ChosenScene = m_manager3.TeamName;
                 UnityEngine.SceneManagement.SceneManager.LoadScene("WinnerShowOff");
                 // Declare Winner, show-off scene before returning to main!
             }
             if (m_manager4.Score > m_manager2.Score && m_manager4.Score > m_manager3.Score && m_manager4.Score > m_manager1.Score)
             {
                 m_rounds.text = m_manager4.TeamName + " is the winnewr";
+                m_manager1.ChosenScene = m_manager4.TeamName;
                 UnityEngine.SceneManagement.SceneManager.LoadScene("WinnerShowOff");
                 // Declare Winner, show-off scene before returning to main!
             }
