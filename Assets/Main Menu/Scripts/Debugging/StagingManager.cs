@@ -30,18 +30,26 @@ public class StagingManager : MonoBehaviour
             if (m_manager1.Score > m_manager2.Score && m_manager1.Score > m_manager3.Score && m_manager1.Score > m_manager4.Score)
             {
                 m_rounds.text = m_manager1.TeamName + " is the winnewr";
+                // Declare Winner, show-off scene before returning to main!
             }
             if (m_manager2.Score > m_manager1.Score && m_manager2.Score > m_manager3.Score && m_manager2.Score > m_manager4.Score)
             {
                 m_rounds.text = m_manager2.TeamName + " is the winnewr";
+                // Declare Winner, show-off scene before returning to main!
             }
             if (m_manager3.Score > m_manager2.Score && m_manager3.Score > m_manager1.Score && m_manager3.Score > m_manager4.Score)
             {
                 m_rounds.text = m_manager3.TeamName + " is the winnewr";
+                // Declare Winner, show-off scene before returning to main!
             }
             if (m_manager4.Score > m_manager2.Score && m_manager4.Score > m_manager3.Score && m_manager4.Score > m_manager1.Score)
             {
                 m_rounds.text = m_manager4.TeamName + " is the winnewr";
+                // Declare Winner, show-off scene before returning to main!
+            }
+            else
+            {
+                m_rounds.text = "It's a tie! Sudden death round!";
             }
             //int[] scores = { manager1.Score, manager2.Score, manager3.Score, manager4.Score };
             //int highestScore = Mathf.Max(manager1.Score, manager2.Score, manager3.Score, manager4.Score);
