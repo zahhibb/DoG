@@ -116,6 +116,11 @@ public class StagingManager : MonoBehaviour
         m_manager1.ChosenScene = "tanks_test";
         LoadTutorial();
     }
+    public void LoadReactionTime()
+    {
+        m_manager1.ChosenScene = "Reaction Time";
+        LoadTutorial();
+    }
 
     public void QuitGame()
     {
@@ -169,99 +174,53 @@ public class StagingManager : MonoBehaviour
         return Input.GetAxisRaw(controller.Inputs[buttonIndex].name);
     }
 
-    // Debug Controller Buttons for choosing scenes.
+    // Debug Controller Buttons for skipping all the bullshit and choosing scenes.
     private void DebugButtons()
     {
         if (m_manager1.Rounds <= 3)
         {
-            if (CheckButton(m_manager1, 0))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Floppy1";
-                LoadTutorial();
-            }
-            if (CheckButton(m_manager2, 0))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Floppy1";
-                LoadTutorial();
-            }
-            if (CheckButton(m_manager3, 0))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Floppy1";
-                LoadTutorial(); ;
-            }
-            if (CheckButton(m_manager4, 0))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Floppy1";
-                LoadTutorial();
-            }
 
 
-
-
-            if (CheckButton(m_manager1, 1))
+            if (CheckButton(m_manager1, 5) || CheckButton(m_manager2, 5) || CheckButton(m_manager3, 5) || CheckButton(m_manager4, 5))
+            {
+                LoadReactionTime();
+            }
+            if (CheckButton(m_manager1, 4) || CheckButton(m_manager2, 4) || CheckButton(m_manager3, 4) || CheckButton(m_manager4, 4))
+            {
+                LoadAntonsAliens();
+            }
+            if (CheckButton(m_manager1, 3) || CheckButton(m_manager2, 3) || CheckButton(m_manager3, 3) || CheckButton(m_manager4, 3))
+            {
+                LoadTankYou();
+            }
+            if (CheckButton(m_manager1, 2) || CheckButton(m_manager2, 2) || CheckButton(m_manager3, 2) || CheckButton(m_manager4, 2))
+            {
+                LoadFloppy1();
+            }
+            if (CheckButton(m_manager1, 1) || CheckButton(m_manager2, 1) || CheckButton(m_manager3, 1) || CheckButton(m_manager4, 1))
+            {
+                // Breaks for wheel tho 
+            }
+            if (CheckButton(m_manager1, 0) || CheckButton(m_manager2, 0) || CheckButton(m_manager3, 0) || CheckButton(m_manager4, 0))
             {
                 LoadSimulPress();
-            }
-            if (CheckButton(m_manager2, 1))
-            {
-                LoadSimulPress();
-            }
-
-            if (CheckButton(m_manager3, 1))
-            {
-                LoadSimulPress();
-            }
-            if (CheckButton(m_manager4, 1))
-            {
-                LoadSimulPress();
-            }
-
-
-            if (CheckButton(m_manager1, 5))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Reaction Time";
-                LoadTutorial();
-            }
-            if (CheckButton(m_manager2, 5))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Reaction Time";
-                LoadTutorial();
-            }
-            if (CheckButton(m_manager3, 5))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Reaction Time";
-                LoadTutorial(); ;
-            }
-            if (CheckButton(m_manager4, 5))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Reaction Time";
-                LoadTutorial();
             }
 
         }
 
-        if (CheckButton(m_manager1, 2))
+        if (CheckButton(m_manager1, 6))
         {
             BackToMain();
         }
-        if (CheckButton(m_manager2, 2))
+        if (CheckButton(m_manager2, 6))
         {
             BackToMain();
         }
-
-        if (CheckButton(m_manager3, 2))
+        if (CheckButton(m_manager3, 6))
         {
             BackToMain();
         }
-        if (CheckButton(m_manager4, 2))
+        if (CheckButton(m_manager4, 6))
         {
             BackToMain();
         }
