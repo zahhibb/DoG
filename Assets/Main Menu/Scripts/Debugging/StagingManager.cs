@@ -70,12 +70,11 @@ public class StagingManager : MonoBehaviour
 
     }
 
-    /*
+ 
     private void Update()
     {
             DebugButtons();
     }
-    */
 
     public void BackToMain()
     {
@@ -225,25 +224,25 @@ public class StagingManager : MonoBehaviour
             if (CheckButton(m_manager1, 5))
             {
                 //LoadFloppy1();
-                m_manager1.ChosenScene = "ReactionTime";
+                m_manager1.ChosenScene = "Reaction Time";
                 LoadTutorial();
             }
             if (CheckButton(m_manager2, 5))
             {
                 //LoadFloppy1();
-                m_manager1.ChosenScene = "ReactionTime";
+                m_manager1.ChosenScene = "Reaction Time";
                 LoadTutorial();
             }
             if (CheckButton(m_manager3, 5))
             {
                 //LoadFloppy1();
-                m_manager1.ChosenScene = "ReactionTime";
+                m_manager1.ChosenScene = "Reaction Time";
                 LoadTutorial(); ;
             }
             if (CheckButton(m_manager4, 5))
             {
                 //LoadFloppy1();
-                m_manager1.ChosenScene = "ReactionTime";
+                m_manager1.ChosenScene = "Reaction Time";
                 LoadTutorial();
             }
 
