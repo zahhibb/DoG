@@ -22,8 +22,9 @@ public class MovementController : MonoBehaviour {
     }
 
     void Start()
-    {
-        m_rigid = GetComponent<Rigidbody>();       
+    {        
+        // Get rigidbody from parent to move entire object
+        m_rigid = GetComponentInParent<Rigidbody>();
     }
 
 	void Update () {
@@ -31,13 +32,13 @@ public class MovementController : MonoBehaviour {
         // Accelerate
         if (Input.GetAxis(m_triggerAxis) < 0)
         {            
-            m_rigid.AddForce(transform.TransformDirection(Vector3.forward) * m_movementSpeed);                    
+            m_rigid.AddForce(transform.TransformDirection(Vector3.right) * m_movementSpeed);                    
         }
 
         // Reverse
         if (Input.GetAxis(m_triggerAxis) > 0)
         {
-            m_rigid.AddForce(transform.TransformDirection(Vector3.back) * m_movementSpeed);
+            m_rigid.AddForce(transform.TransformDirection(Vector3.left) * m_movementSpeed);
         }
 
         // Rotate vehicle left
