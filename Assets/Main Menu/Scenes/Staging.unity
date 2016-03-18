@@ -1118,7 +1118,7 @@ RectTransform:
   m_RootOrder: 14
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15, y: 113}
+  m_AnchoredPosition: {x: -35, y: 100}
   m_SizeDelta: {x: 631.51, y: 81.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &196962039
@@ -1133,7 +1133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7574037, b: 0.32352942, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1142,18 +1142,20 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 44
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 48
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ' '
+  m_Text: 'Round 0/3
+
+'
 --- !u!222 &196962040
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1808,7 +1810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &365082834
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5257,6 +5259,7 @@ MonoBehaviour:
   - {fileID: 749166626}
   - {fileID: 1118671124}
   m_rounds: {fileID: 196962039}
+  m_gameRounds: 1
 --- !u!1 &1042503805
 GameObject:
   m_ObjectHideFlags: 0

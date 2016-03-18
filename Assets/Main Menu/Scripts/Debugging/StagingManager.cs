@@ -7,6 +7,7 @@ public class StagingManager : MonoBehaviour
 {
     [SerializeField] Text[] m_scoreTexts;
     [SerializeField] Text m_rounds;
+    [SerializeField] int m_gameRounds;
 
     Manager m_manager1;
     Manager m_manager2;
@@ -21,7 +22,7 @@ public class StagingManager : MonoBehaviour
         m_manager3 = GameObject.FindGameObjectWithTag("ManagerP3").GetComponent<Manager>();
         m_manager4 = GameObject.FindGameObjectWithTag("ManagerP4").GetComponent<Manager>();
 
-        if (CountRounds(m_manager1) <= 1)
+        if (CountRounds(m_manager1) <= m_gameRounds)
         {
             m_rounds.text = "round " + m_manager1.Rounds + "/3!";
         }
