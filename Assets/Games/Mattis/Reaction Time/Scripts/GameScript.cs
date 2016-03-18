@@ -33,6 +33,8 @@ public class GameScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        CheckButtons();
+        PlayerPressed();
         //m_buttonChoice = Random.Range(1, 5);
         //m_countdown = Random.Range(1, 2);
 
@@ -84,7 +86,7 @@ public class GameScript : MonoBehaviour
             {
                 teamManager.Score += 4;
                 m_playerManagers.Remove(teamManager);
-                m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);
+                m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
                 // nån slags bild som man tar bort från canvas
             }
         }
@@ -97,28 +99,28 @@ public class GameScript : MonoBehaviour
         if (/*(Input.GetKeyDown(KeyCode.A)*/(Input.GetButtonDown(myManager.Inputs[0].name)) && (GameObject.FindGameObjectWithTag("buttonA") == true) && (m_pressCounts[myManager.TeamNumber-1] == 1))
         {
             //Score
-            Debug.Log("buttonA works mate");
+            Debug.Log("buttonA works mate yoloswag");
             return true;
         }
 
         if (/*(Input.GetKeyDown(KeyCode.S)*/(Input.GetButtonDown(myManager.Inputs[1].name)) && (GameObject.FindGameObjectWithTag("buttonB") == true) && (m_pressCounts[myManager.TeamNumber - 1] == 1))
         {
             //Score
-            Debug.Log("buttonB works mate");
+            Debug.Log("buttonB works mate yoloswag");
             return true;
         }
 
         if (/*(Input.GetKeyDown(KeyCode.D)*/(Input.GetButtonDown(myManager.Inputs[2].name)) && (GameObject.FindGameObjectWithTag("buttonX") == true) && (m_pressCounts[myManager.TeamNumber - 1] == 1))
         {
             //Score
-            Debug.Log("buttonX works mate");
+            Debug.Log("buttonX works mate yoloswag");
             return true;
         }
 
         if (/*(Input.GetKeyDown(KeyCode.F)*/(Input.GetButtonDown(myManager.Inputs[3].name)) && (GameObject.FindGameObjectWithTag("buttonY") == true) && (m_pressCounts[myManager.TeamNumber - 1] == 1))
         {
             //Score
-            Debug.Log("buttonY works mate");
+            Debug.Log("buttonY works mate yoloswag");
             return true;
         }
         return false;

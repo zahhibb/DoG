@@ -30,29 +30,29 @@ public class Inputs : MonoBehaviour
     {
         /// funkar perfektomundo
 
-        if (/*(Input.GetKeyDown(KeyCode.A)*/(Input.GetButtonDown(m_myManager.Inputs[0].name)) && (GameObject.FindGameObjectWithTag("buttonA") == true) && (m_clickCount == 1))
-        {
-            //Score
-            Debug.Log("buttonA works mate");
-        }
+        //if (/*(Input.GetKeyDown(KeyCode.A)*/(Input.GetButtonDown(m_myManager.Inputs[0].name)) && (GameObject.FindGameObjectWithTag("buttonA") == true) && (m_clickCount == 1))
+        //{
+        //    //Score
+        //    Debug.Log("buttonA works mate");
+        //}
 
-        if (/*(Input.GetKeyDown(KeyCode.S)*/(Input.GetButtonDown(m_myManager.Inputs[1].name)) && (GameObject.FindGameObjectWithTag("buttonB") == true) && (m_clickCount == 1))
-        {
-            //Score
-            Debug.Log("buttonB works mate");
-        }
+        //if (/*(Input.GetKeyDown(KeyCode.S)*/(Input.GetButtonDown(m_myManager.Inputs[1].name)) && (GameObject.FindGameObjectWithTag("buttonB") == true) && (m_clickCount == 1))
+        //{
+        //    //Score
+        //    Debug.Log("buttonB works mate");
+        //}
 
-        if (/*(Input.GetKeyDown(KeyCode.D)*/(Input.GetButtonDown(m_myManager.Inputs[2].name)) && (GameObject.FindGameObjectWithTag("buttonX") == true) && (m_clickCount == 1))
-        {
-            //Score
-            Debug.Log("buttonX works mate");
-        }
+        //if (/*(Input.GetKeyDown(KeyCode.D)*/(Input.GetButtonDown(m_myManager.Inputs[2].name)) && (GameObject.FindGameObjectWithTag("buttonX") == true) && (m_clickCount == 1))
+        //{
+        //    //Score
+        //    Debug.Log("buttonX works mate");
+        //}
 
-        if (/*(Input.GetKeyDown(KeyCode.F)*/(Input.GetButtonDown(m_myManager.Inputs[3].name)) && (GameObject.FindGameObjectWithTag("buttonY") == true) && (m_clickCount == 1))
-        {
-            //Score
-            Debug.Log("buttonY works mate");
-        }
+        //if (/*(Input.GetKeyDown(KeyCode.F)*/(Input.GetButtonDown(m_myManager.Inputs[3].name)) && (GameObject.FindGameObjectWithTag("buttonY") == true) && (m_clickCount == 1))
+        //{
+        //    //Score
+        //    Debug.Log("buttonY works mate");
+        //}
 
         // You only got one shot, one opportunity to sieze everything you ever wanted. Will you capture it or just let it slip?
         if (((Input.GetKeyDown(KeyCode.A)) || (Input.GetKeyDown(KeyCode.S)) || (Input.GetKeyDown(KeyCode.D)) || (Input.GetKeyDown(KeyCode.F))) && (m_clickCount == 1))
