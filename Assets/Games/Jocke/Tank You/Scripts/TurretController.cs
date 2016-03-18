@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TurretController : MonoBehaviour {
 
-    private float m_rotationSpeed = 90f;
+    private float m_rotationSpeed = 90f; // The speed of how fast the turret rotates
     private string m_rightStickX;
 
     public string RightStick
@@ -11,8 +11,18 @@ public class TurretController : MonoBehaviour {
         set { m_rightStickX = value; }
     }
 
-	void Update () {
+    void Start()
+    {
+        m_rightStickX = transform.root.GetComponentInChildren<MovementController>().MyManager.Inputs[14].name;
+    }
 
+	void Update () {
+        RotateTankTurret();        
+    }
+
+    // Rotation of the tanks turrets
+    private void RotateTankTurret()
+    {
         // Rotate vehicle left
         if (Input.GetAxis(m_rightStickX) < 0)
         {

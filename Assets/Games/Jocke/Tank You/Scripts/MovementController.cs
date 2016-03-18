@@ -6,10 +6,18 @@ public class MovementController : MonoBehaviour {
     private Rigidbody m_rigid;
     private Transform m_direction;
 
-    private float m_movementSpeed = 12f;
-    private float m_rotationSpeed = 40f;
+    private float m_movementSpeed = 12f; // The speed of how fast the tank moves
+    private float m_rotationSpeed = 40f; // The speed of how fast the tank rotates
     private string m_leftStickX;
     private string m_triggerAxis;
+
+    private Manager m_myManager;
+
+    public Manager MyManager
+    {
+        get { return m_myManager; }
+        set { m_myManager = value; }
+    }
 
     public string LeftStickX
     {
@@ -22,17 +30,30 @@ public class MovementController : MonoBehaviour {
     }
 
     void Start()
-    {        
-        // Get rigidbody from parent to move entire object
+    {                
         m_rigid = GetComponentInParent<Rigidbody>();
+
+        m_triggerAxis = m_myManager.Inputs[16].name;
+        m_leftStickX = m_myManager.Inputs[12].name;
     }
 
 	void Update () {
-        
+        TankMovement();        
+    }
+        /*
+        player.GetComponentInChildren<MovementController>().TriggerAxis = m_playerManagers[i].Inputs[16].name;
+        player.GetComponentInChildren<MovementController>().LeftStickX = m_playerManagers[i].Inputs[12].name;
+        player.GetComponentInChildren<TurretController>().RightStick = m_playerManagers[i].Inputs[14].name;
+        player.GetComponentInChildren<ShootingContoller>().RightBumper = m_playerManagers[i].Inputs[5].name;
+        */
+
+    // Movement and rotation for the tanks
+    private void TankMovement()
+    {
         // Accelerate
         if (Input.GetAxis(m_triggerAxis) < 0)
-        {            
-            m_rigid.AddForce(transform.TransformDirection(Vector3.right) * m_movementSpeed);                    
+        {
+            m_rigid.AddForce(transform.TransformDirection(Vector3.right) * m_movementSpeed);
         }
 
         // Reverse
@@ -52,6 +73,10 @@ public class MovementController : MonoBehaviour {
         {
             transform.Rotate(new Vector3(0, m_rotationSpeed, 0) * Time.deltaTime);
         }
-        
+    }
+
+    public void SetScore(int score)
+    {
+        m_myManager.Score += score;
     }
 }

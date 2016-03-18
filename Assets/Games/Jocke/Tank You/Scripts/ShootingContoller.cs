@@ -5,9 +5,7 @@ public class ShootingContoller : MonoBehaviour {
 
     [SerializeField] private GameObject m_projectile;    
     private Transform m_barrelEnd;
-
-    private float m_projectileForce = 7f;
-    
+    private float m_projectileForce = 10f; // The force of the projectile
     private string m_rightBumper;
 
     public string RightBumper
@@ -16,9 +14,10 @@ public class ShootingContoller : MonoBehaviour {
     }
 
     void Start()
-    {        
-        // Projectile instantiation point
-        m_barrelEnd = this.gameObject.transform.GetChild(0);
+    {
+        m_rightBumper = transform.root.GetComponentInChildren<MovementController>().MyManager.Inputs[5].name;
+
+        m_barrelEnd = this.gameObject.transform.GetChild(0); // Projectile instantiation point
     }
 
 	void Update () {
