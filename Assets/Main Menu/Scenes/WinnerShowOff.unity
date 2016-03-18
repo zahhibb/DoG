@@ -744,7 +744,7 @@ MonoBehaviour:
   - {fileID: 2040469623}
   - {fileID: 1861541265}
   m_displayTime: 9
-  m_victor: Lemon Truck
+  m_victor: Blue Coathanger
 --- !u!114 &158333552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2921,7 +2921,7 @@ Prefab:
     - target: {fileID: 11451126, guid: b0a186c73e99c4743938178e1464df5c, type: 2}
       propertyPath: m_Texture
       value: 
-      objectReference: {fileID: 15200000, guid: 4bbf994eaf8866444add65dd7dc22183,
+      objectReference: {fileID: 15200000, guid: 57671e4675acc564084da2b940e2f98a,
         type: 3}
     - target: {fileID: 11451126, guid: b0a186c73e99c4743938178e1464df5c, type: 2}
       propertyPath: m_Material
@@ -3966,7 +3966,7 @@ Prefab:
     - target: {fileID: 11451126, guid: b0a186c73e99c4743938178e1464df5c, type: 2}
       propertyPath: m_Texture
       value: 
-      objectReference: {fileID: 15200000, guid: 66b1dcd53fbb2414880ec950e8f2dc37,
+      objectReference: {fileID: 15200000, guid: 09f26667564b85f45a074e25657a4a06,
         type: 3}
     - target: {fileID: 11451126, guid: b0a186c73e99c4743938178e1464df5c, type: 2}
       propertyPath: m_Material

@@ -30,7 +30,7 @@ public class VictoryPlayer : MonoBehaviour
                 m_victoryMovies[2].gameObject.SetActive(false);
                 m_victoryMovies[3].gameObject.SetActive(false);
 
-                StartCoroutine(PauseMe(3.3f, m_victoryMovies[0]));
+                //StartCoroutine(PauseMe(3.3f, m_victoryMovies[0]));
                 //playergreenshit
                 break;
             case "Pink Pelican Parachute":

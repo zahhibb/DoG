@@ -49,16 +49,27 @@ public class MainMenuManager : Manager {
     void Awake()
     {
         MakeInputsFromIM();
-        MakeColors();   
+        MakeColors();
         MakeTeams();
 
-        TestCameras(m_joysticks);
-
+        //m_ManagerP1.Controllers = m_joysticks;
+        TestCameras(m_joysticks);        
     }
+
+   
+    //void OnLevelWasLoaded()
+    //{
+    //    MakeInputsFromIM();
+    //    MakeColors();
+    //    MakeTeams();
+
+    //    TestCameras(m_joysticks);
+    //}
 
     private void Start()
     {
-        m_ManagerP1.Controllers = m_joysticks;
+        ResetCounts();
+        m_joysticks = m_ManagerP1.Controllers;
     }
 
     void Update()
@@ -78,11 +89,11 @@ public class MainMenuManager : Manager {
 
     }
 
-    void MakePlayers()
-    {
-        m_joysticks = Input.GetJoystickNames().Length;
+    //void MakePlayers()
+    //{
+    //    m_joysticks = Input.GetJoystickNames().Length;
         
-    }
+    //}
 
     private void MakeInputsFromIM()
     {
@@ -167,10 +178,15 @@ public class MainMenuManager : Manager {
                     newManager.TeamName = "Special Snowflake";
                     break;
             }
+        }
+    }
 
-
-            // Add it to the list to sort them upon leaving Main Menu (obsolete).
-            m_managerList.Add(newManager);
+    private void ResetCounts()
+    {
+        for (int i = 1; i <= 4; i++)
+        {
+            GameObject.FindGameObjectWithTag("ManagerP" + (i)).GetComponent<Manager>().Score = 0;
+            GameObject.FindGameObjectWithTag("ManagerP" + (i)).GetComponent<Manager>().Rounds = 0;
         }
     }
 
@@ -185,6 +201,21 @@ public class MainMenuManager : Manager {
 
     private void MakeTeams()
     {
+        //int previousPlayers = m_joysticks;
+
+        //if (GameObject.FindGameObjectWithTag("ManagerP1"))
+        //{
+        //    previousPlayers = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().Controllers;
+        //}
+
+        //for (int i = 0; i < 4; i++)
+        //{
+        //    GameObject[] persistentManagers = GameObject.FindGameObjectsWithTag("ManagerP" + (i + 1));
+        //    foreach (GameObject currentManager in persistentManagers)
+        //    {
+        //        Destroy(currentManager.gameObject);
+        //    }
+        //}
 
         MakeManager(1);
         MakeManager(2);
@@ -196,6 +227,7 @@ public class MainMenuManager : Manager {
         m_ManagerP3 = GameObject.FindGameObjectWithTag("ManagerP3").GetComponent<Manager>();
         m_ManagerP4 = GameObject.FindGameObjectWithTag("ManagerP4").GetComponent<Manager>();
 
+        //m_ManagerP1.Controllers = previousPlayers;
     }
 
     private void SetCameras()

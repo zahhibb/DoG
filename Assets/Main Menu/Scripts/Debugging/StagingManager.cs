@@ -7,6 +7,7 @@ public class StagingManager : MonoBehaviour
 {
     [SerializeField] Text[] m_scoreTexts;
     [SerializeField] Text m_rounds;
+    [SerializeField] int m_gameRounds;
 
     Manager m_manager1;
     Manager m_manager2;
@@ -21,7 +22,7 @@ public class StagingManager : MonoBehaviour
         m_manager3 = GameObject.FindGameObjectWithTag("ManagerP3").GetComponent<Manager>();
         m_manager4 = GameObject.FindGameObjectWithTag("ManagerP4").GetComponent<Manager>();
 
-        if (CountRounds(m_manager1) <= 1)
+        if (CountRounds(m_manager1) <= m_gameRounds)
         {
             m_rounds.text = "round " + m_manager1.Rounds + "/3!";
         }
@@ -69,12 +70,11 @@ public class StagingManager : MonoBehaviour
 
     }
 
-    /*
+ 
     private void Update()
     {
             DebugButtons();
     }
-    */
 
     public void BackToMain()
     {
@@ -114,6 +114,11 @@ public class StagingManager : MonoBehaviour
     public void LoadTankYou()
     {
         m_manager1.ChosenScene = "tanks_test";
+        LoadTutorial();
+    }
+    public void LoadReactionTime()
+    {
+        m_manager1.ChosenScene = "Reaction Time";
         LoadTutorial();
     }
 
@@ -169,71 +174,53 @@ public class StagingManager : MonoBehaviour
         return Input.GetAxisRaw(controller.Inputs[buttonIndex].name);
     }
 
-    /* Debug Controller Buttons for choosing scenes.
+    // Debug Controller Buttons for skipping all the bullshit and choosing scenes.
     private void DebugButtons()
     {
         if (m_manager1.Rounds <= 3)
         {
-            if (CheckButton(m_manager1, 0))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Floppy1";
-                LoadTutorial();
-            }
-            if (CheckButton(m_manager2, 0))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Floppy1";
-                LoadTutorial();
-            }
-
-            if (CheckButton(m_manager3, 0))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Floppy1";
-                LoadTutorial(); ;
-            }
-            if (CheckButton(m_manager4, 0))
-            {
-                //LoadFloppy1();
-                m_manager1.ChosenScene = "Floppy1";
-                LoadTutorial();
-            }
 
 
-            if (CheckButton(m_manager1, 1))
+            if (CheckButton(m_manager1, 5) || CheckButton(m_manager2, 5) || CheckButton(m_manager3, 5) || CheckButton(m_manager4, 5))
             {
-                LoadSimulPress();
+                LoadReactionTime();
             }
-            if (CheckButton(m_manager2, 1))
+            if (CheckButton(m_manager1, 4) || CheckButton(m_manager2, 4) || CheckButton(m_manager3, 4) || CheckButton(m_manager4, 4))
+            {
+                LoadAntonsAliens();
+            }
+            if (CheckButton(m_manager1, 3) || CheckButton(m_manager2, 3) || CheckButton(m_manager3, 3) || CheckButton(m_manager4, 3))
+            {
+                LoadTankYou();
+            }
+            if (CheckButton(m_manager1, 2) || CheckButton(m_manager2, 2) || CheckButton(m_manager3, 2) || CheckButton(m_manager4, 2))
+            {
+                LoadFloppy1();
+            }
+            if (CheckButton(m_manager1, 1) || CheckButton(m_manager2, 1) || CheckButton(m_manager3, 1) || CheckButton(m_manager4, 1))
+            {
+                // Breaks for wheel tho 
+            }
+            if (CheckButton(m_manager1, 0) || CheckButton(m_manager2, 0) || CheckButton(m_manager3, 0) || CheckButton(m_manager4, 0))
             {
                 LoadSimulPress();
             }
 
-            if (CheckButton(m_manager3, 1))
-            {
-                LoadSimulPress();
-            }
-            if (CheckButton(m_manager4, 1))
-            {
-                LoadSimulPress();
-            }
         }
 
-        if (CheckButton(m_manager1, 2))
+        if (CheckButton(m_manager1, 6))
         {
             BackToMain();
         }
-        if (CheckButton(m_manager2, 2))
+        if (CheckButton(m_manager2, 6))
         {
             BackToMain();
         }
-
-        if (CheckButton(m_manager3, 2))
+        if (CheckButton(m_manager3, 6))
         {
             BackToMain();
         }
-        if (CheckButton(m_manager4, 2))
+        if (CheckButton(m_manager4, 6))
         {
             BackToMain();
         }
@@ -257,5 +244,5 @@ public class StagingManager : MonoBehaviour
             QuitGame();
         }
     }
-    */
+    
 }
