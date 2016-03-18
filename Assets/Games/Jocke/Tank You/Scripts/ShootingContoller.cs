@@ -32,7 +32,7 @@ public class ShootingContoller : MonoBehaviour {
         {
             GameObject newProjectile = (GameObject)Instantiate(m_projectile, m_barrelEnd.position, transform.rotation);
             Rigidbody rigidProjectile = newProjectile.GetComponent<Rigidbody>();
-            rigidProjectile.AddForce(-transform.up * m_projectileForce, ForceMode.Impulse);
+            rigidProjectile.AddForce(transform.right * m_projectileForce, ForceMode.Impulse);
 
             Destroy(newProjectile.gameObject, 3);
         }

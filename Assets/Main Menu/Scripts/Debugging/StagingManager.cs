@@ -7,6 +7,7 @@ public class StagingManager : MonoBehaviour
 {
     [SerializeField] Text[] m_scoreTexts;
     [SerializeField] Text m_rounds;
+    [SerializeField] int m_gameRounds;
 
     Manager m_manager1;
     Manager m_manager2;
@@ -21,30 +22,44 @@ public class StagingManager : MonoBehaviour
         m_manager3 = GameObject.FindGameObjectWithTag("ManagerP3").GetComponent<Manager>();
         m_manager4 = GameObject.FindGameObjectWithTag("ManagerP4").GetComponent<Manager>();
 
-        if (CountRounds(m_manager1) <= 3)
+        if (CountRounds(m_manager1) <= m_gameRounds)
         {
-            m_rounds.text = "Select game for round " + m_manager1.Rounds + "/3!";
+            m_rounds.text = "round " + m_manager1.Rounds + "/3!";
         }
         else
         {
             if (m_manager1.Score > m_manager2.Score && m_manager1.Score > m_manager3.Score && m_manager1.Score > m_manager4.Score)
             {
                 m_rounds.text = m_manager1.TeamName + " is the winnewr";
+                m_manager1.ChosenScene = m_manager1.TeamName;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("WinnerShowOff");
             }
             if (m_manager2.Score > m_manager1.Score && m_manager2.Score > m_manager3.Score && m_manager2.Score > m_manager4.Score)
             {
                 m_rounds.text = m_manager2.TeamName + " is the winnewr";
+                m_manager1.ChosenScene = m_manager2.TeamName;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("WinnerShowOff");
+                // Declare Winner, show-off scene before returning to main!
             }
             if (m_manager3.Score > m_manager2.Score && m_manager3.Score > m_manager1.Score && m_manager3.Score > m_manager4.Score)
             {
                 m_rounds.text = m_manager3.TeamName + " is the winnewr";
+                m_manager1.ChosenScene = m_manager3.TeamName;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("WinnerShowOff");
+                // Declare Winner, show-off scene before returning to main!
             }
             if (m_manager4.Score > m_manager2.Score && m_manager4.Score > m_manager3.Score && m_manager4.Score > m_manager1.Score)
             {
                 m_rounds.text = m_manager4.TeamName + " is the winnewr";
+                m_manager1.ChosenScene = m_manager4.TeamName;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("WinnerShowOff");
+                // Declare Winner, show-off scene before returning to main!
             }
-            //int[] scores = { manager1.Score, manager2.Score, manager3.Score, manager4.Score };
-            //int highestScore = Mathf.Max(manager1.Score, manager2.Score, manager3.Score, manager4.Score);
+            else
+            {
+                m_rounds.text = "It's a tie! Sudden death round!";
+                // Winner-Take-All-Bonus-Round, stupid right?
+            }
 
 
         }
@@ -55,10 +70,12 @@ public class StagingManager : MonoBehaviour
 
     }
 
+    /*
     private void Update()
     {
             DebugButtons();
     }
+    */
 
     public void BackToMain()
     {
@@ -78,6 +95,8 @@ public class StagingManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("TutorialScene");
     }
+
+    // The targeted functions for Debug buttons for testing purposes:
     public void LoadAntonsAliens()
     {
         m_manager1.ChosenScene = "Aliens";
@@ -104,9 +123,9 @@ public class StagingManager : MonoBehaviour
         Application.Quit();
     }
 
+    // This function enables/disables the debug buttons for loop purposes.
     private int CountRounds(Manager manager)
     {
-        // Make win or lose I guess.
         manager.Rounds++;
         if (manager.Rounds > 3)
         {
@@ -151,91 +170,93 @@ public class StagingManager : MonoBehaviour
         return Input.GetAxisRaw(controller.Inputs[buttonIndex].name);
     }
 
+    /* Debug Controller Buttons for choosing scenes.
     private void DebugButtons()
     {
-        //if (m_manager1.Rounds <= 3)
-        //{
-        //    if (CheckButton(m_manager1, 0))
-        //    {
-        //        //LoadFloppy1();
-        //        m_manager1.ChosenScene = "Floppy1";
-        //        LoadTutorial();
-        //    }
-        //    if (CheckButton(m_manager2, 0))
-        //    {
-        //        //LoadFloppy1();
-        //        m_manager1.ChosenScene = "Floppy1";
-        //        LoadTutorial();
-        //    }
+        if (m_manager1.Rounds <= 3)
+        {
+            if (CheckButton(m_manager1, 0))
+            {
+                //LoadFloppy1();
+                m_manager1.ChosenScene = "Floppy1";
+                LoadTutorial();
+            }
+            if (CheckButton(m_manager2, 0))
+            {
+                //LoadFloppy1();
+                m_manager1.ChosenScene = "Floppy1";
+                LoadTutorial();
+            }
 
-        //    if (CheckButton(m_manager3, 0))
-        //    {
-        //        //LoadFloppy1();
-        //        m_manager1.ChosenScene = "Floppy1";
-        //        LoadTutorial(); ;
-        //    }
-        //    if (CheckButton(m_manager4, 0))
-        //    {
-        //        //LoadFloppy1();
-        //        m_manager1.ChosenScene = "Floppy1";
-        //        LoadTutorial();
-        //    }
-
-
-        //    if (CheckButton(m_manager1, 1))
-        //    {
-        //        LoadSimulPress();
-        //    }
-        //    if (CheckButton(m_manager2, 1))
-        //    {
-        //        LoadSimulPress();
-        //    }
-
-        //    if (CheckButton(m_manager3, 1))
-        //    {
-        //        LoadSimulPress();
-        //    }
-        //    if (CheckButton(m_manager4, 1))
-        //    {
-        //        LoadSimulPress();
-        //    }
-        //}
-
-        //if (CheckButton(m_manager1, 2))
-        //{
-        //    BackToMain();
-        //}
-        //if (CheckButton(m_manager2, 2))
-        //{
-        //    BackToMain();
-        //}
-
-        //if (CheckButton(m_manager3, 2))
-        //{
-        //    BackToMain();
-        //}
-        //if (CheckButton(m_manager4, 2))
-        //{
-        //    BackToMain();
-        //}
+            if (CheckButton(m_manager3, 0))
+            {
+                //LoadFloppy1();
+                m_manager1.ChosenScene = "Floppy1";
+                LoadTutorial(); ;
+            }
+            if (CheckButton(m_manager4, 0))
+            {
+                //LoadFloppy1();
+                m_manager1.ChosenScene = "Floppy1";
+                LoadTutorial();
+            }
 
 
-        //if (CheckButton(m_manager1, 3))
-        //{
-        //    QuitGame();
-        //}
-        //if (CheckButton(m_manager2, 3))
-        //{
-        //    QuitGame();
-        //}
+            if (CheckButton(m_manager1, 1))
+            {
+                LoadSimulPress();
+            }
+            if (CheckButton(m_manager2, 1))
+            {
+                LoadSimulPress();
+            }
 
-        //if (CheckButton(m_manager3, 3))
-        //{
-        //    QuitGame();
-        //}
-        //if (CheckButton(m_manager4, 3))
-        //{
-        //    QuitGame();
-        //}
+            if (CheckButton(m_manager3, 1))
+            {
+                LoadSimulPress();
+            }
+            if (CheckButton(m_manager4, 1))
+            {
+                LoadSimulPress();
+            }
+        }
+
+        if (CheckButton(m_manager1, 2))
+        {
+            BackToMain();
+        }
+        if (CheckButton(m_manager2, 2))
+        {
+            BackToMain();
+        }
+
+        if (CheckButton(m_manager3, 2))
+        {
+            BackToMain();
+        }
+        if (CheckButton(m_manager4, 2))
+        {
+            BackToMain();
+        }
+
+
+        if (CheckButton(m_manager1, 3))
+        {
+            QuitGame();
+        }
+        if (CheckButton(m_manager2, 3))
+        {
+            QuitGame();
+        }
+
+        if (CheckButton(m_manager3, 3))
+        {
+            QuitGame();
+        }
+        if (CheckButton(m_manager4, 3))
+        {
+            QuitGame();
+        }
     }
+    */
 }

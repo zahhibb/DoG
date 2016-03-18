@@ -52,7 +52,7 @@ public class MainMenuManager : Manager {
         MakeColors();   
         MakeTeams();
 
-        TestCameras(1);
+        TestCameras(m_joysticks);
 
     }
 

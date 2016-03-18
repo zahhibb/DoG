@@ -10,11 +10,11 @@ public class AllSkip : MonoBehaviour
     private int m_teamAmount = 0;
 
 
-    // some optional display highlights, set them to inactive and they activate as players press the team.buttons, or vice versa.
-    [SerializeField] GameObject m_displayTeam1;
-    [SerializeField] GameObject m_displayTeam2;
-    [SerializeField] GameObject m_displayTeam3;
-    [SerializeField] GameObject m_displayTeam4;
+    // some optional display highlights, set them to inactive and they activate as players press the team.buttons, or vice versa (fine to leave as null).
+    [SerializeField] GameObject m_displayTeam1 = null;
+    [SerializeField] GameObject m_displayTeam2 = null;
+    [SerializeField] GameObject m_displayTeam3 = null;
+    [SerializeField] GameObject m_displayTeam4 = null;
     [SerializeField] Object m_goPrefab;
 
     private void Start()
