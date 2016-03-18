@@ -85,6 +85,49 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &479204370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 479204371}
+  - 114: {fileID: 479204372}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &479204371
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 479204370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 716421787}
+  m_RootOrder: 0
+--- !u!114 &479204372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 479204370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0067a240a4aa0fe48bf238c823161c4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_teamSize: 1
+  m_active: 0
+  m_playerColor: {r: 0, g: 0, b: 0, a: 0}
+  m_teamName: Pepper-Green-Granola
 --- !u!1 &578165508
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +243,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_coinValue: 0
   m_playerAmount: 0
+  m_currentScore: 8
+  m_rolls: 0
+  m_previousNumber: -1
+  m_previousNumber1: -1
+  m_previousNumber2: -1
 --- !u!4 &716421787
 Transform:
   m_ObjectHideFlags: 0
@@ -209,7 +257,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 479204371}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!1001 &1715781525
