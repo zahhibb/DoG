@@ -170,7 +170,7 @@ public class StagingManager : MonoBehaviour
         return Input.GetAxisRaw(controller.Inputs[buttonIndex].name);
     }
 
-    /* Debug Controller Buttons for choosing scenes.
+    // Debug Controller Buttons for choosing scenes.
     private void DebugButtons()
     {
         if (m_manager1.Rounds <= 3)
@@ -187,7 +187,6 @@ public class StagingManager : MonoBehaviour
                 m_manager1.ChosenScene = "Floppy1";
                 LoadTutorial();
             }
-
             if (CheckButton(m_manager3, 0))
             {
                 //LoadFloppy1();
@@ -200,6 +199,8 @@ public class StagingManager : MonoBehaviour
                 m_manager1.ChosenScene = "Floppy1";
                 LoadTutorial();
             }
+
+
 
 
             if (CheckButton(m_manager1, 1))
@@ -219,6 +220,33 @@ public class StagingManager : MonoBehaviour
             {
                 LoadSimulPress();
             }
+
+
+            if (CheckButton(m_manager1, 5))
+            {
+                //LoadFloppy1();
+                m_manager1.ChosenScene = "ReactionTime";
+                LoadTutorial();
+            }
+            if (CheckButton(m_manager2, 5))
+            {
+                //LoadFloppy1();
+                m_manager1.ChosenScene = "ReactionTime";
+                LoadTutorial();
+            }
+            if (CheckButton(m_manager3, 5))
+            {
+                //LoadFloppy1();
+                m_manager1.ChosenScene = "ReactionTime";
+                LoadTutorial(); ;
+            }
+            if (CheckButton(m_manager4, 5))
+            {
+                //LoadFloppy1();
+                m_manager1.ChosenScene = "ReactionTime";
+                LoadTutorial();
+            }
+
         }
 
         if (CheckButton(m_manager1, 2))
@@ -258,5 +286,5 @@ public class StagingManager : MonoBehaviour
             QuitGame();
         }
     }
-    */
+    
 }
