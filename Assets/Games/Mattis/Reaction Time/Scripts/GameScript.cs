@@ -34,7 +34,7 @@ public class GameScript : MonoBehaviour
 	void Update ()
     {
         CheckButtons();
-        PlayerPressed();
+        //PlayerPressed();
         //m_buttonChoice = Random.Range(1, 5);
         //m_countdown = Random.Range(1, 2);
 

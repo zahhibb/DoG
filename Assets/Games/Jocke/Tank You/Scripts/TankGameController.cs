@@ -11,7 +11,7 @@ public class TankGameController : MonoBehaviour {
 
     private List<Manager> m_playerManagers;
     private Manager m_manager;
-    private int m_settingScore;
+    private int m_settingScore = 0;
 
     [SerializeField] private Text m_playerCountText;
 
@@ -39,6 +39,12 @@ public class TankGameController : MonoBehaviour {
     private IEnumerator LastManStanding()
     {
         yield return new WaitForSeconds(2f);
+
+        if (m_playerManagers.Count > 0)
+        {
+            m_playerManagers[0].Score += m_settingScore;
+        }
+        
         SceneManager.LoadScene("Celebration");
     }
 
@@ -64,17 +70,11 @@ public class TankGameController : MonoBehaviour {
     private void OnTriggerExit(Collider col) {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponentInChildren<MovementController>().SetScore(m_settingScore);
-            
-            Debug.Log("Manager number " + col.gameObject.GetComponentInChildren<MovementController>().MyManager.TeamNumber + " was awarded " + m_settingScore);
-
-            m_settingScore = m_settingScore * 2;            
+            col.gameObject.GetComponentInChildren<MovementController>().SetScore(m_settingScore);                       
+            m_settingScore = m_settingScore * 2;
 
             m_playerManagers.Remove(col.gameObject.GetComponentInChildren<MovementController>().MyManager);
-            Destroy(col.gameObject);
-
-            // Set score for last man standing
-            m_playerManagers[0].Score += m_settingScore;
+            Destroy(col.gameObject);            
         }
     }    
 }
