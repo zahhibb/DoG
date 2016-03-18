@@ -325,7 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_minigames:
   - Floppy1
-  - tanks_test
+  - SimulPress
   - Aliens
 --- !u!54 &80658281
 Rigidbody:

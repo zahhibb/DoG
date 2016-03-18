@@ -11,7 +11,7 @@ public class Manager : MonoBehaviour
     private Rect m_playerRect;
     private int m_rounds = 0;
     private string m_chosenScene;
-    private int m_controllers;
+    [SerializeField] private int m_controllers;
     public string m_teamName;
     private int m_teamNumber;
 
