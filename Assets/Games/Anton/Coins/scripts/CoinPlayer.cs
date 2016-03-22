@@ -4,7 +4,9 @@ using System.Collections;
 public class CoinPlayer : MonoBehaviour {
     private Manager m_manager;
     private Rigidbody2D m_rb2d;
+    static private float max_coins = 5;
     private float m_speed;
+    private float m_coin;
     private bool m_shallDestroy;
     public void AssignManager(Manager manager)
     {
@@ -13,14 +15,14 @@ public class CoinPlayer : MonoBehaviour {
     }
     // Use this for initialization
     void Start() {
+        m_coin = 0;
         m_speed = 5;
         m_rb2d = GetComponent<Rigidbody2D>();
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Shot")
+        if (collision.gameObject.tag == "Coin")
         {
-            print("blue");
             m_shallDestroy = true;
         }
     }
@@ -29,12 +31,16 @@ public class CoinPlayer : MonoBehaviour {
         transform.position = NewPosition;
     }
     public bool GetShallDestroy()
-    {//returns if the player has hit a shot
+    {//returns if the player has hit enough coins
         return m_shallDestroy;
     }
-    public void SetShallDestroy()
-    {//called by the shot the player hits
-        m_shallDestroy = true;
+    public void PickupCoin()
+    {//called by the coin the player hits
+        m_coin += 1;
+        if (m_coin >= max_coins)
+        {
+            m_shallDestroy = true;
+        }
     }
     public void SetScore(int score)
     {//sets the score of the player(used just before it is destroyed)

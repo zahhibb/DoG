@@ -44,10 +44,10 @@ public class CoinPlayerSpawner : MonoBehaviour {
     {
         for (int i=0;i< m_players.Count;i++)
         {
-            if (m_players[i].GetComponent<PlayerScript>().GetShallDestroy()==true)
+            if (m_players[i].GetComponent<CoinPlayer>().GetShallDestroy()==true)
             {
 
-                m_players[i].GetComponent<PlayerScript>().SetScore(8-m_players.Count * 2);
+                m_players[i].GetComponent<CoinPlayer>().SetScore(m_players.Count * 2);
                 Destroy(m_players[i]);
                 m_players.RemoveAt(i);
             }

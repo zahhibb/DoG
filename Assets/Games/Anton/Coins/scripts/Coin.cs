@@ -14,28 +14,20 @@ public class collisionShot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+
         if (m_shallDestroy)
         {//destroys the object if it has collided with a player since last frame
             Destroy(gameObject);
         }
-        /*else if ((transform.position.x < -32)
-            || (transform.position.x > Screen.width + 32)
-            || (transform.position.y < -32)
-            || (transform.position.y > Screen.height + 32))
-        {//or if it is outside of bounds
-            Destroy(gameObject);
-        }*/
 
     }
 
     void OnCollisionEnter2D(Collision2D collision)
-    {//destroys the shot if it collides with a player
+    {//destroys the coin if it collides with a player
         if (collision.gameObject.tag == "Player")
         {
             m_shallDestroy = true;
-            print("blue");
-            collision.gameObject.GetComponent<PlayerScript>().SetShallDestroy();
+            collision.gameObject.GetComponent<CoinPlayer>().PickupCoin();
 
         }
         else if (collision.gameObject.tag =="Wall")
