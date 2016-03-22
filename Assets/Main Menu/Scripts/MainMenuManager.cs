@@ -128,7 +128,7 @@ public class MainMenuManager : Manager {
 
             for (int k = 10; k < 17; k++)
             {
-                m_buttonArray[k * i].isAxis = false;
+                m_buttonArray[k * i].isAxis = true;
             }
         }  
     }

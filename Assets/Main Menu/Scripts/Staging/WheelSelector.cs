@@ -12,7 +12,7 @@ public class WheelSelector : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         //Debug.Log(collider.gameObject.name);
-        m_currentText.text = collider.gameObject.name;
+        m_currentText.text = collider.GetComponent<SayMyName>().MyName;
         m_sceneUnderNeedle = collider.gameObject.name;
     }
 

@@ -6,11 +6,11 @@ using System.Collections.Generic;
 public class ButtonpressInterval : MonoBehaviour
 {
     [SerializeField] private Object m_go = null;
-
+    [SerializeField] private Texture[] m_inputSprites;
     private bool m_coolingDown = false;
 
-    private string[] m_buttonNames;
-    private Button[] m_pressedP1;
+    //private string[] m_buttonNames;
+    private List<string> m_activeInputs = new List<string>();
 
     private int m_roundCount = 1;
     [SerializeField] private int m_currentWorth = 1;
@@ -19,10 +19,11 @@ public class ButtonpressInterval : MonoBehaviour
     [SerializeField] private Text[] m_teamScoreTexts;
     private int[] m_teamScores;
 
+    private List<Button> m_currentButtons;
     private List<Manager> m_playerManagers;
     [SerializeField] private int m_buttonOfTheDay;
 
-    void Start ()
+    void Start()
     {
         m_currentWorth = 1;
         m_currentWorthText.color = Color.white;
@@ -43,7 +44,7 @@ public class ButtonpressInterval : MonoBehaviour
         m_currentWorthText.text = " " + m_currentWorth + ".";
 
         if (!m_coolingDown)
-            {
+        {
             if (LameGame())
             {
                 m_coolingDown = true;
@@ -57,6 +58,7 @@ public class ButtonpressInterval : MonoBehaviour
     {
         public string name;
         public bool pressed; //getters in structs? :|
+        public int inputIndex;
     };
 
     private enum InputType
@@ -140,7 +142,7 @@ public class ButtonpressInterval : MonoBehaviour
     public void BackToStaging()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Celebration");
-        
+
     }
 
     private void FindTeams()
@@ -171,5 +173,46 @@ public class ButtonpressInterval : MonoBehaviour
         GameObject go = (GameObject)Instantiate(m_go, transform.position, transform.rotation);
         rotator.ZRot = rotatorRot;
     }
-}
+
+    private float EaseInOutQuartic(float time, float value, float change, float duration)
+    {
+        time /= duration * 2;
+        if (time > 1)
+        {
+            return (change * time * time * time * time + value);
+        }
+        time -= 2;
+        return (-change / 2 * (time * time * time * time - 2) + value);
+    }
+
+    private void SimulPress()
+    {
+        foreach (Manager team in m_playerManagers)
+        {
+            foreach (Button button in m_currentButtons)
+            {
+                if (Input.GetButtonDown(button.name))
+                {
+
+                }
+            }
+        }
+    }
+
+    private void MakeActiveInputs(Manager myTeam)
+    {
+        int indexSkipper = 0;
+        for (int i = 0; i < (4 + myTeam.TeamSize * 2); i++)
+        {
+            int indexAdder = Random.Range(0, 1);
+            m_activeInputs.Add(myTeam.Inputs[Random.Range(indexSkipper, (indexSkipper + indexAdder)) + i].name);
+            indexSkipper = Mathf.Clamp(indexSkipper + indexAdder, 0, 5 - myTeam.TeamSize);
+
+            // this won't work, but there is a way.
+        }
+    }
+}    
+
+  
+
 
