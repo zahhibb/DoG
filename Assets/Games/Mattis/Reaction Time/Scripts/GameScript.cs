@@ -131,10 +131,10 @@ public class GameScript : MonoBehaviour
             return true;
         }
 
-        if (((Input.GetButtonDown(myManager.Inputs[1].name)) || (Input.GetButtonDown(myManager.Inputs[2].name)) || (Input.GetButtonDown(myManager.Inputs[3].name) || (Input.GetButtonDown(myManager.Inputs[3].name)))
-        {
+        //if (((Input.GetButtonDown(myManager.Inputs[1].name)) || (Input.GetButtonDown(myManager.Inputs[2].name)) || (Input.GetButtonDown(myManager.Inputs[3].name) || (Input.GetButtonDown(myManager.Inputs[3].name)))
+        //{
             
-        }
+        //}
         return false;
     }
 
