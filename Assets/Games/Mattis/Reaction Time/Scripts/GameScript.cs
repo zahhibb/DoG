@@ -21,10 +21,11 @@ public class GameScript : MonoBehaviour
 
     private int m_countdown;       //Time before button is instantiated
     private int m_buttonChoice;    //Which button to instantiate
-
+    private int m_score = 8;           //Amount of score to give to winner
     // Use this for initialization
     void Start ()
     {
+        FindTeams();
         m_buttonChoice = Random.Range(1, 5);
         m_countdown = Random.Range(1, 10);
         StartCoroutine(ExecuteAfterTime(m_countdown));
@@ -34,6 +35,7 @@ public class GameScript : MonoBehaviour
 	void Update ()
     {
         CheckButtons();
+        
         //PlayerPressed();
         //m_buttonChoice = Random.Range(1, 5);
         //m_countdown = Random.Range(1, 2);
@@ -84,7 +86,10 @@ public class GameScript : MonoBehaviour
         {
             if (PlayerPressed(teamManager))
             {
-                teamManager.Score += 4;
+
+                teamManager.Score += m_score;
+                Debug.Log(teamManager.Score);
+                m_score /= 2;
                 m_playerManagers.Remove(teamManager);
                 m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
                 // nån slags bild som man tar bort från canvas
@@ -96,7 +101,9 @@ public class GameScript : MonoBehaviour
     {
         /// funkar perfektomundo
 
-        if (/*(Input.GetKeyDown(KeyCode.A)*/(Input.GetButtonDown(myManager.Inputs[0].name)) && (GameObject.FindGameObjectWithTag("buttonA") == true) && (m_pressCounts[myManager.TeamNumber-1] == 1))
+        
+
+            if (/*(Input.GetKeyDown(KeyCode.A)*/(Input.GetButtonDown(myManager.Inputs[0].name)) && (GameObject.FindGameObjectWithTag("buttonA") == true) && (m_pressCounts[myManager.TeamNumber-1] == 1))
         {
             //Score
             Debug.Log("buttonA works mate yoloswag");
@@ -122,6 +129,11 @@ public class GameScript : MonoBehaviour
             //Score
             Debug.Log("buttonY works mate yoloswag");
             return true;
+        }
+
+        if (((Input.GetButtonDown(myManager.Inputs[1].name)) || (Input.GetButtonDown(myManager.Inputs[2].name)) || (Input.GetButtonDown(myManager.Inputs[3].name) || (Input.GetButtonDown(myManager.Inputs[3].name)))
+        {
+            
         }
         return false;
     }
