@@ -7,10 +7,10 @@ public class SimulPress : MonoBehaviour
 {
     [SerializeField] private int m_inputsPerPlayer = 4;
 
-    private Dictionary<int, bool> m_inputDictionary;
+    //private Dictionary<int, bool> m_inputDictionary;
     private List<int> m_trueIndices;
     private List<int> m_falseIndices;
-    private List<string> m_inputNames;
+    //private List<string> m_inputNames;
     private List<Manager> m_playerManagers;
 
     private int[] m_inputStates;
@@ -24,6 +24,7 @@ public class SimulPress : MonoBehaviour
 
     private void Update()
     {
+        // end/start should be properly animated for the user before setting to m_gameRunning.
         if (!m_gameRunning)
         {
             m_stateIndexer = 0;
@@ -55,6 +56,8 @@ public class SimulPress : MonoBehaviour
 
         foreach (int key in m_trueIndices)
         {
+            // foreach "true" input check wether it is being pressed (both axis and keys) and set the State accordingly
+
             if (myManager.Inputs[key].isAxis)
             {
                 if (Input.GetAxis(myManager.Inputs[key].name) != 0f)
@@ -70,6 +73,8 @@ public class SimulPress : MonoBehaviour
                 }
             }
         }
+
+        // foreach "false" input check wether it is being pressed (both axis and keys) and set the State accordingly
 
         foreach (int key in m_falseIndices)
         {
@@ -92,12 +97,14 @@ public class SimulPress : MonoBehaviour
 
     private bool AllInputsUsed(int[] inputStates)
     {
-        bool anyInput = false;
+        // returns false if any one index in States is "untouched".
+
+        bool anyInput = true;
         foreach ( int state in m_inputStates)
         {
-            if (state != 0)
+            if (state == 0)
             {
-                anyInput = true;
+                anyInput = false;
             }
         }
         return anyInput;
@@ -142,13 +149,14 @@ public class SimulPress : MonoBehaviour
     //                    {
     //                        m_inputDictionary.Add(falseIndex, false);
     //                    }
-
     //                }
-
     //            }
     //        }
     //    }
     //}
+
+
+    // with Lists like these, who needs dicionaries? 
 
     private List<int> MakeFalseIndices()
     {
@@ -172,9 +180,7 @@ public class SimulPress : MonoBehaviour
         }
 
         return tempList;
-    }
-
-    // with Lists like these, who needs dicionaries?  
+    } 
 }
 
 

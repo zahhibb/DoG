@@ -19,7 +19,7 @@ public class SayMyName : MonoBehaviour
                 m_myName = "Antons Aliens";
                 break;
             case ("tanks_test"):
-                m_myName = "PanzerTankMadels";
+                m_myName = "Panzer TankMadels";
                 break;
             default:
                 m_myName = gameObject.name;
