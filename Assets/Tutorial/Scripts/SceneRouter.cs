@@ -17,10 +17,12 @@ public class SceneRouter : MonoBehaviour {
     private float m_lastTime = 0f;
 
     // serialize your very own tutorial here.
-    [SerializeField] Object m_sampleTutorial = null;
-    [SerializeField] Object m_floppyTutorial = null;
-    [SerializeField] Object m_aliensTutorial = null;
-    [SerializeField] Object m_tanksTutorial = null;
+    //[SerializeField] Object m_sampleTutorial = null;
+    //[SerializeField] Object m_floppyTutorial = null;
+    //[SerializeField] Object m_aliensTutorial = null;
+    //[SerializeField] Object m_tanksTutorial = null;
+    [SerializeField] Object[] m_tutorialPrefabs = null;
+    GameObject m_currentTutorial = null;
 
     private void Start ()
     {
@@ -36,7 +38,7 @@ public class SceneRouter : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.F1))
             {
-                Destroy(m_sampleTutorial);
+                Destroy(m_currentTutorial);
                 StartCoroutine(TutorialTime(m_totalTime));
                 SpinCountdown();
             }
@@ -58,32 +60,32 @@ public class SceneRouter : MonoBehaviour {
         {
 
             // and add a case for your game in this switch.
-            case "SimulPress":
-                GameObject simulTutorial = (GameObject)Instantiate(m_sampleTutorial, transform.position, transform.rotation);
-                m_totalTime = simulTutorial.GetComponent<SelfDestruct>().LifeTime;
-                StartCoroutine(TimeToStartSpin(m_totalTime));
-                SpinCountdown();
-                break;
             case "Floppy1":
-                GameObject floppyTutorial = (GameObject)Instantiate(m_floppyTutorial, transform.position, transform.rotation);
+                GameObject floppyTutorial = (GameObject)Instantiate(m_tutorialPrefabs[1], transform.position, transform.rotation);
                 m_totalTime = floppyTutorial.GetComponent<SelfDestruct>().LifeTime;
                 StartCoroutine(TimeToStartSpin(m_totalTime));
                 SpinCountdown();
                 break;
             case "Aliens":
-                GameObject aliensTutorial = (GameObject)Instantiate(m_aliensTutorial, transform.position, transform.rotation);
+                GameObject aliensTutorial = (GameObject)Instantiate(m_tutorialPrefabs[2], transform.position, transform.rotation);
                 m_totalTime = aliensTutorial.GetComponent<SelfDestruct>().LifeTime;
                 StartCoroutine(TimeToStartSpin(m_totalTime));
                 SpinCountdown();
                 break;
             case "tanks_test":
-                GameObject tanksTutorial = (GameObject)Instantiate(m_tanksTutorial, transform.position, transform.rotation);
+                GameObject tanksTutorial = (GameObject)Instantiate(m_tutorialPrefabs[3], transform.position, transform.rotation);
                 m_totalTime = tanksTutorial.GetComponent<SelfDestruct>().LifeTime;
                 StartCoroutine(TimeToStartSpin(m_totalTime));
                 SpinCountdown();
                 break;
+            case "SimulPress":
+                GameObject simulTutorial = (GameObject)Instantiate(m_tutorialPrefabs[4], transform.position, transform.rotation);
+                m_totalTime = simulTutorial.GetComponent<SelfDestruct>().LifeTime;
+                StartCoroutine(TimeToStartSpin(m_totalTime));
+                SpinCountdown();
+                break;
             default:
-                GameObject samplePrefab = (GameObject)Instantiate(m_sampleTutorial, transform.position, transform.rotation);
+                GameObject samplePrefab = (GameObject)Instantiate(m_tutorialPrefabs[4], transform.position, transform.rotation);
                 m_totalTime = samplePrefab.GetComponent<SelfDestruct>().LifeTime;
                 StartCoroutine(TimeToStartSpin(m_totalTime));
                 SpinCountdown();

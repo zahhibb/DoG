@@ -1053,10 +1053,12 @@ MonoBehaviour:
   m_backgroundCutout: {fileID: 123883276}
   m_background: {fileID: 179952885}
   m_backgroundColor: {r: 0, g: 0, b: 0, a: 1}
-  m_sampleTutorial: {fileID: 112074, guid: 33c460e556acba947a0c2cb50fd9fe04, type: 2}
-  m_floppyTutorial: {fileID: 161990, guid: 241e6cbdb570e2247b53646570d513ad, type: 2}
-  m_aliensTutorial: {fileID: 106886, guid: d13f2713aee55644bb0790f39766936c, type: 2}
-  m_tanksTutorial: {fileID: 176372, guid: c73da66be4d769b499262f186eea849e, type: 2}
+  m_tutorialPrefabs:
+  - {fileID: 112074, guid: 33c460e556acba947a0c2cb50fd9fe04, type: 2}
+  - {fileID: 161990, guid: 241e6cbdb570e2247b53646570d513ad, type: 2}
+  - {fileID: 106886, guid: d13f2713aee55644bb0790f39766936c, type: 2}
+  - {fileID: 176372, guid: c73da66be4d769b499262f186eea849e, type: 2}
+  - {fileID: 112074, guid: ffb7903aac5316440bb67ba35f3566c6, type: 2}
 --- !u!92 &880053947
 Behaviour:
   m_ObjectHideFlags: 0

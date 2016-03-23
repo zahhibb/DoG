@@ -23,7 +23,7 @@ public class WheelMaker : MonoBehaviour {
             // spawn countdownprefab with countdown lifetime
             StartCoroutine(StartMinigame(2));
         }
-        m_rotator.ZRot = Mathf.Clamp(m_rotator.ZRot + ((m_rotator.ZRot > -60) ? (12 * Time.deltaTime) : (Mathf.Abs((m_rotator.ZRot / 10) * Time.deltaTime))), -350, 10);
+        m_rotator.ZRot = Mathf.Clamp(m_rotator.ZRot + ((m_rotator.ZRot > -60) ? (20 * Time.deltaTime) : (Mathf.Abs((m_rotator.ZRot / 3) * Time.deltaTime))), -350, 10);
     }
 
     private void SlowDown()
@@ -32,7 +32,7 @@ public class WheelMaker : MonoBehaviour {
         {
             if (Input.GetButton(controller.Inputs[1].name))
             {
-                m_rotator.ZRot = Mathf.Clamp(m_rotator.ZRot + ((m_rotator.ZRot > -60) ? (60 * Time.deltaTime) : (Mathf.Abs((m_rotator.ZRot/5) * Time.deltaTime))), -350, 10);
+                m_rotator.ZRot = Mathf.Clamp(m_rotator.ZRot + ((m_rotator.ZRot > -60) ? (60 * Time.deltaTime) : (Mathf.Abs((m_rotator.ZRot/2) * Time.deltaTime))), -350, 10);
             }
         }
     }
