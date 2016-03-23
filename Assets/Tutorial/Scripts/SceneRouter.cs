@@ -20,6 +20,7 @@ public class SceneRouter : MonoBehaviour {
     [SerializeField] Object m_sampleTutorial = null;
     [SerializeField] Object m_floppyTutorial = null;
     [SerializeField] Object m_aliensTutorial = null;
+    [SerializeField] Object m_tanksTutorial = null;
 
     private void Start ()
     {
@@ -72,6 +73,12 @@ public class SceneRouter : MonoBehaviour {
             case "Aliens":
                 GameObject aliensTutorial = (GameObject)Instantiate(m_aliensTutorial, transform.position, transform.rotation);
                 m_totalTime = aliensTutorial.GetComponent<SelfDestruct>().LifeTime;
+                StartCoroutine(TimeToStartSpin(m_totalTime));
+                SpinCountdown();
+                break;
+            case "tanks_test":
+                GameObject tanksTutorial = (GameObject)Instantiate(m_tanksTutorial, transform.position, transform.rotation);
+                m_totalTime = tanksTutorial.GetComponent<SelfDestruct>().LifeTime;
                 StartCoroutine(TimeToStartSpin(m_totalTime));
                 SpinCountdown();
                 break;
