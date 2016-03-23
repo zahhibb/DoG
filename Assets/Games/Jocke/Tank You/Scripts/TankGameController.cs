@@ -17,14 +17,15 @@ public class TankGameController : MonoBehaviour {
     private Manager m_manager;
     private int m_settingScore = 0;
     private float m_suddenDeathCountdown = 10f;
-
-    private float m_suddenDeathRotX = -60f;
-    private float m_suddenDeathRotZ = -60f;
+    private float m_suddenDeathRotX = 300f;
+    private float m_suddenDeathRotY = 90f;
+    private float m_suddenDeathRotZ = 300f;
+    
 
     void Start ()
     {        
         CreateTeams();
-
+        
         m_settingScore = 5 - m_playerManagers[0].Controllers;
     }	
 	
@@ -35,11 +36,7 @@ public class TankGameController : MonoBehaviour {
     }
 
     private void SuddenDeath()
-    {       
-        //int minutes = Mathf.FloorToInt(m_suddenDeathCountdown / 60F);
-        //int seconds = Mathf.FloorToInt(m_suddenDeathCountdown - minutes * 60);
-        //string niceTime = string.Format("{0:00}:{1:00}", minutes, seconds);
-
+    {
         if (m_suddenDeathCountdown > 0)
         {
             m_suddenDeathCountdown -= Time.deltaTime;
@@ -53,10 +50,20 @@ public class TankGameController : MonoBehaviour {
         {
             m_suddenDeathText.text = null;
 
-            m_tankArena.transform.Rotate(Vector3.left * Time.deltaTime);
+            /*
+            while (m_suddenDeathCheck == true)
+            { 
+                if (m_tankArena.transform.rotation.x > 300)
+                {
+                    m_tankArena.transform.Rotate(Vector3.left * Time.deltaTime);
 
-
-            
+                    //if (m_tankArena.transform.rotation.y < m_suddenDeathRotY)
+                    {
+                        m_tankArena.transform.Rotate(Vector3.up * Time.deltaTime);
+                    }//
+                }
+            }
+            */
         }
     }
 
@@ -67,7 +74,8 @@ public class TankGameController : MonoBehaviour {
         {
             StartCoroutine(LastManStanding());
 
-            m_winCanvasGroup.alpha = Mathf.Lerp(0, 1, 2f / Time.deltaTime);
+            m_winCanvasGroup.alpha = 1f;
+
             if (m_teamWinText != null)
             {
                 switch (m_playerManagers[0].ToString())
