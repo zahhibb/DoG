@@ -36,7 +36,6 @@ public class GameScript : MonoBehaviour
 	void Update ()
     {
         CheckButtons();
-        Debug.Log(m_playerManagers.Count);
         if (m_playerManagers.Count < 1)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Celebration");
@@ -74,8 +73,6 @@ public class GameScript : MonoBehaviour
             {
 
                 teamManager.Score += m_score;
-                Debug.Log("Yoloswag spelare vann fick score");
-                Debug.Log(teamManager.Score);
                 m_score /= 2;
                 m_playerManagers.Remove(teamManager);
                 //m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
@@ -88,7 +85,7 @@ public class GameScript : MonoBehaviour
             if ((PlayerPressed(teamManager)) && (m_pressCounts[teamManager.TeamNumber - 1] == 0))
             {
                 
-                Debug.Log("Yoloswag en spelare eliminerad och variabel resettad");
+                
                 //m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
                 m_playerManagers.Remove(teamManager);
 
@@ -105,31 +102,31 @@ public class GameScript : MonoBehaviour
 
             if (/*(Input.GetKeyDown(KeyCode.A)*/(Input.GetButtonDown(myManager.Inputs[0].name)) && (GameObject.FindGameObjectWithTag("buttonA") == true) && (m_pressCounts[myManager.TeamNumber-1] == 1))
         {
-            Debug.Log("buttonA works mate yoloswag");
+            
             return true;
         }
 
         if (/*(Input.GetKeyDown(KeyCode.S)*/(Input.GetButtonDown(myManager.Inputs[1].name)) && (GameObject.FindGameObjectWithTag("buttonB") == true) && (m_pressCounts[myManager.TeamNumber - 1] == 1))
         {
-            Debug.Log("buttonB works mate yoloswag");
+            
             return true;
         }
 
         if (/*(Input.GetKeyDown(KeyCode.D)*/(Input.GetButtonDown(myManager.Inputs[2].name)) && (GameObject.FindGameObjectWithTag("buttonX") == true) && (m_pressCounts[myManager.TeamNumber - 1] == 1))
         {
-            Debug.Log("buttonX works mate yoloswag");
+            
             return true;
         }
 
         if (/*(Input.GetKeyDown(KeyCode.F)*/(Input.GetButtonDown(myManager.Inputs[3].name)) && (GameObject.FindGameObjectWithTag("buttonY") == true) && (m_pressCounts[myManager.TeamNumber - 1] == 1))
         {
-            Debug.Log("buttonY works mate yoloswag");
+            
             return true;
         }
 
         if ((Input.GetButtonDown(myManager.Inputs[0].name)) || (Input.GetButtonDown(myManager.Inputs[1].name)) || (Input.GetButtonDown(myManager.Inputs[2].name)) || (Input.GetButtonDown(myManager.Inputs[3].name)) && (m_wrongButton == 0))
         {
-            Debug.Log("Yoloswag någon tröck fel yolo");
+            
             m_pressCounts[myManager.TeamNumber - 1] = 0;
             return true;
         }

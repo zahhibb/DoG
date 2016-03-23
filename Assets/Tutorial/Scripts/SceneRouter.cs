@@ -78,12 +78,20 @@ public class SceneRouter : MonoBehaviour {
                 StartCoroutine(TimeToStartSpin(m_totalTime));
                 SpinCountdown();
                 break;
+			case "Reaction Time":
+			GameObject ReactionTimeTutorial = (GameObject)Instantiate(m_tutorialPrefabs[4],
+				transform.position, transform.rotation);
+			m_totalTime = ReactionTimeTutorial.GetComponent<SelfDestruct>().LifeTime;
+			StartCoroutine(TimeToStartSpin(m_totalTime));
+			SpinCountdown();
+			break;
             case "SimulPress":
                 GameObject simulTutorial = (GameObject)Instantiate(m_tutorialPrefabs[4], transform.position, transform.rotation);
                 m_totalTime = simulTutorial.GetComponent<SelfDestruct>().LifeTime;
                 StartCoroutine(TimeToStartSpin(m_totalTime));
                 SpinCountdown();
                 break;
+
             default:
                 GameObject samplePrefab = (GameObject)Instantiate(m_tutorialPrefabs[4], transform.position, transform.rotation);
                 m_totalTime = samplePrefab.GetComponent<SelfDestruct>().LifeTime;
