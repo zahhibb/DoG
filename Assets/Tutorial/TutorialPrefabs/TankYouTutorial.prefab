@@ -311,7 +311,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Skjut ut motst\xE5ndarna fr\xE5n arenan!\n\nPansarvagnen k\xF6rs via 'LT'
-    och 'RT'!\n\nStyrs via 'LS' och 'RS'!\n\nSkjuter via 'RB'!\n\nPS. Man kan flyga!...typ\n\n"
+    och 'RT'!\n\nStyr med 'LS' och 'RS'!\n\nSkjut med 'RB'!\n\nPS. Man kan flyga!...typ\n\n"
 --- !u!114 &11449504
 MonoBehaviour:
   m_ObjectHideFlags: 1
