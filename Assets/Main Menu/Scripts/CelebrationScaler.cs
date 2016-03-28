@@ -15,10 +15,7 @@ public class CelebrationScaler : ScoreAnnouncer {
     private ScoreThing[] m_fetchedScoreThings;
 
     private float[] m_barScales;
-
-    public float[] BarScales
-    {
-        set { m_barScales = value; }
+    public float[] BarScales{ set { m_barScales = value; }
     }
 
     public ScoreThing[] FetchedScoreThings

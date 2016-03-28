@@ -5,12 +5,15 @@ public class SelfDestruct : MonoBehaviour
 {
 
 	[SerializeField] private float m_lifeTime = 5;
-    [SerializeField] private bool startOnLoad = false;
+    [SerializeField] private bool m_startOnLoad = true;
 
 
     private void Start ()
-	{	
-		StartCoroutine(CountDown(m_lifeTime));
+	{
+        if (m_startOnLoad)
+        {
+            StartCoroutine(CountDown(m_lifeTime));
+        }
 	}
 
     private IEnumerator CountDown(float time)

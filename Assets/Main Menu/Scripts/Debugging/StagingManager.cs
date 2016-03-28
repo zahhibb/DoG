@@ -205,7 +205,10 @@ public class StagingManager : MonoBehaviour
             {
                 LoadSimulPress();
             }
-
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Samtidigthet");
+            }
         }
 
         if (CheckButton(m_manager1, 6))

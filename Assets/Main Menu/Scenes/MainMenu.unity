@@ -4703,7 +4703,6 @@ GameObject:
   - 124: {fileID: 1012388052}
   - 92: {fileID: 1012388051}
   - 81: {fileID: 1012388050}
-  - 114: {fileID: 1012388055}
   - 114: {fileID: 1012388056}
   - 114: {fileID: 1012388057}
   m_Layer: 0
@@ -4781,22 +4780,6 @@ Transform:
   - {fileID: 1042757829}
   m_Father: {fileID: 481176991}
   m_RootOrder: 0
---- !u!114 &1012388055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1012388049}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fb25b45d939b28439266bb73ca093f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_canvas1: {fileID: 1042757828}
-  m_pSlider: {fileID: 232128812}
-  m_a: {fileID: 314070000}
-  m_x: {fileID: 408654534}
-  m_b: {fileID: 1690072806}
 --- !u!114 &1012388056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6775,6 +6758,7 @@ MonoBehaviour:
   m_teamSize: 0
   m_active: 0
   m_playerColor: {r: 0, g: 0, b: 0, a: 0}
+  m_controllers: 0
   m_teamName: 
   m_controller1Cam: {fileID: 1012388053}
   m_controller2Cam: {fileID: 884990456}
