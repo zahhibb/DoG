@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Coin : MonoBehaviour {
+public class CollisionShot : MonoBehaviour {
     bool m_shallDestroy;//not instant destruction
 	// Use this for initialization
 	void Start () {
@@ -27,7 +27,6 @@ public class Coin : MonoBehaviour {
         if (collision.gameObject.tag == "Player")
         {
             m_shallDestroy = true;
-
         }
     }
 }
