@@ -52,9 +52,12 @@ public class PlayerSpawner : MonoBehaviour {
                 m_players.RemoveAt(i);
             }
         }
-        if (m_players.Count == 0)
+        if (m_players.Count == 1)
         {
-            SceneManager.LoadScene("Staging");
+            m_players[0].GetComponent<PlayerScript>().SetScore(8 - m_players.Count * 2);
+            Destroy(m_players[0]);
+            m_players.RemoveAt(0);
+            SceneManager.LoadScene("Celebration");
         }
     }
 }

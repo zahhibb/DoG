@@ -30,10 +30,6 @@ public class Coin : MonoBehaviour {
             collision.gameObject.GetComponent<CoinPlayer>().PickupCoin();
 
         }
-        else if (collision.gameObject.tag =="Wall")
-        {
-            m_shallDestroy = true;
-
-        }
+        
     }
 }

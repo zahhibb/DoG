@@ -28,5 +28,10 @@ public class CollisionShot : MonoBehaviour {
         {
             m_shallDestroy = true;
         }
+        else if (collision.gameObject.tag == "Wall")
+        {
+            m_shallDestroy = true;
+
+        }
     }
 }
