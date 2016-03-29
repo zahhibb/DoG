@@ -6,16 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class TankGameController : MonoBehaviour {
 
+    [SerializeField] private GameObject[] m_spawnLoc = new GameObject[4];
+    [SerializeField] private List<GameObject> m_teamTanks;
     [SerializeField] private GameObject m_tankArena;
     [SerializeField] private CanvasGroup m_winCanvasGroup;
     [SerializeField] private Text m_teamWinText;
-    [SerializeField] private Text m_suddenDeathText;
-    [SerializeField] private GameObject[] m_spawnLoc = new GameObject[4];
-    [SerializeField] private List<GameObject> m_teamTanks;
+    [SerializeField] private Text m_suddenDeathText;    
 
     private List<Manager> m_playerManagers;
     private Manager m_manager;
     private int m_settingScore = 0;
+
     private float m_suddenDeathCountdown = 10f;
     private float m_suddenDeathRotX = 300f;
     private float m_suddenDeathRotY = 90f;
@@ -49,6 +50,7 @@ public class TankGameController : MonoBehaviour {
         else
         {
             m_suddenDeathText.text = null;
+            m_suddenDeathText.transform.parent.gameObject.SetActive(false);
 
             /*
             while (m_suddenDeathCheck == true)
