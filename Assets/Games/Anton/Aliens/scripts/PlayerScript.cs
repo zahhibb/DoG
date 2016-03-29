@@ -20,7 +20,6 @@ public class PlayerScript : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Shot")
         {
-            print("blue");
             m_shallDestroy = true;
         }
     }

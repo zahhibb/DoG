@@ -91,6 +91,12 @@ public class SceneRouter : MonoBehaviour {
                 StartCoroutine(TimeToStartSpin(m_totalTime));
                 SpinCountdown();
                 break;
+            case "Coins":
+                GameObject Coins = (GameObject)Instantiate(m_tutorialPrefabs[6], transform.position, transform.rotation);
+                m_totalTime = Coins.GetComponent<SelfDestruct>().LifeTime;
+                StartCoroutine(TimeToStartSpin(m_totalTime));
+                SpinCountdown();
+                break;
 
             default:
                 GameObject samplePrefab = (GameObject)Instantiate(m_tutorialPrefabs[4], transform.position, transform.rotation);

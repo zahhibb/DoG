@@ -1046,7 +1046,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sceneChoice: SimulPress
-  m_totalTime: 3
+  m_totalTime: 2
   m_countDownParent: {fileID: 173029603}
   m_spinCountdown: {fileID: 1316579101}
   m_spinCountdownTime: 3
@@ -1060,6 +1060,7 @@ MonoBehaviour:
   - {fileID: 176372, guid: c73da66be4d769b499262f186eea849e, type: 2}
   - {fileID: 150628, guid: b6368f89f18c4b24e8c950c09a4e93ec, type: 2}
   - {fileID: 112074, guid: ffb7903aac5316440bb67ba35f3566c6, type: 2}
+  - {fileID: 192096, guid: be2ab0377bb770a43973abaebddc2897, type: 2}
 --- !u!92 &880053947
 Behaviour:
   m_ObjectHideFlags: 0
