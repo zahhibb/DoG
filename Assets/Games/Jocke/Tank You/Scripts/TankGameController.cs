@@ -69,13 +69,18 @@ public class TankGameController : MonoBehaviour
 
             for (int i = 0; i < m_suddenDeathSwipers.Length; i++)
             {
-                float swiperJourneyLength = Vector3.Distance(m_swiperStartPos[i].position, m_swiperTargetPos[i].position);
+                float journeyLength = Vector3.Distance(m_swiperStartPos[i].position, m_swiperTargetPos[i].position);
 
                 float distCovered = (Time.time - m_startTime) * m_swiperSpeed;
-                float fracJourney = distCovered / swiperJourneyLength;
+                float fracJourney = distCovered / journeyLength;
 
                 m_suddenDeathSwipers[i].transform.position = Vector3.Lerp(m_swiperStartPos[i].position, m_swiperTargetPos[i].position, fracJourney);
-
+                
+                if (m_suddenDeathSwipers[i].transform.position == m_swiperTargetPos[i].position)
+                {
+                    m_suddenDeathSwipers[i].transform.position = Vector3.Lerp(m_swiperTargetPos[i].position, m_swiperStartPos[i].position, fracJourney);                    
+                }
+                
             
             }
         }
