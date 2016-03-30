@@ -1,8 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 public class CoinSpawn : MonoBehaviour {
+
+    [SerializeField]
+    private Text m_teamWinText;
+    [SerializeField]
+    private CanvasGroup m_winCanvasGroup;
 
     public GameObject GreenCoin;
     public GameObject PinkCoin;
@@ -28,7 +34,7 @@ public class CoinSpawn : MonoBehaviour {
     private bool m_thirdWin = false;
     private bool m_fourthWin = false;
 
-
+    private int m_currentWinner = -1;
     //Exempel public bool canRun { get { return m_canRun; } }
     private bool m_winner = false;
     public bool winner { get { return m_winner; } }
@@ -37,6 +43,10 @@ public class CoinSpawn : MonoBehaviour {
     private float m_timer = 1.8f;
     [SerializeField]
     private float m_spawnTimer;
+
+    [SerializeField]
+    private float m_winTimer = 0.87f;
+    private bool m_showWinner = false;
 
 
     // Use this for initialization
@@ -69,9 +79,25 @@ public class CoinSpawn : MonoBehaviour {
         if (Input.GetKeyDown("space"))
         {
             m_winner = false;
+            m_showWinner = false;
+            m_winTimer = 0.87f;
             Debug.Log("Space pressed");
         }
 
+        if (m_showWinner == true)
+        {
+            m_winTimer -= Time.deltaTime;
+
+            if(m_winTimer <= 0f)
+            {
+                m_winCanvasGroup.alpha = 1f;
+                
+            }
+        }
+        if(m_showWinner == false)
+        {
+            m_winCanvasGroup.alpha = 0f;
+        }
 
             if (m_currentRotateCoin.rotate == true)  
             m_spawnTimer -= Time.deltaTime;
@@ -104,30 +130,66 @@ public class CoinSpawn : MonoBehaviour {
 
         if (rand == GetComponent<CoinFlip>().m_previousNumber && m_firstWin == false && m_secondWin == false && m_thirdWin == false && m_fourthWin == false)
         {
+           
+
+            m_currentWinner = GetComponent<CoinFlip>().m_previousNumber;
+
             m_winner = true;
             m_firstWin = true;
         }
     
         else if (rand == GetComponent<CoinFlip>().m_previousNumber1 &&  m_firstWin == true && m_secondWin == false && m_thirdWin == false && m_fourthWin == false)
         {
+            m_currentWinner = GetComponent<CoinFlip>().m_previousNumber1;
+
             m_winner = true;
             m_secondWin = true;
         }
 
         else if (rand == GetComponent<CoinFlip>().m_previousNumber2 && m_firstWin == true && m_secondWin == true && m_thirdWin == false && m_fourthWin == false)
         {
+            m_currentWinner = GetComponent<CoinFlip>().m_previousNumber2;
+
             m_winner = true;
             m_thirdWin = true;
         }
 
         else if (rand == GetComponent<CoinFlip>().m_coinValue && m_firstWin == true && m_secondWin == true && m_thirdWin == true && m_fourthWin == false)
         {
+            m_currentWinner = GetComponent<CoinFlip>().m_coinValue;
+
             m_winner = true;
             m_fourthWin = true;
         }
 
 
 
+        switch(m_currentWinner)
+        {
+            case 0:
+                m_showWinner = true;
+                m_teamWinText.text = "Pepper-Green Granola";
+                m_teamWinText.color = ConvertColor(175, 239, 143);
+                break;
+
+            case 1:
+                m_showWinner = true;
+                m_teamWinText.text = "Pink-Pelican Parachute";
+                m_teamWinText.color = ConvertColor(255, 168, 254);
+                break;
+
+            case 2:
+                m_showWinner = true;
+                m_teamWinText.text = "Lemon Truck";
+                m_teamWinText.color = ConvertColor(234, 231, 94);
+                break;
+
+            case 3:
+                m_showWinner = true;
+                m_teamWinText.text = "Blue Coathanger";
+                m_teamWinText.color = ConvertColor(125, 208, 255);
+                break;
+        }
 
 
 
@@ -168,5 +230,10 @@ public class CoinSpawn : MonoBehaviour {
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Celebration");
         Debug.Log("Celebrate!!!");
+    }
+
+    private Color ConvertColor(int r, int g, int b)
+    {
+        return new Color(r / 255.0f, g / 255.0f, b / 255.0f);
     }
 }
