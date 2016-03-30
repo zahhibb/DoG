@@ -20,10 +20,13 @@ public class SimulPress : MonoBehaviour
 
     //private Dictionary<int, bool> m_inputDictionary;
     private List<int> m_trueIndices;
-    public List<int> TrueIndices { get { return m_trueIndices; } }
+    public List<int> TrueIndices { set { m_trueIndices = value; } get { return m_trueIndices; } }
     private List<int> m_falseIndices;
+    public List<int> FalseIndices { set { m_trueIndices = value; } get { return m_trueIndices; } }
+
     private Manager m_teamManager;
-    public Manager TeamManager {  set { m_teamManager = value; } get { return m_teamManager; } }
+    public Manager TeamManager { set { m_teamManager = value; } get { return m_teamManager; } }
+
     private int[] m_inputStates;
     public int[] InputStatesArray { get { return m_inputStates; } }
 
@@ -31,9 +34,9 @@ public class SimulPress : MonoBehaviour
     private int m_stateIndexer;
     private int m_maxErrors = 2;
 
-    private void Start()
+    void Start()
     {
-
+        Debug.Log(gameObject.name + " has " + m_teamManager.TeamName);
     }
 
     private void Update()
@@ -41,10 +44,9 @@ public class SimulPress : MonoBehaviour
         // end/start should be properly animated for the user before setting to m_gameRunning.
         if (!m_gameRunning)
         {
-            int xBoxInputs = 4;
-
-            m_falseIndices = MakeFalseIndices(xBoxInputs); // gör detta centralt istället eller?
-            m_trueIndices = MakeTrueIndices(m_falseIndices, m_teamManager);
+            //int xBoxInputs = 17;
+            //m_falseIndices = MakeFalseIndices(xBoxInputs); // gör detta centralt istället eller?
+            //m_trueIndices = MakeTrueIndices(m_falseIndices, m_teamManager);
 
             m_stateIndexer = 0;
             m_inputStates = new int[17] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -55,34 +57,27 @@ public class SimulPress : MonoBehaviour
         {
             m_clockRunning = true;
         }
-        if ((CheckForTrue(m_inputStates) < (m_inputsPerPlayer * m_teamManager.TeamSize) && (CheckForFalse(m_inputStates) <= (m_maxErrors * m_teamManager.TeamSize))))
+        if (CheckForTrue(m_inputStates) < (m_inputsPerPlayer * m_teamManager.TeamSize))
         {
             InputStates(m_teamManager);
         }
-        else
+        if (CheckForTrue(m_inputStates) >= m_inputsPerPlayer)
         {
-            // do check.
+            m_clockRunning = false;
+            m_timerText.text = "yep";
+        }
+        if (CheckForFalse(m_inputStates) >= (m_maxErrors))
+        {
+            m_clockRunning = false;
+            m_timerText.text = "nope";
         }
 
         if (m_clockRunning)
         {
             m_timeSinceFirstPress += Time.deltaTime;
-            m_timerText.text = string.Format("{00.00}", TimeSinceFirstPress); // does this even work?
+            m_timerText.text = string.Format("{0:00.00}", TimeSinceFirstPress);
         }
     }
-
-    //private void MakeInputCollectors()
-    //{
-    //    int teamAmount = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().Controllers;
-    //    for (int i = 0; i < teamAmount; i++)
-    //    {
-    //        GameObject collector = Instantiate(new GameObject, transform.position, transform.rotation);
-    //        collector.name = "Collector " + (i + 1);
-    //        InputCollector myCollector = collector.AddComponent<InputCollector>();
-    //        myCollector.FalseIndices = MakeFalseIndices();
-    //        myCollector.TrueIndices = MakeTrueIndices(myCollector.FalseIndices)
-    //    }
-    //}
 
     private void InputStates(Manager myManager)
     {
@@ -95,13 +90,14 @@ public class SimulPress : MonoBehaviour
         {
             if (myManager.Inputs[tKey].isAxis)
             {
-                if (Input.GetAxis(myManager.Inputs[tKey].name) != 0f) // not deadzone safe :(
+                if ((Input.GetAxis(myManager.Inputs[tKey].name) != 0f) || (Input.GetKeyDown(KeyCode.Alpha1))) // not deadzone safe :(
                 {                 
                     m_stateIndexer++;
                     m_inputStates[tKey] = 1;
+                    Debug.Log(" the SimulPresser assigned to " + m_teamManager.TeamName + " took notice of Alpha1");
                 }
             }
-            else if (!myManager.Inputs[tKey].isAxis)
+            else if ((!myManager.Inputs[tKey].isAxis)  || (Input.GetKeyDown(KeyCode.Alpha1)))
             {
                 if (Input.GetButton(myManager.Inputs[tKey].name))
                 {
@@ -111,11 +107,11 @@ public class SimulPress : MonoBehaviour
             }
         }
 
-        foreach (int fKey in m_falseIndices)
+        foreach (int fKey in m_falseIndices) 
         {
             if (myManager.Inputs[fKey].isAxis)
             {
-                if (Input.GetAxis(myManager.Inputs[fKey].name) != 0f)
+                if ((Input.GetAxis(myManager.Inputs[fKey].name) != 0f) || (Input.GetKeyDown(KeyCode.Alpha2)))
                 {
                     m_stateIndexer++;
                     m_inputStates[fKey] = 2;
@@ -123,7 +119,7 @@ public class SimulPress : MonoBehaviour
             }
             else if (!myManager.Inputs[fKey].isAxis)
             {
-                if (Input.GetButton(myManager.Inputs[fKey].name))
+                if ((Input.GetButton(myManager.Inputs[fKey].name)) || (Input.GetKeyDown(KeyCode.Alpha2)))
                 {
                     m_stateIndexer++;
                     m_inputStates[fKey] = 2;

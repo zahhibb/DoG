@@ -12,23 +12,31 @@ public class SimulController : MonoBehaviour
     [SerializeField] private GameObject[] m_activeInputIcons = null;
     [SerializeField] private Text m_countDownText = null;
     private float m_countDownTime = 0f;
-    private string m_timeFormat = ("{0:00:00}");
+    private bool m_displayingScores = false;
+    private string m_timeFormat = ("{0:00.00}");
+
+    private List<int> m_trueIndices;
+    private List<int> m_falseIndices;
 
     private void Start()
     {
+        int xBoxInputs = 17;
+        m_falseIndices = MakeFalseIndices(xBoxInputs); // gör detta centralt istället eller?
+        m_trueIndices = MakeTrueIndices(m_falseIndices);
         MakePlayers();
         StartCountdown(20f);
     }
 
     private void Update()
     {
-        // DisplayCurrentActives(); // run this from individual simulpressers, serialized like whatever.
-
         if ( !PlayersUpdating(m_teamSimulPressers)  ||  (!UpdatingCountDown()))
         {
-            StartCoroutine(AllDone(4f));
+            if (!m_displayingScores)
+            {
+                StartCoroutine(AllDone(4f));
+            }
         }
-
+        DisplayActiveInputs();
     }
 
     private void MakePlayers()
@@ -41,13 +49,18 @@ public class SimulController : MonoBehaviour
         for (int i = 0; i < controllers; i++)
         {
             m_teamManagers.Add(GameObject.FindGameObjectWithTag("ManagerP" + (i + 1)).GetComponent<Manager>());
+            Debug.Log("m_teamManagers[" + i + "] = " + m_teamManagers[i].TeamName);
         }
-        for (int i = 0; i < m_teamManagers.Count; i++)
+        for (int i = 0; i < controllers; i++)
         {
-            m_timerObjects[i].SetActive(true);                                // eh there is a script called DisableIfNoController for this shit.
-            m_timerObjects[i].GetComponentInChildren<Text>().text = "eh?";   // how to make double out of floats? :D
+            m_timerObjects[i].GetComponentInChildren<Text>().text = "eh?"; 
             m_teamSimulPressers[i] = m_timerObjects[i].GetComponent<SimulPress>();
             m_teamSimulPressers[i].TeamManager = m_teamManagers[i];
+            m_teamSimulPressers[i].TrueIndices = m_trueIndices;
+            m_teamSimulPressers[i].FalseIndices = m_falseIndices;
+            Debug.Log("m_timerObjects[" + i + "] is " + m_timerObjects[i].gameObject.name);
+            Debug.Log(" m_teamSimulPressers.teamManager[" + i + "] = " + m_teamSimulPressers[i].TeamManager.TeamName);
+            // nr.4 doesn't seem to get a manager here?
         }
     }
 
@@ -82,12 +95,12 @@ public class SimulController : MonoBehaviour
 
     private bool PlayersUpdating(SimulPress[] simulPressers)
     {
-        bool allDone = true;
+        bool allDone = false;
         foreach (SimulPress simulPresser in simulPressers)
         {
             if (simulPresser.ClockIsRunning)
             {
-                allDone = false;
+                allDone = true;
             }
         }
         return allDone;
@@ -95,6 +108,7 @@ public class SimulController : MonoBehaviour
 
     private IEnumerator AllDone(float time)
     {
+        m_displayingScores = true;
         m_countDownText.text = "waiting for results...";
         List<float> finishedTimes = new List<float>();
         for (int i = 0; i < m_teamSimulPressers.Length; i++)
@@ -117,7 +131,7 @@ public class SimulController : MonoBehaviour
                                 ((finishedTimes.Count > 3) ? ("4 - " + string.Format(m_timeFormat, scoreManagers[3].score) + " - " + scoreManagers[3].manager.TeamName + "\n") : ("\n"));
 
         StartCoroutine(ExitToCelebration(4f));
-    }
+    } 
 
     struct ScoreManager
     {
@@ -140,13 +154,53 @@ public class SimulController : MonoBehaviour
     private void DisplayActiveInputs()
     {
         List<int> activeInputs = m_teamSimulPressers[0].TrueIndices;
-        for (int i = 0; i < m_activeInputIcons.Length; i++)
+        for (int i = 0; i < ( m_activeInputIcons.Length); i++)
         {
-            if (activeInputs.Contains(i))
             {
                 m_activeInputIcons[i].SetActive(true);
             }
         }
+    }
+    
+    private ScoreManager[] CompareScores(ScoreManager[] scoreManagers)
+    {
+        ScoreManager[] rankedScoreManagers = new ScoreManager[scoreManagers.Length];
+        for (int i = 0; i < scoreManagers.Length; i++)
+        {
+            foreach (ScoreManager otherScoreManager in scoreManagers)
+            {
+                int rank = 0;
+                if ((scoreManagers[i].manager != otherScoreManager.manager) && (scoreManagers[i].score > otherScoreManager.score))
+                {
+                    rank++;
+                } 
+            }
+        }
+        return rankedScoreManagers;
+    }
+
+    private List<int> MakeFalseIndices(int amount)
+    {
+        List<int> tempList = new List<int>();
+        for (int i = 0; i < amount; i++)
+        {
+            tempList.Add(i);
+        }
+        return tempList;
+    }
+
+    private List<int> MakeTrueIndices(List<int> falseIndices)
+    {
+        List<int> tempList = new List<int>();
+
+        for (int i = 0; i < 5; i++)
+        {
+            int index = Random.Range(0, falseIndices.Count);
+            falseIndices.Remove(index);
+            tempList.Add(index);
+        }
+
+        return tempList;
     }
 
     //public class StructComparer : IComparer
