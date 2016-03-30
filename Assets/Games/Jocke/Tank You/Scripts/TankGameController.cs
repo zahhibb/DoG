@@ -4,33 +4,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public class TankGameController : MonoBehaviour {
-
+public class TankGameController : MonoBehaviour
+{
+    [SerializeField] private Transform[] m_swiperStartPos = new Transform[1];
+    [SerializeField] private Transform[] m_swiperTargetPos = new Transform[1];
+    [SerializeField] private GameObject[] m_suddenDeathSwipers = new GameObject[2];
     [SerializeField] private GameObject[] m_spawnLoc = new GameObject[4];
     [SerializeField] private List<GameObject> m_teamTanks;
     [SerializeField] private GameObject m_tankArena;
     [SerializeField] private CanvasGroup m_winCanvasGroup;
     [SerializeField] private Text m_teamWinText;
-    [SerializeField] private Text m_suddenDeathText;    
+    [SerializeField] private Text m_suddenDeathText;            
 
     private List<Manager> m_playerManagers;
     private Manager m_manager;
     private int m_settingScore = 0;
-
     private float m_suddenDeathCountdown = 10f;
-    private float m_suddenDeathRotX = 300f;
-    private float m_suddenDeathRotY = 90f;
-    private float m_suddenDeathRotZ = 300f;
-    
+    private float m_swiperSpeed = 1.0f;
+    private float m_startTime;
+
 
     void Start ()
     {        
         CreateTeams();
         
         m_settingScore = 5 - m_playerManagers[0].Controllers;
-    }	
+
+        
+    }
 	
-	void Update () {
+	void Update ()
+    {
         SuddenDeath();
 
         GameEnd();        
@@ -38,14 +42,16 @@ public class TankGameController : MonoBehaviour {
 
     private void SuddenDeath()
     {
-        if (m_suddenDeathCountdown > 0)
+        if (m_suddenDeathCountdown > 1)
         {
             m_suddenDeathCountdown -= Time.deltaTime;
 
             int seconds = Mathf.FloorToInt(m_suddenDeathCountdown);
-            string niceTime = string.Format("{00}", seconds);
+            string formatTime = string.Format("{00}", seconds);
 
-            m_suddenDeathText.text = niceTime;
+            m_suddenDeathText.text = formatTime;
+
+            m_startTime = Time.time;
         }
         else
         {
@@ -53,19 +59,28 @@ public class TankGameController : MonoBehaviour {
             m_suddenDeathText.transform.parent.gameObject.SetActive(false);
 
             /*
-            while (m_suddenDeathCheck == true)
-            { 
-                if (m_tankArena.transform.rotation.x > 300)
-                {
-                    m_tankArena.transform.Rotate(Vector3.left * Time.deltaTime);
+                Set UI panel of "SUDDEN DEATH" to active/visible.
+            */
 
-                    //if (m_tankArena.transform.rotation.y < m_suddenDeathRotY)
-                    {
-                        m_tankArena.transform.Rotate(Vector3.up * Time.deltaTime);
-                    }//
+            foreach (GameObject swiper in m_suddenDeathSwipers)
+            {
+                swiper.SetActive(true);
+            }
+
+            for (int i = 0; i < m_suddenDeathSwipers.Length; i++)
+            {
+                float swiperJourneyLength = Vector3.Distance(m_swiperStartPos[i].position, m_swiperTargetPos[i].position);
+
+                float distCovered = (Time.time - m_startTime) * m_swiperSpeed;
+                float fracJourney = distCovered / swiperJourneyLength;
+
+                m_suddenDeathSwipers[i].transform.position = Vector3.Lerp(m_swiperStartPos[i].position, m_swiperTargetPos[i].position, fracJourney);
+
+                if ()
+                {
+
                 }
             }
-            */
         }
     }
 
@@ -119,7 +134,7 @@ public class TankGameController : MonoBehaviour {
         SceneManager.LoadScene("Celebration");
     }
 
-    // Converts color from true RGB to Unity float RGB
+    // Converts color from RGB to Unity applicable RGB
     private Color ConvertColor(int r, int g, int b)
     {
         return new Color(r / 255.0f, g / 255.0f, b / 255.0f);
@@ -146,7 +161,8 @@ public class TankGameController : MonoBehaviour {
 
     // Destroys player tanks if they fall below the arena and into the trigger.
     // Sets score for each player defeated.
-    private void OnTriggerExit(Collider col) {
+    private void OnTriggerExit(Collider col)
+    {
         if (col.gameObject.tag == "Player")
         {
             col.gameObject.GetComponentInChildren<MovementController>().SetScore(m_settingScore);                       
