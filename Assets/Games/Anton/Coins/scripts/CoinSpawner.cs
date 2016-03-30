@@ -18,8 +18,8 @@ public class CoinSpawner : MonoBehaviour {
 
         m_turning = 0;//the amount of degrees the player has turned
         m_currentTime = 0;
-        m_timeBetweenCoins = 2.3f;
-        m_startVelocity = 15.0f;
+        m_timeBetweenCoins = 3.3f;
+        m_startVelocity = 30.0f;
     }
 
     // Update is called once per frame
@@ -31,14 +31,14 @@ public class CoinSpawner : MonoBehaviour {
             m_currentTime -= m_timeBetweenCoins;//decreased by the time since last coin
             if (m_timeBetweenCoins > 0.35)//increases the firing speed with a maximum firing speed at 1/0.35 shots per second (almost 3 shots per second)
             {
-                m_timeBetweenCoins -= 0.05f;
+                m_timeBetweenCoins -= 0.02f;
             }
             GameObject newCoin = (GameObject)Instantiate(m_coin, transform.position, transform.rotation);//sets it to the same position and rotation 
             newCoin.GetComponent<Rigidbody2D>().AddForce(m_startVelocity * -1 * transform.up);
             //sets the velocity indirectly by adding a force
             if (m_turning < 90)
             {
-                transform.Rotate(Vector3.forward, 35);
+                transform.Rotate(Vector3.forward, 15);
                 m_turning += 15;
             }
             else
