@@ -33,8 +33,8 @@ public class AlienScript : MonoBehaviour {
             //sets the velocity indirectly by adding a force
             if (m_turning < 90)
             {
-                transform.Rotate(Vector3.forward, 15);
-                m_turning += 15;
+                transform.Rotate(Vector3.forward, 30);
+                m_turning += 30;
             }
             else
             {

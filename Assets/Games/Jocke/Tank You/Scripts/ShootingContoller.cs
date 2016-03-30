@@ -20,7 +20,8 @@ public class ShootingContoller : MonoBehaviour {
         m_barrelEnd = this.gameObject.transform.GetChild(0); // Projectile instantiation point
     }
 
-	void Update () {
+	void Update ()
+    {
         FireProjectile();
 	}
 

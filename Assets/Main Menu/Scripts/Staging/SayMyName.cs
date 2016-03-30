@@ -16,7 +16,7 @@ public class SayMyName : MonoBehaviour
                 m_myName = "Floppy Man";
                 break;
             case ("Aliens"):
-                m_myName = "Antons Aliens";
+                m_myName = "Shooting Turrets";
                 break;
             case ("tanks_test"):
                 m_myName = "Panzer TankMadels";

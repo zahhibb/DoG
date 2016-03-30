@@ -14,7 +14,7 @@ GameObject:
   - 61: {fileID: 6198630}
   m_Layer: 0
   m_Name: Shot
-  m_TagString: Untagged
+  m_TagString: Shot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3def7ed041a0d23479056a48e815429a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_shallDestroy: 0
 --- !u!212 &21247348
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -142,6 +143,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Shot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

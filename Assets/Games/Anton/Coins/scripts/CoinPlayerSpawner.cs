@@ -19,20 +19,20 @@ public class CoinPlayerSpawner : MonoBehaviour {
         {
             
             m_players.Add(Instantiate(m_player));
-            m_players[i].GetComponent<PlayerScript>().AssignManager(GameObject.FindGameObjectWithTag("ManagerP"+(i+1)).GetComponent<Manager>());
+            m_players[i].GetComponent<CoinPlayer>().AssignManager(GameObject.FindGameObjectWithTag("ManagerP"+(i+1)).GetComponent<Manager>());
             switch (i)
             {
                 case 0:
-                    m_players[i].GetComponent<PlayerScript>().SetPlayerPosition(new Vector3((float)(m_width*-1.6),(float)(m_height*0.4),0));
+                    m_players[i].GetComponent<CoinPlayer>().SetPlayerPosition(new Vector3((float)(m_width*-1.6),(float)(m_height*0.4),0));
                     break;
                 case 1:
-                    m_players[i].GetComponent<PlayerScript>().SetPlayerPosition(new Vector3((float)(m_width * 1.6), (float)(m_height * 0.4), 0));
+                    m_players[i].GetComponent<CoinPlayer>().SetPlayerPosition(new Vector3((float)(m_width * 1.6), (float)(m_height * 0.4), 0));
                     break;
                 case 2:
-                    m_players[i].GetComponent<PlayerScript>().SetPlayerPosition(new Vector3((float)(m_width * -1.6), (float)(m_height * -0.4), 0));
+                    m_players[i].GetComponent<CoinPlayer>().SetPlayerPosition(new Vector3((float)(m_width * -1.6), (float)(m_height * -0.4), 0));
                     break;
                 case 3:
-                    m_players[i].GetComponent<PlayerScript>().SetPlayerPosition(new Vector3((float)(m_width * 1.6), (float)(m_height * -0.4), 0));
+                    m_players[i].GetComponent<CoinPlayer>().SetPlayerPosition(new Vector3((float)(m_width * 1.6), (float)(m_height * -0.4), 0));
                     break;
 
             }
@@ -52,9 +52,9 @@ public class CoinPlayerSpawner : MonoBehaviour {
                 m_players.RemoveAt(i);
             }
         }
-        if (m_players.Count == 0)
+        if (m_players.Count == 1)
         {
-            SceneManager.LoadScene("Staging");
+            SceneManager.LoadScene("Celebration");
         }
     }
 }

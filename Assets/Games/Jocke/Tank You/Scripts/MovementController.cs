@@ -37,15 +37,10 @@ public class MovementController : MonoBehaviour {
         m_leftStickX = m_myManager.Inputs[12].name;
     }
 
-	void Update () {
+	void Update ()
+    {
         TankMovement();        
     }
-        /*
-        player.GetComponentInChildren<MovementController>().TriggerAxis = m_playerManagers[i].Inputs[16].name;
-        player.GetComponentInChildren<MovementController>().LeftStickX = m_playerManagers[i].Inputs[12].name;
-        player.GetComponentInChildren<TurretController>().RightStick = m_playerManagers[i].Inputs[14].name;
-        player.GetComponentInChildren<ShootingContoller>().RightBumper = m_playerManagers[i].Inputs[5].name;
-        */
 
     // Movement and rotation for the tanks
     private void TankMovement()

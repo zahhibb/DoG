@@ -328,6 +328,7 @@ MonoBehaviour:
   - Reaction Time
   - Aliens
   - tanks_test
+  - Coins
 --- !u!54 &80658281
 Rigidbody:
   m_ObjectHideFlags: 0
