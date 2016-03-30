@@ -76,10 +76,7 @@ public class TankGameController : MonoBehaviour
 
                 m_suddenDeathSwipers[i].transform.position = Vector3.Lerp(m_swiperStartPos[i].position, m_swiperTargetPos[i].position, fracJourney);
 
-                if ()
-                {
-
-                }
+            
             }
         }
     }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CoinFlip : MonoBehaviour {
     [SerializeField]
-    private int m_coinValue;
+    public int m_coinValue = -1;
     [SerializeField]
     private int m_playerAmount;
     [SerializeField]
@@ -13,11 +13,11 @@ public class CoinFlip : MonoBehaviour {
     private int m_rolls;
     private List<Manager> m_playerManagers;
     [SerializeField]
-    private int m_previousNumber = -1;
+    public int m_previousNumber = -1;
     [SerializeField]
-    private int m_previousNumber1 = -1;
+    public int m_previousNumber1 = -1;
     [SerializeField]
-    private int m_previousNumber2 = -1;
+    public int m_previousNumber2 = -1;
 
     private bool m_canFlip = true;
 
@@ -45,8 +45,8 @@ public class CoinFlip : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-
-	}
+        
+    }
 
 
     void FlipCoin()
@@ -55,7 +55,7 @@ public class CoinFlip : MonoBehaviour {
         {
             while (m_coinValue == m_previousNumber || m_coinValue == m_previousNumber1 || m_coinValue == m_previousNumber2)
             {
-                m_coinValue = Random.Range(0, 4);
+                m_coinValue = Random.Range(0, 4); //m_playerAmount;
             }
 
             if (m_rolls == 0)
@@ -115,7 +115,7 @@ public class CoinFlip : MonoBehaviour {
         if (m_rolls == 4)
         {
             m_canFlip = false;
-            GoToCelebration();
+            
         }
 
         FlipCoin();
@@ -129,7 +129,7 @@ public class CoinFlip : MonoBehaviour {
         if (m_rolls == 4)
         {
             m_canFlip = false;
-            GoToCelebration();
+            
         }
 
         FlipCoin();
@@ -143,7 +143,7 @@ public class CoinFlip : MonoBehaviour {
         if (m_rolls == 4)
         {
             m_canFlip = false;
-            GoToCelebration();
+            
         }
 
         FlipCoin();
@@ -157,14 +157,11 @@ public class CoinFlip : MonoBehaviour {
         if (m_rolls == 4)
         {
             m_canFlip = false;
-            GoToCelebration();
+            
         }
 
         FlipCoin();
     }
 
-    void GoToCelebration()
-    {
-        //UnityEngine.SceneManagement.SceneManager.LoadScene("Celebration");
-    }
+ 
 }
