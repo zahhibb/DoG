@@ -40,7 +40,6 @@ public class GameScript : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Celebration");
         }
-
     }
 
     IEnumerator ExecuteAfterTime(float time)
@@ -71,62 +70,47 @@ public class GameScript : MonoBehaviour
         {
             if (PlayerPressed(teamManager) && (m_pressCounts[teamManager.TeamNumber - 1] == 1))
             {
-
                 teamManager.Score += m_score;
                 m_score /= 2;
                 m_playerManagers.Remove(teamManager);
-                //m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
                 m_pressCounts[teamManager.TeamNumber - 1] = 0;
-
+                //m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
                 // nån slags bild som man tar bort från canvas
 
             }
 
             if ((PlayerPressed(teamManager)) && (m_pressCounts[teamManager.TeamNumber - 1] == 0))
             {
-                
-                
-                //m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
                 m_playerManagers.Remove(teamManager);
-
-                
+                //m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
             }
         }
     }
 
     private bool PlayerPressed(Manager myManager)
     {
-        /// funkar perfektomundo
-
-        
-
             if (/*(Input.GetKeyDown(KeyCode.A)*/(Input.GetButtonDown(myManager.Inputs[0].name)) && (GameObject.FindGameObjectWithTag("buttonA") == true) && (m_pressCounts[myManager.TeamNumber-1] == 1))
         {
-            
             return true;
         }
 
         if (/*(Input.GetKeyDown(KeyCode.S)*/(Input.GetButtonDown(myManager.Inputs[1].name)) && (GameObject.FindGameObjectWithTag("buttonB") == true) && (m_pressCounts[myManager.TeamNumber - 1] == 1))
         {
-            
             return true;
         }
 
         if (/*(Input.GetKeyDown(KeyCode.D)*/(Input.GetButtonDown(myManager.Inputs[2].name)) && (GameObject.FindGameObjectWithTag("buttonX") == true) && (m_pressCounts[myManager.TeamNumber - 1] == 1))
         {
-            
             return true;
         }
 
         if (/*(Input.GetKeyDown(KeyCode.F)*/(Input.GetButtonDown(myManager.Inputs[3].name)) && (GameObject.FindGameObjectWithTag("buttonY") == true) && (m_pressCounts[myManager.TeamNumber - 1] == 1))
         {
-            
             return true;
         }
 
         if ((Input.GetButtonDown(myManager.Inputs[0].name)) || (Input.GetButtonDown(myManager.Inputs[1].name)) || (Input.GetButtonDown(myManager.Inputs[2].name)) || (Input.GetButtonDown(myManager.Inputs[3].name)) && (m_wrongButton == 0))
         {
-            
             m_pressCounts[myManager.TeamNumber - 1] = 0;
             return true;
         }
