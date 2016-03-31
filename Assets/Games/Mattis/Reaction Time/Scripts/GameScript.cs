@@ -71,35 +71,26 @@ public class GameScript : MonoBehaviour
         {
             if (PlayerPressed(teamManager) && (m_pressCounts[teamManager.TeamNumber - 1] == 1))
             {
-
                 teamManager.Score += m_score;
                 m_score /= 2;
                 m_playerManagers.Remove(teamManager);
-                //m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
                 m_pressCounts[teamManager.TeamNumber - 1] = 0;
-
+                //m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
                 // nån slags bild som man tar bort från canvas
 
             }
 
             if ((PlayerPressed(teamManager)) && (m_pressCounts[teamManager.TeamNumber - 1] == 0))
             {
-                
-                
-                //m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
                 m_playerManagers.Remove(teamManager);
+                //m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
 
-                
             }
         }
     }
 
     private bool PlayerPressed(Manager myManager)
     {
-        /// funkar perfektomundo
-
-        
-
             if (/*(Input.GetKeyDown(KeyCode.A)*/(Input.GetButtonDown(myManager.Inputs[0].name)) && (GameObject.FindGameObjectWithTag("buttonA") == true) && (m_pressCounts[myManager.TeamNumber-1] == 1))
         {
             
