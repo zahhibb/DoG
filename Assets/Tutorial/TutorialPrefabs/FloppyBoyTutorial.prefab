@@ -422,16 +422,16 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'use the buttons.
+  m_Text: '
 
 
-    flopp the boys.
+    Use the buttons to flopp your boys
 
 
-    win.
+    Goal is to survive as long as possible
 
 
-    lose.'
+'
 --- !u!114 &11483314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -559,7 +559,7 @@ RectTransform:
   m_RootOrder: 5
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 235, y: 80}
+  m_AnchoredPosition: {x: 235, y: 150}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22442066
@@ -633,7 +633,7 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -206, y: 74}
+  m_AnchoredPosition: {x: -206, y: 150}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22468524

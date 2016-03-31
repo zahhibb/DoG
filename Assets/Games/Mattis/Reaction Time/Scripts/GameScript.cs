@@ -23,7 +23,7 @@ public class GameScript : MonoBehaviour
     private int m_countdown;       //Time before button is instantiated
     private int m_buttonChoice;    //Which button to instantiate
     private int m_score = 8;           //Amount of score to give to winner
-    // Use this for initialization
+    
     void Start ()
     {
         FindTeams();
@@ -73,17 +73,15 @@ public class GameScript : MonoBehaviour
             {
                 teamManager.Score += m_score;
                 m_score /= 2;
-                m_playerManagers.Remove(teamManager);
                 m_pressCounts[teamManager.TeamNumber - 1] = 0;
-                //m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
-                // nån slags bild som man tar bort från canvas
-
+                m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);
+                m_playerManagers.Remove(teamManager);
             }
 
             if ((PlayerPressed(teamManager)) && (m_pressCounts[teamManager.TeamNumber - 1] == 0))
             {
                 m_playerManagers.Remove(teamManager);
-                //m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);//meme
+                m_teamIcons[teamManager.TeamNumber - 1].gameObject.SetActive(false);
 
             }
         }
@@ -129,6 +127,7 @@ public class GameScript : MonoBehaviour
         int controllers = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().Controllers;
         for (int i = 1; i <= controllers; i++)
         {
+            
             m_playerManagers.Add(GameObject.FindGameObjectWithTag("ManagerP" + i).GetComponent<Manager>());
         }
     }

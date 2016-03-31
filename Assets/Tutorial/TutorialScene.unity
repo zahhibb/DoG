@@ -1061,6 +1061,8 @@ MonoBehaviour:
   - {fileID: 150628, guid: b6368f89f18c4b24e8c950c09a4e93ec, type: 2}
   - {fileID: 112074, guid: ffb7903aac5316440bb67ba35f3566c6, type: 2}
   - {fileID: 192096, guid: be2ab0377bb770a43973abaebddc2897, type: 2}
+  - {fileID: 117208, guid: 0ac7c2bbd1089f04392052bb288a8981, type: 2}
+  - {fileID: 186546, guid: 1739bea2bc4a08240895a9bcbab1b5cf, type: 2}
 --- !u!92 &880053947
 Behaviour:
   m_ObjectHideFlags: 0
@@ -1301,6 +1303,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1154316700}
+  - 81: {fileID: 1154316701}
   m_Layer: 0
   m_Name: Borders
   m_TagString: Untagged
@@ -1321,6 +1324,13 @@ Transform:
   - {fileID: 1818763018}
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!81 &1154316701
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1154316699}
+  m_Enabled: 1
 --- !u!1 &1316579101 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 136842, guid: b0a186c73e99c4743938178e1464df5c, type: 2}

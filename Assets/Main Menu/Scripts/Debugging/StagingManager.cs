@@ -123,6 +123,11 @@ public class StagingManager : MonoBehaviour
         m_manager1.ChosenScene = "Reaction Time";
         LoadTutorial();
     }
+	public void LoadButtonBrawl()
+	{
+		m_manager1.ChosenScene = "Button Brawl";
+		LoadTutorial();
+	}
 
     public void QuitGame()
     {
@@ -209,7 +214,7 @@ public class StagingManager : MonoBehaviour
             }
             if (CheckButton(m_manager1, 0) || CheckButton(m_manager2, 0) || CheckButton(m_manager3, 0) || CheckButton(m_manager4, 0))
             {
-                LoadSimulPress();
+				LoadButtonBrawl();
             }
             if (Input.GetKeyDown(KeyCode.A))
             {

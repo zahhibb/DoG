@@ -98,6 +98,20 @@ public class SceneRouter : MonoBehaviour {
                 SpinCountdown();
                 break;
 
+            case "CoinFlipScene":
+                GameObject CoinFlipTutorial = (GameObject)Instantiate(m_tutorialPrefabs[7], transform.position, transform.rotation);
+                m_totalTime = CoinFlipTutorial.GetComponent<SelfDestruct>().LifeTime;
+                StartCoroutine(TimeToStartSpin(m_totalTime));
+                SpinCountdown();
+                break;
+
+		case "Button Brawl":
+			GameObject ButtonBrawlTutorial = (GameObject)Instantiate(m_tutorialPrefabs[8], transform.position, transform.rotation);
+			m_totalTime = ButtonBrawlTutorial.GetComponent<SelfDestruct>().LifeTime;
+			StartCoroutine(TimeToStartSpin(m_totalTime));
+			SpinCountdown();
+			break;
+
             default:
                 GameObject samplePrefab = (GameObject)Instantiate(m_tutorialPrefabs[4], transform.position, transform.rotation);
                 m_totalTime = samplePrefab.GetComponent<SelfDestruct>().LifeTime;

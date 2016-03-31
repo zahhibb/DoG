@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: 781ef21a543c18248943f8758950ad8b
-timeCreated: 1459241825
+timeCreated: 1459413485
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_teamWinText: {instanceID: 0}
+  - m_winCanvasGroup: {instanceID: 0}
+  - GreenCoin: {fileID: 141728, guid: 0200fbefae2c97f46b4c95a7d6b99281, type: 2}
+  - PinkCoin: {fileID: 191716, guid: b2ae301afbb66404b84210b8778fc238, type: 2}
+  - LemonCoin: {fileID: 161094, guid: e14d69cb14bfe604b9b841a004770781, type: 2}
+  - BlueCoin: {fileID: 120704, guid: 6bbae368c6a9c824cbdc5fe9849c1ea3, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

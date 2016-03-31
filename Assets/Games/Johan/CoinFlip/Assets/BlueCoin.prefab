@@ -12,7 +12,7 @@ GameObject:
   - 23: {fileID: 2393488}
   - 95: {fileID: 9546884}
   - 114: {fileID: 11480894}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BlueCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

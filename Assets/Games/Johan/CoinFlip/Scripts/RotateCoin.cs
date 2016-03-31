@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 
 
@@ -16,9 +17,22 @@ public class RotateCoin : MonoBehaviour {
     private bool m_rotate = true;
     public bool rotate { get { return m_rotate; } }
 
+    private List<Manager> m_playerManagers;
+    private int m_playerAmount;
+
     // Use this for initialization
     void Start ()
     {
+        m_playerManagers = new List<Manager>();
+        Manager player1Manager = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
+        m_playerAmount = player1Manager.Controllers;
+
+        for (int i = 0; i < m_playerAmount; i++)
+        {
+            m_playerManagers.Add(GameObject.FindGameObjectWithTag("ManagerP" + (i + 1)).GetComponent<Manager>());
+        }
+
+
         CoinSpawn = GetComponentInParent<CoinSpawn>();
         flip = GetComponentInParent<CoinFlip>();
 	}
@@ -32,7 +46,15 @@ public class RotateCoin : MonoBehaviour {
             Debug.Log("Space2 pressed");
         }
 
-        if (CoinSpawn.winner == true)
+        foreach (Manager manager in m_playerManagers)
+        {
+            if (Input.GetButtonDown(manager.Inputs[0].name))
+            {
+                m_rotate = true;
+            }
+        }
+
+                if (CoinSpawn.winner == true)
         {
             if (transform.rotation.eulerAngles.x >= 268 && transform.rotation.eulerAngles.x <= 272)
             {

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class DoneToStaging : MonoBehaviour
 {
@@ -26,7 +25,10 @@ public class DoneToStaging : MonoBehaviour
         //{
             if (gameObject.GetComponent<AllSkip>())
             {
-                gameObject.GetComponent<AllSkip>().AllTeamsPressed(2, "DoneInMainMenu");
+                if (gameObject.GetComponent<AllSkip>().AllTeamsPressed(2, "DoneInMainMenu"))
+                {
+                DoneInMainMenu();
+                }
             }
         //}
     }

@@ -21,6 +21,11 @@ TagManager:
   - buttonB
   - buttonX
   - buttonY
+  - Coathanger
+  - Truck
+  - Granola
+  - Parachute
+  - MusicManager
   layers:
   - Default
   - TransparentFX
