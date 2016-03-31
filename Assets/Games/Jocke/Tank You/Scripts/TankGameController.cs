@@ -22,15 +22,13 @@ public class TankGameController : MonoBehaviour
     private float m_suddenDeathCountdown = 10f;
     private float m_swiperSpeed = 1.0f;
     private float m_startTime;
-
+    private bool m_swipeBackward = false;
 
     void Start ()
     {        
         CreateTeams();
         
         m_settingScore = 5 - m_playerManagers[0].Controllers;
-
-        
     }
 	
 	void Update ()
@@ -52,7 +50,7 @@ public class TankGameController : MonoBehaviour
             m_suddenDeathText.text = formatTime;
 
             m_startTime = Time.time;
-        }
+        }        
         else
         {
             m_suddenDeathText.text = null;
@@ -67,22 +65,46 @@ public class TankGameController : MonoBehaviour
                 swiper.SetActive(true);
             }
 
+            
             for (int i = 0; i < m_suddenDeathSwipers.Length; i++)
             {
                 float journeyLength = Vector3.Distance(m_swiperStartPos[i].position, m_swiperTargetPos[i].position);
 
-                float distCovered = (Time.time - m_startTime) * m_swiperSpeed;
-                float fracJourney = distCovered / journeyLength;
-
-                m_suddenDeathSwipers[i].transform.position = Vector3.Lerp(m_swiperStartPos[i].position, m_swiperTargetPos[i].position, fracJourney);
-                
                 if (m_suddenDeathSwipers[i].transform.position == m_swiperTargetPos[i].position)
                 {
-                    m_suddenDeathSwipers[i].transform.position = Vector3.Lerp(m_swiperTargetPos[i].position, m_swiperStartPos[i].position, fracJourney);                    
+                    if (!m_swipeBackward)
+                    {
+                        m_startTime = Time.time;
+                        m_swiperSpeed *= 1.4f;
+                    }
+                    m_swipeBackward = true;
                 }
-                
-            
-            }
+
+                if (m_suddenDeathSwipers[i].transform.position == m_swiperStartPos[i].position)
+                {
+                    if (m_swipeBackward)
+                    {
+                        m_startTime = Time.time;
+                        m_swiperSpeed *= 1.4f;
+                    }
+                    m_swipeBackward = false;
+                    
+                }
+
+                if (m_swipeBackward)
+                {
+                    float distCovered = (Time.time - m_startTime) * m_swiperSpeed;
+                    float fracJourney = distCovered / journeyLength;
+                    m_suddenDeathSwipers[i].transform.position = Vector3.Lerp(m_swiperTargetPos[i].position, m_swiperStartPos[i].position, fracJourney);
+                } 
+                else
+                {
+                    float distCovered = (Time.time - m_startTime) * m_swiperSpeed;
+                    float fracJourney = distCovered / journeyLength;
+
+                    m_suddenDeathSwipers[i].transform.position = Vector3.Lerp(m_swiperStartPos[i].position, m_swiperTargetPos[i].position, fracJourney);
+                }
+            }            
         }
     }
 

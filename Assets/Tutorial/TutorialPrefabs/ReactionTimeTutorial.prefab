@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_lifeTime: 6
-  startOnLoad: 1
+  m_startOnLoad: 1
 --- !u!114 &11461926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -365,8 +365,7 @@ MonoBehaviour:
 
     If you press anything before the button spawns you will be disqualified
 
-
-    Yolo'
+'
 --- !u!114 &11494824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -497,8 +496,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -6}
-  m_SizeDelta: {x: 800, y: 472}
+  m_AnchoredPosition: {x: 0, y: -28}
+  m_SizeDelta: {x: 800, y: 439}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22445188
 RectTransform:

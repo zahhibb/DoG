@@ -2,7 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class CelebrationScaler : ScoreAnnouncer {
+public class CelebrationScaler : ScoreAnnouncer
+{
+    // The ScoreAnnouncer behaviour is run on the object "ScoreAnnouncerGuy" made in the tutorial scene before each minigame.
 
     [SerializeField] private GameObject[] m_bars;
     [SerializeField] private Text[] m_scoreTexts;
@@ -13,14 +15,10 @@ public class CelebrationScaler : ScoreAnnouncer {
     private bool m_displayGameResult = true;
 
     private ScoreThing[] m_fetchedScoreThings;
+    public ScoreThing[] FetchedScoreThings { set { m_fetchedScoreThings = value; } }
 
     private float[] m_barScales;
     public float[] BarScales{ set { m_barScales = value; }
-    }
-
-    public ScoreThing[] FetchedScoreThings
-    {
-        set { m_fetchedScoreThings = value; }
     }
 
     void Start()
@@ -71,6 +69,16 @@ public class CelebrationScaler : ScoreAnnouncer {
                 float yScale = Mathf.Clamp(m_bars[i].gameObject.transform.localScale.y + (4 * Time.deltaTime), 0, m_fetchedScoreThings[i].barScale);
                 m_bars[i].gameObject.transform.localScale = new Vector3(1f, (0.1f + yScale), 1f);
                 //m_bars[i].GetComponentInChildren<Image>().color = GameObject.FindGameObjectWithTag("ManagerP" + (i + 1)).GetComponent<Manager>().PlayerColor;
+
+                float scoreText = yScale;
+                if (scoreText > 0)
+                {
+                    m_scoreTexts[i].text = string.Format(("{0:#0.#}"), scoreText);
+                }
+                else
+                {
+                    m_scoreTexts[i].text = "nope";
+                }
             }
         }
     }

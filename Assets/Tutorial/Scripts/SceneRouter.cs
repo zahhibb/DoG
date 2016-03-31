@@ -136,7 +136,7 @@ public class SceneRouter : MonoBehaviour {
         SpinCountdown();
     }
 
-    private void SpinCountdown()
+    public void SpinCountdown()
     {
         m_countDownParent.GetComponentInChildren<Text>().text = "game starting";
         m_countDownParent.GetComponentInChildren<PlayImage>().PlayLoop();
@@ -188,7 +188,10 @@ public class SceneRouter : MonoBehaviour {
         if (gameObject.GetComponent<AllSkip>())
         {
             //Debug.Log(gameObject.name + " found allskipper");
-            gameObject.GetComponent<AllSkip>().AllTeamsPressed(7, "SpinCountdown");
+            if (gameObject.GetComponent<AllSkip>().AllTeamsPressed(7, "SpinCountdown"))
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(m_sceneChoice);
+            }
             //Debug.Log("DoneToStaging called DoneInMainMenu from All");
         }
     }

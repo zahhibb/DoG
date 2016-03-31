@@ -24,40 +24,42 @@ public class StagingManager : MonoBehaviour
 
         if (CountRounds(m_manager1) <= m_gameRounds)
         {
-            m_rounds.text = "round " + m_manager1.Rounds + "/3!";
+            m_rounds.text = "round " + m_manager1.Rounds + "/" + m_gameRounds + ".";
         }
         else
         {
             if (m_manager1.Score > m_manager2.Score && m_manager1.Score > m_manager3.Score && m_manager1.Score > m_manager4.Score)
             {
-                m_rounds.text = m_manager1.TeamName + " is the winnewr";
+                m_rounds.text = m_manager1.TeamName + " wins.";
                 m_manager1.ChosenScene = m_manager1.TeamName;
-                UnityEngine.SceneManagement.SceneManager.LoadScene("WinnerShowOff");
+                StartCoroutine(GoToShowOff(2));
+                // Declare Winner, show-off scene before returning to main!
             }
-            if (m_manager2.Score > m_manager1.Score && m_manager2.Score > m_manager3.Score && m_manager2.Score > m_manager4.Score)
+            else if (m_manager2.Score > m_manager1.Score && m_manager2.Score > m_manager3.Score && m_manager2.Score > m_manager4.Score)
             {
-                m_rounds.text = m_manager2.TeamName + " is the winnewr";
+                m_rounds.text = m_manager2.TeamName + " wins.";
                 m_manager1.ChosenScene = m_manager2.TeamName;
-                UnityEngine.SceneManagement.SceneManager.LoadScene("WinnerShowOff");
+                StartCoroutine(GoToShowOff(2));
                 // Declare Winner, show-off scene before returning to main!
             }
-            if (m_manager3.Score > m_manager2.Score && m_manager3.Score > m_manager1.Score && m_manager3.Score > m_manager4.Score)
+            else if (m_manager3.Score > m_manager2.Score && m_manager3.Score > m_manager1.Score && m_manager3.Score > m_manager4.Score)
             {
-                m_rounds.text = m_manager3.TeamName + " is the winnewr";
+                m_rounds.text = m_manager3.TeamName + " wins.";
                 m_manager1.ChosenScene = m_manager3.TeamName;
-                UnityEngine.SceneManagement.SceneManager.LoadScene("WinnerShowOff");
+                StartCoroutine(GoToShowOff(2));
                 // Declare Winner, show-off scene before returning to main!
             }
-            if (m_manager4.Score > m_manager2.Score && m_manager4.Score > m_manager3.Score && m_manager4.Score > m_manager1.Score)
+            else if (m_manager4.Score > m_manager2.Score && m_manager4.Score > m_manager3.Score && m_manager4.Score > m_manager1.Score)
             {
-                m_rounds.text = m_manager4.TeamName + " is the winnewr";
+                m_rounds.text = m_manager4.TeamName + " wins.";
                 m_manager1.ChosenScene = m_manager4.TeamName;
-                UnityEngine.SceneManagement.SceneManager.LoadScene("WinnerShowOff");
+                StartCoroutine(GoToShowOff(2));
                 // Declare Winner, show-off scene before returning to main!
+
             }
             else
             {
-                m_rounds.text = "It's a tie! Sudden death round!";
+                m_rounds.text = "tie, one more.";
                 // Winner-Take-All-Bonus-Round, stupid right?
             }
 
@@ -127,21 +129,25 @@ public class StagingManager : MonoBehaviour
         Application.Quit();
     }
 
-    // This function enables/disables the debug buttons for loop purposes.
+    
     private int CountRounds(Manager manager)
     {
         manager.Rounds++;
-        if (manager.Rounds > 3)
-        {
-            GameObject[] finishButtons = GameObject.FindGameObjectsWithTag("Finish");
 
-            foreach (GameObject button in finishButtons)
-            {
-                button.SetActive(false);
-            }
+        //// This function enables/disables the debug buttons for loop purposes.
+        //if (manager.Rounds > 3)
+        //{
+        //    GameObject[] finishButtons = GameObject.FindGameObjectsWithTag("Finish");
 
-            GameObject.FindGameObjectWithTag("FindableUI").GetComponent<Text>().text = "congratulations. \n fireworks.";
-        }
+        //    foreach (GameObject button in finishButtons)
+        //    {
+        //        button.SetActive(false);
+        //    }
+
+        //    GameObject.FindGameObjectWithTag("FindableUI").GetComponent<Text>().text = "congratulations. \n fireworks.";
+        //}
+
+
         return manager.Rounds;
     }
 
@@ -227,25 +233,12 @@ public class StagingManager : MonoBehaviour
         {
             BackToMain();
         }
-
-
-        if (CheckButton(m_manager1, 3))
-        {
-            QuitGame();
-        }
-        if (CheckButton(m_manager2, 3))
-        {
-            QuitGame();
-        }
-
-        if (CheckButton(m_manager3, 3))
-        {
-            QuitGame();
-        }
-        if (CheckButton(m_manager4, 3))
-        {
-            QuitGame();
-        }
     }
     
+    private IEnumerator GoToShowOff(float time)
+    {
+        yield return new WaitForSeconds(time);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("WinnerShowOff");
+    }
+
 }
