@@ -21,6 +21,10 @@ TagManager:
   - buttonB
   - buttonX
   - buttonY
+  - Coathanger
+  - Truck
+  - Granola
+  - Parachute
   layers:
   - Default
   - TransparentFX
