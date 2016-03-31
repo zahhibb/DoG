@@ -3,8 +3,10 @@ using System.Collections;
 
 public class Manager : MonoBehaviour
 {
+    // This class contains set/get for all of this.
     [SerializeField] private int m_teamSize = 1;
     private Button[] m_inputs;
+    private Sound[] m_sounds;
     private int m_score = 0;
     [SerializeField] private bool m_active = false;
     [SerializeField] private Color m_playerColor;
@@ -26,6 +28,13 @@ public class Manager : MonoBehaviour
         {
             PrintInputs();
         }
+    }
+
+    public struct Sound
+    {
+        public AudioClip clip; // inte clip va?
+        public float duration;
+        public float volume;
     }
 
     public struct Button
@@ -74,6 +83,12 @@ public class Manager : MonoBehaviour
     {
         get { return m_inputs; }
         set { m_inputs = value; }
+    }
+
+    public Sound[] Sounds
+    {
+        get { return m_sounds; }
+        set { m_sounds = value; }
     }
 
     public Color PlayerColor

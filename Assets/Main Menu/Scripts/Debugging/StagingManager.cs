@@ -228,24 +228,6 @@ public class StagingManager : MonoBehaviour
             BackToMain();
         }
 
-
-        if (CheckButton(m_manager1, 3))
-        {
-            QuitGame();
-        }
-        if (CheckButton(m_manager2, 3))
-        {
-            QuitGame();
-        }
-
-        if (CheckButton(m_manager3, 3))
-        {
-            QuitGame();
-        }
-        if (CheckButton(m_manager4, 3))
-        {
-            QuitGame();
-        }
     }
     
 }

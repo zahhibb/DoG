@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ScoreAnnouncer : MonoBehaviour {
@@ -6,16 +7,17 @@ public class ScoreAnnouncer : MonoBehaviour {
     private ScoreThing[] m_scoreThings;
     private Manager m_manager1;
     private GameObject m_celebrationCanvas;
+    private Text[] m_scoreTexts;
 
     private void Start()
     {
         m_scoreThings = new ScoreThing[4];
         GetOldScores();
         DontDestroyOnLoad(gameObject);
-        Debug.Log("Start called in " + gameObject.name);
+        Debug.Log("Start called in " + gameObject.name + ", 'Im ready to accounce some scores!'");
     }
 
-    public virtual void Update()
+    public virtual void Update() // OnLevelWasLoaded snarare?
     {
         GetNewScores();
         SetBarScales();
@@ -59,6 +61,7 @@ public class ScoreAnnouncer : MonoBehaviour {
         if (GameObject.FindGameObjectWithTag("CelebratorCanvas"))
         {
             GameObject.FindGameObjectWithTag("CelebratorCanvas").GetComponent<CelebrationScaler>().FetchedScoreThings = m_scoreThings;
+            Debug.Log(gameObject.name + " is sending Score and things ");
             Destroy(gameObject);
         }
 
