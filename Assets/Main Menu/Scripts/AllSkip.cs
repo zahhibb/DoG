@@ -10,6 +10,7 @@ public class AllSkip : MonoBehaviour
     private int m_teamAmount = 0;
 
 
+
     // some optional display highlights, set them to inactive and they activate as players press the team.buttons, or vice versa (fine to leave as null).
     [SerializeField] GameObject m_displayTeam1 = null;
     [SerializeField] GameObject m_displayTeam2 = null;
@@ -79,7 +80,7 @@ public class AllSkip : MonoBehaviour
             //Debug.Log("Button  on 3: " + m_team3Pressed + " And Active is: " + GameObject.FindGameObjectWithTag("ManagerP3").GetComponent<Manager>().Active);
             //Debug.Log("Button  on 4: " + m_team4Pressed + " And Active is: " + GameObject.FindGameObjectWithTag("ManagerP4").GetComponent<Manager>().Active);
 
-            StartCoroutine(WaitAndGo(0.3f, function));
+            //StartCoroutine(WaitAndGo(0.3f, function));
 
             return true;
         }
