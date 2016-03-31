@@ -19,8 +19,9 @@ public class TankGameController : MonoBehaviour
     private List<Manager> m_playerManagers;
     private Manager m_manager;
     private int m_settingScore = 0;
-    private float m_suddenDeathCountdown = 10f;
+    private float m_suddenDeathCountdown = 60f;
     private float m_swiperSpeed = 1.0f;
+    private float m_swiperSpeedIncrease = 1.4f;
     private float m_startTime;
     private bool m_swipeBackward = false;
 
@@ -56,15 +57,10 @@ public class TankGameController : MonoBehaviour
             m_suddenDeathText.text = null;
             m_suddenDeathText.transform.parent.gameObject.SetActive(false);
 
-            /*
-                Set UI panel of "SUDDEN DEATH" to active/visible.
-            */
-
             foreach (GameObject swiper in m_suddenDeathSwipers)
             {
                 swiper.SetActive(true);
             }
-
             
             for (int i = 0; i < m_suddenDeathSwipers.Length; i++)
             {
@@ -75,7 +71,7 @@ public class TankGameController : MonoBehaviour
                     if (!m_swipeBackward)
                     {
                         m_startTime = Time.time;
-                        m_swiperSpeed *= 1.4f;
+                        m_swiperSpeed *= m_swiperSpeedIncrease;
                     }
                     m_swipeBackward = true;
                 }
@@ -85,7 +81,7 @@ public class TankGameController : MonoBehaviour
                     if (m_swipeBackward)
                     {
                         m_startTime = Time.time;
-                        m_swiperSpeed *= 1.4f;
+                        m_swiperSpeed *= m_swiperSpeedIncrease;
                     }
                     m_swipeBackward = false;
                     
