@@ -35,3 +35,5 @@ EditorBuildSettings:
     path: Assets/Games/Isak/SimulPress/Scenes/Samtidigthet.unity
   - enabled: 1
     path: Assets/Games/Johan/CoinFlip/Scenes/CoinFlipScene.unity
+  - enabled: 1
+    path: Assets/Games/Martin/Scenes/Button Brawl.unity
