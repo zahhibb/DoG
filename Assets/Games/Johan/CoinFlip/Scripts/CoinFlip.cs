@@ -24,21 +24,25 @@ public class CoinFlip : MonoBehaviour {
     // Use this for initialization
     void Start () 
     {
-
         m_playerManagers = new List<Manager>();
         Manager player1Manager = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
         m_playerAmount = player1Manager.Controllers;
 
-        // glöm ej att ta bort denna skit
-        m_playerManagers.Add(player1Manager);
-        m_playerManagers.Add(player1Manager);
-        m_playerManagers.Add(player1Manager);
-        m_playerManagers.Add(player1Manager);
+        for (int i = 0; i < m_playerAmount; i++)
+        {
+            m_playerManagers.Add(GameObject.FindGameObjectWithTag("ManagerP" + (i + 1)).GetComponent<Manager>());
+        }
 
-       
-        
-            
-            FlipCoin();
+        //// glöm ej att ta bort denna skit
+        //m_playerManagers.Add(player1Manager);
+        //m_playerManagers.Add(player1Manager);
+        //m_playerManagers.Add(player1Manager);
+        //m_playerManagers.Add(player1Manager);
+
+
+
+
+        FlipCoin();
         
     }
 	
@@ -53,10 +57,38 @@ public class CoinFlip : MonoBehaviour {
     {
         if (m_canFlip == true)
         {
-            while (m_coinValue == m_previousNumber || m_coinValue == m_previousNumber1 || m_coinValue == m_previousNumber2)
+
+
+            if (m_playerAmount == 4)
             {
-                m_coinValue = Random.Range(0, 4); //m_playerAmount;
+                while (m_coinValue == m_previousNumber || m_coinValue == m_previousNumber1 || m_coinValue == m_previousNumber2)
+                {
+                    m_coinValue = Random.Range(0, 4); //m_playerAmount;
+                }
             }
+
+            else if (m_playerAmount == 3)
+            {
+                while (m_coinValue == m_previousNumber || m_coinValue == m_previousNumber1)
+                {
+                    m_coinValue = Random.Range(0, 3); //m_playerAmount;
+                }
+            }
+
+            else if (m_playerAmount == 2)
+            {
+                while (m_coinValue == m_previousNumber)
+                {
+                    m_coinValue = Random.Range(0, 2); //m_playerAmount;
+                }
+            }
+
+
+
+
+
+
+
 
             if (m_rolls == 0)
             {

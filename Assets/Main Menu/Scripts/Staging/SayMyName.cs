@@ -21,6 +21,9 @@ public class SayMyName : MonoBehaviour
             case ("tanks_test"):
                 m_myName = "Panzer TankMadels";
                 break;
+            case ("CoinFlipScene"):
+                m_myName = "Coin Flip";
+                break;
             default:
                 m_myName = gameObject.name;
                 break;

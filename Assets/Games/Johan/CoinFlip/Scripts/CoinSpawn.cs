@@ -17,6 +17,8 @@ public class CoinSpawn : MonoBehaviour {
 
     [SerializeField]
     private int m_previousCoin;
+    [SerializeField]
+    private SpriteRenderer SpriteRend;
 
     GameObject m_gCoin;
     GameObject m_pCoin;
@@ -27,6 +29,7 @@ public class CoinSpawn : MonoBehaviour {
     private RotateCoin RotateCoin;
 
     private List<Manager> m_playerManagers;
+    [SerializeField]
     private int m_playerAmount;
 
     private bool m_firstWin = false;
@@ -45,7 +48,8 @@ public class CoinSpawn : MonoBehaviour {
     private float m_spawnTimer;
 
     [SerializeField]
-    private float m_winTimer = 0.87f;
+    private float m_winTimer = 0.95f;
+    [SerializeField]
     private bool m_showWinner = false;
 
 
@@ -56,7 +60,10 @@ public class CoinSpawn : MonoBehaviour {
         Manager player1Manager = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>();
         m_playerAmount = player1Manager.Controllers;
 
-
+        for (int i = 0; i < m_playerAmount; i++)
+        {
+            m_playerManagers.Add(GameObject.FindGameObjectWithTag("ManagerP" + (i + 1)).GetComponent<Manager>());
+        }
 
         m_spawnTimer = m_timer;
         SpawnCoin();
@@ -74,15 +81,35 @@ public class CoinSpawn : MonoBehaviour {
         //        //Debug.Log(m_gCoin.transform.rotation.eulerAngles);
         //    }
         //}
-
+        
 
         if (Input.GetKeyDown("space"))
         {
             m_winner = false;
             m_showWinner = false;
-            m_winTimer = 0.87f;
+            m_winTimer = 0.95f;
+            m_currentWinner = -1;
             Debug.Log("Space pressed");
+            
         }
+
+        foreach(Manager manager in m_playerManagers)
+        {
+            if (Input.GetButtonDown(manager.Inputs[0].name))
+            {
+                m_winner = false;
+                m_showWinner = false;
+                m_winTimer = 0.95f;
+                m_currentWinner = -1;
+                Debug.Log("Space pressed");
+
+            }
+        }
+
+        //if (Input.GetButtonDown(m_playerManagers[0].Inputs[7].name))
+        //{
+
+        //}
 
         if (m_showWinner == true)
         {
@@ -110,22 +137,24 @@ public class CoinSpawn : MonoBehaviour {
 
         if (m_firstWin == true && m_secondWin == true && m_thirdWin == true && m_fourthWin == true)
         {
-            if (Input.GetKeyDown("space"))
+            foreach (Manager manager in m_playerManagers)
             {
-                GoToCelebration();
+                if (Input.GetButtonDown(manager.Inputs[0].name))
+                {
+                    GoToCelebration();
+                }
             }
         }
     }
 
     void SpawnCoin()
     {
-       
        // GetComponent<CoinFlip>().
-        var rand = Random.Range(0, 4); //m_playerAmount;
+        var rand = Random.Range(0, m_playerAmount); //m_playerAmount;
 
         while (rand == m_previousCoin)
         {
-            rand = Random.Range(0, 4); //m_playerAmount;
+            rand = Random.Range(0, m_playerAmount); //m_playerAmount;
         }
 
         if (rand == GetComponent<CoinFlip>().m_previousNumber && m_firstWin == false && m_secondWin == false && m_thirdWin == false && m_fourthWin == false)
@@ -144,6 +173,11 @@ public class CoinSpawn : MonoBehaviour {
 
             m_winner = true;
             m_secondWin = true;
+            if(m_playerAmount == 2)
+            {
+                m_thirdWin = true;
+                m_fourthWin = true;
+            }
         }
 
         else if (rand == GetComponent<CoinFlip>().m_previousNumber2 && m_firstWin == true && m_secondWin == true && m_thirdWin == false && m_fourthWin == false)
@@ -152,6 +186,11 @@ public class CoinSpawn : MonoBehaviour {
 
             m_winner = true;
             m_thirdWin = true;
+
+            if(m_playerAmount == 3)
+            {
+                m_fourthWin = true;
+            }
         }
 
         else if (rand == GetComponent<CoinFlip>().m_coinValue && m_firstWin == true && m_secondWin == true && m_thirdWin == true && m_fourthWin == false)

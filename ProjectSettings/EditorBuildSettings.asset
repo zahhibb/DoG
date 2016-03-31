@@ -33,3 +33,5 @@ EditorBuildSettings:
     path: Assets/Games/Mattis/Reaction Time/Scene/Reaction Time.unity
   - enabled: 1
     path: Assets/Games/Isak/SimulPress/Scenes/Samtidigthet.unity
+  - enabled: 1
+    path: Assets/Games/Johan/CoinFlip/Scenes/CoinFlipScene.unity
