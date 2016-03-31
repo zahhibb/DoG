@@ -25,6 +25,7 @@ TagManager:
   - Truck
   - Granola
   - Parachute
+  - MusicManager
   layers:
   - Default
   - TransparentFX

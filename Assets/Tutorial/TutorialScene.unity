@@ -1303,6 +1303,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1154316700}
+  - 81: {fileID: 1154316701}
   m_Layer: 0
   m_Name: Borders
   m_TagString: Untagged
@@ -1323,6 +1324,13 @@ Transform:
   - {fileID: 1818763018}
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!81 &1154316701
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1154316699}
+  m_Enabled: 1
 --- !u!1 &1316579101 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 136842, guid: b0a186c73e99c4743938178e1464df5c, type: 2}

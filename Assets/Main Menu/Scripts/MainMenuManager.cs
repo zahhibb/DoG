@@ -29,6 +29,13 @@ public class MainMenuManager : Manager {
     private Button[] m_buttonArray;
     // private string[] m_controller = Input.GetJoystickNames();
 
+    // Sound Effects and Music for each team.
+    [SerializeField] private AudioClip[] m_team1Sounds;
+    [SerializeField] private AudioClip[] m_team2Sounds;
+    [SerializeField] private AudioClip[] m_team3Sounds;
+    [SerializeField] private AudioClip[] m_team4Sounds;
+    private Sound[][] m_teamSoundArrays;
+    
     // Standard Colors (there needs to be as many as of these as there are supported controllers)
     private Color m_lemonTruck = new Color32(249, 227, 105, 255);
     private Color m_beachBlueCoathanger = new Color32(148, 233, 246, 255);
@@ -51,6 +58,7 @@ public class MainMenuManager : Manager {
         MakeInputsFromIM();
         MakeColors();
         MakeTeams();
+        MakeSoundBanks();
 
         //m_ManagerP1.Controllers = m_joysticks;
         TestCameras(m_joysticks);        
@@ -228,6 +236,53 @@ public class MainMenuManager : Manager {
         m_ManagerP4 = GameObject.FindGameObjectWithTag("ManagerP4").GetComponent<Manager>();
 
         //m_ManagerP1.Controllers = previousPlayers;
+    }
+
+    private void MakeSoundBanks()
+    {
+        // this temporary hack puts banks of sounds on the 4 default managers.
+        float volumeMod = 0.1f;
+        m_teamSoundArrays = new Sound[4][];
+
+        Sound[] teamSoundBank = new Sound[m_team1Sounds.Length];
+        for (int i = 0; i < m_team1Sounds.Length; i++)
+        {
+            teamSoundBank[i].clip = m_team1Sounds[i];
+            teamSoundBank[i].volume = volumeMod;
+        }
+        m_teamSoundArrays[0] = teamSoundBank;
+
+        teamSoundBank = new Sound[m_team2Sounds.Length];
+        for (int i = 0; i < m_team2Sounds.Length; i++)
+        {
+            teamSoundBank[i].clip = m_team2Sounds[i];
+            teamSoundBank[i].volume = volumeMod;
+        }
+        m_teamSoundArrays[1] = teamSoundBank;
+
+        teamSoundBank = new Sound[m_team3Sounds.Length];
+        for (int i = 0; i < m_team3Sounds.Length; i++)
+        {
+            teamSoundBank[i].clip = m_team3Sounds[i];
+            teamSoundBank[i].volume = volumeMod;
+        }
+        m_teamSoundArrays[2] = teamSoundBank;
+
+        teamSoundBank = new Sound[m_team4Sounds.Length];
+        for (int i = 0; i < m_team4Sounds.Length; i++)
+        {
+            teamSoundBank[i].clip = m_team4Sounds[i];
+            teamSoundBank[i].volume = volumeMod;
+        }
+        m_teamSoundArrays[3] = teamSoundBank;
+
+        // and then assign the banks to the 4 managers.
+
+        m_ManagerP1.Sounds = m_teamSoundArrays[0];
+        m_ManagerP2.Sounds = m_teamSoundArrays[1];
+        m_ManagerP3.Sounds = m_teamSoundArrays[2];
+        m_ManagerP4.Sounds = m_teamSoundArrays[3];
+
     }
 
     private void SetCameras()

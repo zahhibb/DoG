@@ -13,10 +13,25 @@ public class MusicManager : MonoBehaviour
 
 	private void Start ()
     {
+
+        GameObject[] otherMusicManagers = GameObject.FindGameObjectsWithTag("MusicManager");  // fel fel fel fel fel
+        foreach (GameObject other in otherMusicManagers)
+        {
+            if (other != gameObject)
+            {
+                Destroy(other.gameObject);
+            }
+        }
+
         GetManagers();
         MakeAudioSources();
         StartTheMusics();
     }
+
+    //private void OnLevelWasLoaded()
+    //{
+    //    StartTheMusics();
+    //}
 
     private void Update()
     {
@@ -27,6 +42,7 @@ public class MusicManager : MonoBehaviour
     }
     private void GetManagers()
     {
+        m_numberOfPlayers = GameObject.FindGameObjectWithTag("ManagerP1").GetComponent<Manager>().Controllers;
         m_playerManagers = new Manager[m_numberOfPlayers];
         for (int i = 0; i < m_numberOfPlayers; i++)
         {
@@ -37,9 +53,17 @@ public class MusicManager : MonoBehaviour
     private void StartTheMusics()
     {
         int musicIndex = 0;
-        for (int i = 1; i < m_numberOfPlayers; i++)
+        for (int i = 0; i < m_numberOfPlayers; i++)
         {
-            m_musicSources[i].PlayOneShot(m_playerManagers[i - 1].Sounds[musicIndex].clip, m_playerManagers[i - 1].Sounds[musicIndex].volume);
+            float pitchMod = (i + 1) / 3f;
+
+            m_musicSources[i].clip = m_playerManagers[i].Sounds[musicIndex].clip;
+            m_musicSources[i].volume = m_playerManagers[i].Sounds[musicIndex].volume;
+            //m_musicSources[i].pitch = pitchMod;
+            m_musicSources[i].loop = true;
+            m_musicSources[i].Play();
+
+            //m_musicSources[i].PlayOneShot(m_playerManagers[i - 1].Sounds[musicIndex].clip, m_playerManagers[i - 1].Sounds[musicIndex].volume);
         }
     }
 
@@ -52,15 +76,18 @@ public class MusicManager : MonoBehaviour
         // etc...
 
         m_audioSources = new AudioSource[m_numberOfPlayers + 1];
-        m_musicSources = new AudioSource[m_numberOfPlayers + 1];
-        m_musicVolumes = new float[m_numberOfPlayers + 1];
+        m_musicSources = new AudioSource[m_numberOfPlayers];
+        m_musicVolumes = new float[m_numberOfPlayers];
 
         m_audioSources[0] = gameObject.AddComponent<AudioSource>();
         for (int i = 1; i < m_numberOfPlayers; i++)
         {
             m_audioSources[i] = gameObject.AddComponent<AudioSource>();
+        }
+        for (int i = 0; i < m_numberOfPlayers; i++)
+        {
             m_musicSources[i] = gameObject.AddComponent<AudioSource>();
-            m_musicVolumes[i - 1] = m_playerManagers[i].Sounds[0].volume;
+            m_musicVolumes[i] = m_playerManagers[i].Sounds[0].volume;
         }
     }
 
@@ -86,4 +113,12 @@ public class MusicManager : MonoBehaviour
         m_musicSources[manager.TeamNumber].volume = manager.Sounds[0].volume;
 
     }
+
+    //private void UpdateMusicVolumes()
+    //{
+    //    for (int i = 0; i < m_numberOfPlayers; i++)
+    //    {
+    //        m_musicSources.Vol
+    //    }
+    //}
 }
