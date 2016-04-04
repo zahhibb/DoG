@@ -241,7 +241,7 @@ public class MainMenuManager : Manager {
     private void MakeSoundBanks()
     {
         // this temporary hack puts banks of sounds on the 4 default managers.
-        float volumeMod = 0.1f;
+        float volumeMod = 0.5f;
         m_teamSoundArrays = new Sound[4][];
 
         Sound[] teamSoundBank = new Sound[m_team1Sounds.Length];

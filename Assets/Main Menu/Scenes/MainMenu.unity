@@ -6737,13 +6737,13 @@ MonoBehaviour:
   m_joysticks: 4
   m_playerManager: {fileID: 133454, guid: 02ec300b439dce6498ba03bf216c69bd, type: 2}
   m_team1Sounds:
-  - {fileID: 8300000, guid: 5e0dd3eead1230d48bbd7135b5cc3eaa, type: 3}
+  - {fileID: 8300000, guid: f9e87fa5644a9474791faa99e476c334, type: 3}
   m_team2Sounds:
-  - {fileID: 8300000, guid: 88eadfaecf3a3e14f9082906b60db1fa, type: 3}
+  - {fileID: 8300000, guid: a5f48e2ea86f61a4e9767932afc78392, type: 3}
   m_team3Sounds:
-  - {fileID: 8300000, guid: 715fd9ae1bcb4bc4b90fc541837c3faf, type: 3}
+  - {fileID: 8300000, guid: e03a17161020eba418db3cd15314de20, type: 3}
   m_team4Sounds:
-  - {fileID: 8300000, guid: 896832b6ea1c2ed4a8dde1d09e40bd3e, type: 3}
+  - {fileID: 8300000, guid: 97a8313bc32aa9c47930d6a5ec008f40, type: 3}
 --- !u!4 &1639960808
 Transform:
   m_ObjectHideFlags: 0

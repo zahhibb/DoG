@@ -32,28 +32,28 @@ public class StagingManager : MonoBehaviour
             {
                 m_rounds.text = m_manager1.TeamName + " wins.";
                 m_manager1.ChosenScene = m_manager1.TeamName;
-                StartCoroutine(GoToShowOff(2));
+                StartCoroutine(GoToShowOff(0.3f));
                 // Declare Winner, show-off scene before returning to main!
             }
             else if (m_manager2.Score > m_manager1.Score && m_manager2.Score > m_manager3.Score && m_manager2.Score > m_manager4.Score)
             {
                 m_rounds.text = m_manager2.TeamName + " wins.";
                 m_manager1.ChosenScene = m_manager2.TeamName;
-                StartCoroutine(GoToShowOff(2));
+                StartCoroutine(GoToShowOff(0.3f));
                 // Declare Winner, show-off scene before returning to main!
             }
             else if (m_manager3.Score > m_manager2.Score && m_manager3.Score > m_manager1.Score && m_manager3.Score > m_manager4.Score)
             {
                 m_rounds.text = m_manager3.TeamName + " wins.";
                 m_manager1.ChosenScene = m_manager3.TeamName;
-                StartCoroutine(GoToShowOff(2));
+                StartCoroutine(GoToShowOff(0.3f));
                 // Declare Winner, show-off scene before returning to main!
             }
             else if (m_manager4.Score > m_manager2.Score && m_manager4.Score > m_manager3.Score && m_manager4.Score > m_manager1.Score)
             {
                 m_rounds.text = m_manager4.TeamName + " wins.";
                 m_manager1.ChosenScene = m_manager4.TeamName;
-                StartCoroutine(GoToShowOff(2));
+                StartCoroutine(GoToShowOff(0.3f));
                 // Declare Winner, show-off scene before returning to main!
 
             }
@@ -75,7 +75,7 @@ public class StagingManager : MonoBehaviour
  
     private void Update()
     {
-            DebugButtons();
+            //DebugButtons();
     }
 
     public void BackToMain()

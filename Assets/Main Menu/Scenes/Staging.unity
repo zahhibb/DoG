@@ -1598,7 +1598,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22470932, guid: 32e7995e22612c7409c990c25c4be391, type: 2}
       propertyPath: m_RootOrder
-      value: 38
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 22470932, guid: 32e7995e22612c7409c990c25c4be391, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -4953,7 +4953,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22442048, guid: ae3b151432a79ff4dbf4f7dd6c1dae55, type: 2}
       propertyPath: m_RootOrder
-      value: 37
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 22442048, guid: ae3b151432a79ff4dbf4f7dd6c1dae55, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -5468,10 +5468,10 @@ RectTransform:
   - {fileID: 135919891}
   - {fileID: 2115718215}
   - {fileID: 1752758306}
-  - {fileID: 2025453133}
   - {fileID: 1178994266}
   - {fileID: 966180339}
   - {fileID: 286321829}
+  - {fileID: 2025453133}
   - {fileID: 1802000105}
   - {fileID: 749166625}
   - {fileID: 1118671123}
@@ -5499,7 +5499,7 @@ MonoBehaviour:
   - {fileID: 749166626}
   - {fileID: 1118671124}
   m_rounds: {fileID: 196962039}
-  m_gameRounds: 3
+  m_gameRounds: 2
 --- !u!1 &1042503805
 GameObject:
   m_ObjectHideFlags: 0
@@ -6287,7 +6287,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22444412, guid: dde56cc60e50b174bb7df6d88a93adbc, type: 2}
       propertyPath: m_RootOrder
-      value: 36
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 22444412, guid: dde56cc60e50b174bb7df6d88a93adbc, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -10727,7 +10727,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1032535250}
-  m_RootOrder: 35
+  m_RootOrder: 38
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 27.8, y: -25.6}

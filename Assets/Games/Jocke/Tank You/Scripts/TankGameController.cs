@@ -19,7 +19,7 @@ public class TankGameController : MonoBehaviour
     private List<Manager> m_playerManagers;
     private Manager m_manager;
     private int m_settingScore = 0;
-    private float m_suddenDeathCountdown = 60f;
+    private float m_suddenDeathCountdown = 25f;
     private float m_swiperSpeed = 1.0f;
     private float m_swiperSpeedIncrease = 1.4f;
     private float m_startTime;

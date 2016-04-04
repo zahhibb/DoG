@@ -53,7 +53,7 @@ public class MusicManager : MonoBehaviour
     private void StartTheMusics()
     {
         int musicIndex = 0;
-        for (int i = 0; i < m_numberOfPlayers; i++)
+        for (int i = 0; i < /*m_numberOfPlayers*/ 1; i++)
         {
             float pitchMod = (i + 1) / 3f;
 

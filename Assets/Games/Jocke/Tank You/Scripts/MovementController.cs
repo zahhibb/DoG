@@ -6,7 +6,7 @@ public class MovementController : MonoBehaviour {
     private Rigidbody m_rigid;
     private Transform m_direction;
 
-    private float m_movementSpeed = 12f; // The speed of how fast the tank moves
+    private float m_movementSpeed = 13f; // The speed of how fast the tank moves
     private float m_rotationSpeed = 40f; // The speed of how fast the tank rotates
     private string m_leftStickX;
     private string m_triggerAxis;
@@ -37,7 +37,7 @@ public class MovementController : MonoBehaviour {
         m_leftStickX = m_myManager.Inputs[12].name;
     }
 
-	void Update ()
+	void FixedUpdate ()
     {
         TankMovement();        
     }
