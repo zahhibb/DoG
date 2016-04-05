@@ -8,13 +8,13 @@ public class GameScript : MonoBehaviour
     [SerializeField] private Image[] m_teamIcons;
 
     [SerializeField]
-    private GameObject buttonA;
+    private GameObject m_buttonA;
     [SerializeField]
-    private GameObject buttonB;
+    private GameObject m_buttonB;
     [SerializeField]
-    private GameObject buttonX;
+    private GameObject m_buttonX;
     [SerializeField]
-    private GameObject buttonY;
+    private GameObject m_buttonY;
 
     private List<Manager> m_playerManagers = new List<Manager>();
     private int[] m_pressCounts = new int[4] { 1, 1, 1, 1 };
@@ -49,19 +49,19 @@ public class GameScript : MonoBehaviour
         yield return new WaitForSeconds(m_countdown);
         if(m_buttonChoice == 1)
         {
-            Instantiate(buttonA);
+            Instantiate(m_buttonA);
         }
         else if (m_buttonChoice == 2)
         {
-            Instantiate(buttonB);
+            Instantiate(m_buttonB);
         }
         else if (m_buttonChoice == 3)
         {
-            Instantiate(buttonX);
+            Instantiate(m_buttonX);
         }
         else if (m_buttonChoice == 4)
         {
-            Instantiate(buttonY);
+            Instantiate(m_buttonY);
         }
     }
 

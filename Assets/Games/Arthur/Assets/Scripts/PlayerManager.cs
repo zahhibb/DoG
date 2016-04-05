@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] private Object m_floppyBoy;
+    [SerializeField] private Object m_player;
     private List<Manager> m_playerManagers;
 
     private int m_scoreBase = 1;
@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviour
 
         for (int i = 0; i < player1Manager.Controllers ; i++)
         {
-            GameObject player = (GameObject)Instantiate(m_floppyBoy, new Vector3(0f +(i*1.5f) ,1f,0f), Quaternion.Euler(0, 0, 0));
+            GameObject player = (GameObject)Instantiate(m_player, new Vector3(0f +(i*1.5f) ,1f,0f), Quaternion.Euler(0, 0, 0));
             PlayerController playerController = player.GetComponent<PlayerController>();
 
             playerController.MyManager = m_playerManagers[i];
